@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"@svelte-add/create-kit": "2024.2.16-0.0"
+	}
+}
