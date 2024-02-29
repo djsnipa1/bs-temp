@@ -18,9 +18,9 @@
 	<div class="flex flex-col items-center justify-center">controls here</div>
 </div>
 
-<div class:visibleDel={isVisible} class:notVisibleDel={!isVisible}>
+<!-- <div class:visibleDel={isVisible} class:notVisibleDel={!isVisible}>
   This div will move.
-</div>
+</div> -->
 
 <style>
 	.pos {

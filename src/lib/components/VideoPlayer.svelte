@@ -1,5 +1,3 @@
-<!-- src/components/VideoPlayer.svelte -->
-
 <script>
   export let src;
 
@@ -31,8 +29,8 @@
     width: 100%;
     height: auto;
   }
-  .shim {
+  /* .shim {
     position: fixed;
     z-index: 50;
-  }
+  } */
 </style>
