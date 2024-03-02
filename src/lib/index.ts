@@ -2,3 +2,4 @@
 export { default as VideoPlayer } from './components/VideoPlayer.svelte';
 export { default as VideoPosition } from './components/VideoPosition.svelte';
 export { default as Controls } from './components/Controls.svelte';
+export { default as YoutubeVideo } from './components/YoutubeVideo.svelte';

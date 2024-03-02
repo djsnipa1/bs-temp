@@ -1,12 +1,11 @@
 <script>
-	import { writable } from 'svelte/store';
 	import { isControlsOpen } from '$lib/stores/ControlsStore.js';
   let isVisible = false;
 </script>
 
 <div
-	class="glass fixed z-[100] h-[200px] w-[300px] rounded-xl border-2 border-gray-400 shadow-xl"
-  class:visible={isVisible} class:notVisible={!isVisible}
+	class="glass fixed z-[100] h-[200px] w-[300px] rounded-xl border-2 border-gray-400 shadow-xl translate"
+  class:visible={$isControlsOpen} class:notVisible={!$isControlsOpen}
 >
 	<button
 		class="absolute right-4 top-2 text-red-500"
@@ -28,12 +27,12 @@
 		right: 5px;
 	}
   .visible {
-    transform: translateX(0px);
+    transform: translateX(50px);
     @apply transition-all;
   }
   .notVisible {
-    transform: translateX(-200px);
-    @apply transition-all;
+    /* transform: translateX(-290px); */
+    @apply transition-all translate-x-4;
   }
   .visibleDel {
     transform: translateX(-20px);
