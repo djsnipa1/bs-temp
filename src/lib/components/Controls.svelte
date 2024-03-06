@@ -4,9 +4,10 @@
 </script>
 
 <div
-	class="glass fixed z-[100] h-[200px] w-[300px] rounded-xl border-2 border-gray-400 shadow-xl translate"
-  class:visible={$isControlsOpen} class:notVisible={!$isControlsOpen}
->
+	class="glass fixed z-[100] h-[200px] w-[300px] rounded-xl border-2 border-gray-400 shadow-xl translate">
+  <!-- class:visible={$isControlsOpen} class:notVisible={!$isControlsOpen} -->
+
+  
 	<button
 		class="absolute right-4 top-2 text-red-500"
 		on:click={() => {

@@ -1,11 +1,13 @@
 <script>
   import { VideoPosition } from '$lib';
-  import { Controls, YoutubeVideo } from '$lib';
+  import { Controls } from '$lib';
   import { isControlsOpen } from '$lib/stores/ControlsStore.js';
   import { browser } from '$app/environment';
   import { onMount, onDestroy } from 'svelte';
+  import { fly } from 'svelte/transition';
 
    let element;
+  let old = true;
 
 if (browser) {
    function centerElement() {
@@ -31,32 +33,36 @@ if (browser) {
 
 </script>
 
-<YoutubeVideo />
-
 <h1>{$isControlsOpen}</h1>
 
 <button class="btn" on:click={() => { isControlsOpen.set(true); }}>
   Toggle Controls</button>
 
-<!-- {#if $isControlsOpen} -->
+{#if old}
 <!-- <Controls style="top: 40px; left: 0; position: absolute; transform: translateX(290px);" /> -->
-<div class="container z-[100] absolute" bind:this={element} 
+<div class="container z-[100] absolute top-8" 
    class:initialPosition={!$isControlsOpen} class:endPosition={$isControlsOpen}
 
 >
   <Controls />
 </div>
-<!-- {/if} -->
+{:else}
+  <div class="container z-[100] absolute -translate-x-[290px] translate-y-8" transition:fly={{x: '290px', duration: 5000}}>
+    <Controls />
+  </div>
+  
+{/if}
 
 <VideoPosition src="/beatstar-peru.mp4" />
 
 <style>
   .initialPosition{
     transform: translateX(-290px);
-    transition: all 1300ms ease-in;
+    transition: all 2000ms ease-in;
   }
   .endPosition{
-    transform: translateX(0px);
-    transition: all 3500ms ease-out;
+    transform: translateX(30px);
+    /* transition: all 2000ms ease-out; */
+    transition: all 2000ms cubic-bezier(0.25, 1, 0.5, 1);
   }
 </style>
