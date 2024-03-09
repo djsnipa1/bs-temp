@@ -30,3 +30,7 @@ start = "html-languageserver --stdio"
 pattern = "**/{*.css}"
 [languages.css.languageServer]
 start = "css-languageserver --stdio"
+
+[[ports]]
+localPort = 5173
+externalPort = 80

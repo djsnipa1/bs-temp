@@ -3,7 +3,9 @@
 	let isVisible = false;
 </script>
 
-<div class="translate glass fixed z-[100] h-[200px] w-[300px] rounded-xl shadow-xl">
+<div
+	class="translate glass fixed z-[100] h-[200px] w-[300px] rounded-xl border-2 border-gray-400 shadow-xl"
+>
 	<!-- class:visible={$isControlsOpen} class:notVisible={!$isControlsOpen} -->
 
 	<button
@@ -12,7 +14,7 @@
 			isControlsOpen.set(false);
 		}}>X</button
 	>
-	<h1 class="text-center text-xl font-bold mix-blend-difference">Controls</h1>
+	<h1 class="text-center text-xl font-bold">Controls</h1>
 	<div class="flex flex-col items-center justify-center">controls here</div>
 </div>
 

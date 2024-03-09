@@ -5,7 +5,7 @@
 </script>
 
 <!--<div class="shim min-w-full min-h-[25vh] border-pink-400 border-2">-->
-  <div class="h-screen w-full aspect-5.8">
+<div class="aspect-5.8 h-screen w-full">
 	<video
 		autoplay
 		loop
@@ -19,20 +19,18 @@
 		<track kind="captions" src="" srclang="en" label="English" default />
 		Your browser does not support the video tag.
 	</video>
-
 </div>
-
 
 <style>
 	/* .video-container > * {
     pointer-events: none;
   }  */
 	.video-container {
-    width:  100%; 
-    height:  auto;
-    padding-bottom:  100%; /* Maintain aspect ratio */
-    position: relative;
-    overflow: hidden; /* Hide the parts of the video outside the container */
+		width: 100%;
+		height: auto;
+		padding-bottom: 100%; /* Maintain aspect ratio */
+		position: relative;
+		overflow: hidden; /* Hide the parts of the video outside the container */
 	}
 
 	#myVideo {

@@ -1,19 +1,17 @@
 <script>
-  import "../app.pcss";
-
+	import '../app.pcss';
 </script>
 
 <svelte:head>
-    <script src="https://www.youtube.com/iframe_api"></script>
+	<script src="https://www.youtube.com/iframe_api"></script>
 </svelte:head>
 
-<slot></slot>
-
+<slot />
 
 <style>
-  body {
-    @apply bg-stone-950;
-  }
+	body {
+		@apply bg-stone-950;
+		-webkit-font-smoothing: antialiased;
+		user-select: none;
+	}
 </style>
-
-

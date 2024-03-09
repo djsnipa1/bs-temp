@@ -3,25 +3,17 @@
 	import { Controls } from '$lib';
 	import { isControlsOpen } from '$lib/stores/ControlsStore.js';
 	import { browser } from '$app/environment';
-	import { onMount, onDestroy, tick } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { fly } from 'svelte/transition';
 
-	let element, controlsContainer;
-	let width;
-	let innerWidth = 0;
-	let innerHeight = 0;
-
-	onMount(async () => {
-		await tick(); // wait for the next microtask
-		width = controlsContainer.clientWidth; // get the client width
-	});
-
-	let old = false;
+	let element;
+	let old = true;
 
 	if (browser) {
 		function centerElement() {
-			const elementWidth = width;
-			const leftPosition = (innerWidth - elementWidth) / 2;
+			const windowWidth = window.innerWidth;
+			const elementWidth = element.offsetWidth;
+			const leftPosition = (windowWidth - elementWidth) / 2;
 			element.style.transform = `translateX(${leftPosition}px)`;
 			console.log(leftPosition);
 		}
@@ -35,11 +27,12 @@
 			window.removeEventListener('resize', centerElement);
 		});
 	}
+
+	// Apply the translation using CSS transform
+	// element.style.transform = `translateX(${translation}px)`;
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight />
-
-<!-- <h1>{$isControlsOpen}</h1> -->
+<h1>{$isControlsOpen}</h1>
 
 <button
 	class="btn"
@@ -50,29 +43,21 @@
 	Toggle Controls</button
 >
 
-<div bind:this={element}>
-	that element has a width of {width}px
-</div>
-
 {#if old}
 	<!-- <Controls style="top: 40px; left: 0; position: absolute; transform: translateX(290px);" /> -->
 	<div
-		class="container absolute z-[100]"
+		class="container absolute top-8 z-[100]"
 		class:initialPosition={!$isControlsOpen}
 		class:endPosition={$isControlsOpen}
 	>
 		<Controls />
 	</div>
 {:else}
-	<div class="absolute flex h-screen w-screen justify-center">
-		<div
-			class="container z-[100] mt-20 w-[300px]"
-			bind:this={controlsContainer}
-			class:initialPosition2={!$isControlsOpen}
-			class:endPosition2={$isControlsOpen}
-		>
-			<Controls />
-		</div>
+	<div
+		class="container absolute z-[100] -translate-x-[290px] translate-y-8"
+		transition:fly={{ x: '290px', duration: 5000 }}
+	>
+		<Controls />
 	</div>
 {/if}
 
@@ -87,19 +72,5 @@
 		transform: translateX(30px);
 		/* transition: all 2000ms ease-out; */
 		transition: all 2000ms cubic-bezier(0.25, 1, 0.5, 1);
-	}
-	.initialPosition2 {
-		transform: rotateX(-100deg);
-		transform-origin: top;
-		border-radius: 10%;
-		opacity: 0;
-		transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	}
-	.endPosition2 {
-		transform: rotateX(0deg);
-		transform-origin: top;
-		border-radius: 50%;
-		opacity: 1;
-		transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	}
 </style>
