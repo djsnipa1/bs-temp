@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+  import { cssPosition } from '$lib/stores/store.js';
 
 	export let player;
 	export let initialVideoId = 'M7lc1UVf-VE';
@@ -30,13 +31,16 @@
 
 <div class="container flex items-center justify-center video-background">
   <!-- <div class="new-wrapper"> -->
-  <div class="video-foreground">
+  <div class="video-foreground" style="--translate: {$cssPosition}%;">
 	<div class="iframe" id={ytPlayerId} />
   </div>
   <!-- </div> -->
 </div>
 
 <style>
+  /* :root { 
+    --translate: 33%;
+  } */
   .new-wrapper {
     position: absolute;
     /* object-fit: cover;
@@ -51,7 +55,7 @@
     z-index: -99;
   }
   .video-foreground {
-    transform: translateX(-33%);
+    transform: translateX(var(--translate));
   }
   .video-foreground,
   .video-background .iframe {
