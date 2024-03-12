@@ -1,5 +1,5 @@
 <script>
-	import { Youtube, InputBoxNew } from '$lib';
+	import { YoutubeNewer , InputBoxNew } from '$lib';
 	import { videoId } from '$lib/stores/YoutubeURL.js';
 	import { copy } from 'svelte-copy';
 
@@ -20,16 +20,14 @@
 <div class="container z-[500]">
 	<InputBoxNew />
 
-	<Youtube bind:player />
+	<YoutubeNewer bind:player />
 </div>
-
-<!-- <button class="button btn" on:click={toggle}>change video</button> -->
 
 <div class="justify-items container">
 	<button
 		class="tooltip tooltip-left absolute right-4 z-[40] m-2 rounded-md bg-slate-600 hover:bg-amber-500 p-2 text-slate-300 shadow-sm"
     data-tip="copied!"
-		use:copy={'https://m.youtube.com/watch?v=m_xoN8KlP3w'}
+		use:copy={'https://m.youtube.com/watch?v=9B1SQX9a_hU'}
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +43,7 @@
 	</button>
 
 	<div class="mockup-code m-4 bg-slate-900 text-xs">
-		<pre><code>https://m.youtube.com/watch?v=m_xoN8KlP3w</code></pre>
+		<pre><code>https://m.youtube.com/watch?v=9B1SQX9a_hU</code></pre>
 	</div>
 </div>
 

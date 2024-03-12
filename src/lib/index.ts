@@ -6,3 +6,4 @@ export { default as YoutubeVideo } from './components/YoutubeVideo.svelte';
 export { default as Youtube } from './components/YoutubeNew.svelte';
 export { default as InputBoxNew } from './components/InputBoxNew.svelte';
 export { default as Viewport } from './components/Viewport.svelte';
+export { default as YoutubeNewer } from './components/YoutubeNewer.svelte';

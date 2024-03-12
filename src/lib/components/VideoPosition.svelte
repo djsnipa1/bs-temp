@@ -5,7 +5,7 @@
 </script>
 
 <!--<div class="shim min-w-full min-h-[25vh] border-pink-400 border-2">-->
-<div class="aspect-5.8 h-screen w-full">
+<div class="aspect-[9/16] h-screen w-full">
 	<video
 		autoplay
 		loop
