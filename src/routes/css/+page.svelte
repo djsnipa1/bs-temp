@@ -1,9 +1,9 @@
 <script>
-	import { YoutubeNewer , InputBoxNew, ControlsNew } from '$lib';
+	import { YoutubeNewer, InputBoxNew, ControlsNew } from '$lib';
 	import { videoId } from '$lib/stores/YoutubeURL.js';
 	import { copy } from 'svelte-copy';
-  import { cssPosition } from '$lib/stores/store.js'
-  
+	import { cssPosition } from '$lib/stores/store.js';
+
 	let player;
 
 	// const toggle = () => {
@@ -17,26 +17,29 @@
 		player.loadVideoById($videoId);
 	}
 
-  export let min = -33;
-  export let max = 33;
-  export let step = 3;
-  export let value = 0;
+	export let min = -33;
+	export let max = 33;
+	export let step = 3;
+	export let value = 0;
 
-  
-  let style = '';
+	let style = '';
 
-  $: style = `width: ${value}vw; height: ${value}px;`;
+	$: style = `width: ${value}vw; height: ${value}px;`;
 </script>
 
-<input type="range" class="range [--range-shdw:chartreuse] w-1/2 mx-auto flex justify-items" {min} {max} {step} bind:value={$cssPosition} />
-<div class="text-2xl text-white">{$cssPosition}</div>[
-<div style={style} class="border-pink-500 border-2">
-  This div's dimensions change with the slider.
-</div>
+<input
+	type="range"
+	class="justify-items range mx-auto flex w-1/2 [--range-shdw:chartreuse]"
+	{min}
+	{max}
+	{step}
+	bind:value={$cssPosition}
+/>
+<div class="mx-auto w-1/2 text-2xl text-white">{$cssPosition}</div>
 
 <div class="container z-[500]">
-  <!-- <ControlsNew /> -->
-  
+	<!-- <ControlsNew /> -->
+
 	<InputBoxNew />
 
 	<YoutubeNewer bind:player />
@@ -44,8 +47,8 @@
 
 <div class="justify-items container">
 	<button
-		class="tooltip tooltip-left absolute right-4 z-[40] m-2 rounded-md bg-slate-600 hover:bg-amber-500 p-2 text-slate-300 shadow-sm"
-    data-tip="copied!"
+		class="tooltip tooltip-left absolute right-4 z-[40] m-2 rounded-md bg-slate-600 p-2 text-slate-300 shadow-sm hover:bg-amber-500"
+		data-tip="copied!"
 		use:copy={'https://m.youtube.com/watch?v=9B1SQX9a_hU'}
 	>
 		<svg
@@ -66,4 +69,13 @@
 	</div>
 </div>
 
-              
+<style>
+	:root {
+		/*
+	range 
+  --filler-size: 200px;
+  --filler-offset: 2rem;
+  --range-shdw: red;
+*/
+	}
+</style>

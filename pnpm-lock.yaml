@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fontsource-variable/sofia-sans':
+    specifier: ^5.0.13
+    version: 5.0.13
   animejs:
     specifier: ^3.2.2
     version: 3.2.2
@@ -349,6 +352,10 @@ packages:
     resolution: {integrity: sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@fontsource-variable/sofia-sans@5.0.13:
+    resolution: {integrity: sha512-ww9Gk4ZFINgKldt6hXGL5OPv6DxBMrNnJv5zigN16KZs889bEV7CbGJUeOoo6rv0j5X3LgKbaLf7UrekhSggAg==}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}

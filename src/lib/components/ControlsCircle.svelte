@@ -1,5 +1,5 @@
 <script>
-	import { isControlsOpen } from '$lib/stores/ControlsStore.js';
+	import { isControlsOpen } from '$lib/stores/store.js';
 	let isVisible = false;
 </script>
 

@@ -6,7 +6,11 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			fontFamily: {
+				'sofiasans': ['"Sofia Sans Variable"', 'sans-serif'],
+			}
+		}
 	},
 
 	plugins: [typography, daisyui]

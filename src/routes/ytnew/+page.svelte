@@ -1,5 +1,5 @@
 <script>
-	import { YoutubeNewer , InputBoxNew } from '$lib';
+	import { YoutubeNewer, InputBoxNew } from '$lib';
 	import { videoId } from '$lib/stores/YoutubeURL.js';
 	import { copy } from 'svelte-copy';
 
@@ -25,8 +25,8 @@
 
 <div class="justify-items container">
 	<button
-		class="tooltip tooltip-left absolute right-4 z-[40] m-2 rounded-md bg-slate-600 hover:bg-amber-500 p-2 text-slate-300 shadow-sm"
-    data-tip="copied!"
+		class="tooltip tooltip-left absolute right-4 z-[40] m-2 rounded-md bg-slate-600 p-2 text-slate-300 shadow-sm hover:bg-amber-500"
+		data-tip="copied!"
 		use:copy={'https://m.youtube.com/watch?v=9B1SQX9a_hU'}
 	>
 		<svg
@@ -46,5 +46,3 @@
 		<pre><code>https://m.youtube.com/watch?v=9B1SQX9a_hU</code></pre>
 	</div>
 </div>
-
-              

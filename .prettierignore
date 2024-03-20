@@ -4,3 +4,4 @@ package-lock.json
 yarn.lock
 .cache
 src/lib/viewport.js
+static/

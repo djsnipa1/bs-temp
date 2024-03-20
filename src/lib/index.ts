@@ -8,3 +8,5 @@ export { default as Youtube } from './components/YoutubeNew.svelte';
 export { default as InputBoxNew } from './components/InputBoxNew.svelte';
 export { default as Viewport } from './components/Viewport.svelte';
 export { default as YoutubeNewer } from './components/YoutubeNewer.svelte';
+export { default as Slider } from './components/Slider.svelte';
+export { default as SettingsButton } from './components/SettingsButton.svelte';
