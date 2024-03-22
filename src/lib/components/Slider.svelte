@@ -9,7 +9,7 @@
 
 <input
 	type="range"
-	class="justify-items range mx-auto flex w-1/2 [--range-shdw:chartreuse]"
+	class="justify-items range range-warning range-xs mx-auto flex w-1/2"
 	{min}
 	{max}
 	{step}

@@ -32,26 +32,26 @@
 	// element.style.transform = `translateX(${translation}px)`;
 </script>
 
-<div class="relative min-h-screen min-w-full bg-slate-700 border border-aqua-500">
-<nav class="absolute flex w-full h-12 top-0 justify-between items-center bg-yellow-500 ">
-<div
-	style="transition: background-color 1s ease;"
-	class="{$isControlsOpen ? 'bg-green-500' : 'bg-red-500'} ml-4 px-2 top-8 flex-none w-12"
->
-	{$isControlsOpen}
-</div>
-
-<div class="text-sm flex-none">logo</div>
-<div class="">
-  <SettingsButton
-      class="button rounded-md p-1 mr-4 shadow-md bg-slate-300 text-slate-700 hover:bg-slate-400 hover:text-slate-800 flex-1" />
- </div>
+<div class="border-aqua-500 relative min-h-screen min-w-full border">
 
 
+	<nav class="absolute top-0 flex h-12 w-full items-center justify-between bg-yellow-500">
+		<div
+			style="transition: background-color 1s ease;"
+			class="{$isControlsOpen ? 'bg-green-500' : 'bg-red-500'} top-8 ml-4 w-12 flex-none px-2"
+		>
+			{$isControlsOpen}
+		</div>
 
-</nav>
+		<div class="flex-none text-sm">logo</div>
+		<div class="">
+			<SettingsButton
+				class="button mr-4 flex-1 rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
+			/>
+		</div>
+	</nav>
 
-<!--
+	<!--
 <button
 	class="button btn bg-amber-50" style="position: statc;"
 	on:click={() => {
@@ -61,35 +61,38 @@
 		Toggle Controls</button
 >
 -->
-{#if !dev}
-	<div
-		class="absolute w-full top-0 "
-		class:initialPosition={!$isControlsOpen}
-		class:endPosition={$isControlsOpen}
-	>
-		<ControlsNew />
-	</div>
-{:else}
-	<div
-		class="absolute w-full top-0 "
-		class:initialPosition={$isControlsOpen}
-		class:endPosition={!$isControlsOpen}
-	>
-		<ControlsNew />
-	</div>
-{/if}
+	{#if !dev}
+		<div
+			class="absolute top-0 w-full"
+			class:initialPosition={!$isControlsOpen}
+			class:endPosition={$isControlsOpen}
+		>
+			<ControlsNew />
+		</div>
+	{:else}
+		<div
+			class="absolute top-0 w-full"
+			class:initialPosition={$isControlsOpen}
+			class:endPosition={!$isControlsOpen}
+		>
+			<ControlsNew />
+		</div>
+	{/if}
+	
+	
 
-<!-- <VideoPosition src="/beatstar-peru.mp4" /> -->
+	<!-- <VideoPosition src="/beatstar-peru.mp4" /> -->
 </div>
+
 <style>
 	.initialPosition {
 		transform: translateY(-210px);
-	/*	transition: all 500ms ease-in; */
-		transition: all 1000ms cubic-bezier(0.600, 0.040, 0.980, 0.335); /* easeInCirc */
+		/*	transition: all 500ms ease-in; */
+		transition: all 1000ms cubic-bezier(0.6, 0.04, 0.98, 0.335); /* easeInCirc */
 	}
 	.endPosition {
-transform: translateY(40px);
-/*		transition: all 500ms cubic-bezier(0.25, 1, 0.5, 1); */
-transition: all 1000ms cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+		transform: translateY(40px);
+		/*		transition: all 500ms cubic-bezier(0.25, 1, 0.5, 1); */
+		transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1); /* easeOutCirc */
 	}
 </style>

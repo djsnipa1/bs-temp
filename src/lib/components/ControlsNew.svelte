@@ -1,6 +1,6 @@
 <script>
 	import { isControlsOpen, cssPosition } from '$lib/stores/store.js';
-	import { Slider } from '$lib';
+	import { Slider, FineTuning } from '$lib';
 
 	let isVisible = false;
 </script>
@@ -17,10 +17,16 @@
 				isControlsOpen.set(false);
 			}}>X</button
 		>
-		<h1 class="text-center text-xl font-bold mix-blend-difference font-sofiasans">Controls</h1>
-		<div class="flex flex-col items-center justify-center font-sofiasans">controls here</div>
+		<h1 class="text-center font-sofiasans text-xl font-bold text-black mix-blend-difference">
+			Controls
+		</h1>
+		<div class="flex flex-col items-center justify-center font-sofiasans text-black">
+			Video Position:
+		</div>
 
 		<Slider />
+
+		<FineTuning />
 	</div>
 </div>
 

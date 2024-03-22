@@ -4,9 +4,6 @@
 
 <button
 	{...$$restProps}
-	on:click={() => {
-		isControlsOpen.set(true);
-	}}
 >
 	<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 512 512"
 		><circle cx="256" cy="256" r="48" fill="currentColor" /><path

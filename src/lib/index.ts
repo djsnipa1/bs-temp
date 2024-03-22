@@ -10,3 +10,6 @@ export { default as Viewport } from './components/Viewport.svelte';
 export { default as YoutubeNewer } from './components/YoutubeNewer.svelte';
 export { default as Slider } from './components/Slider.svelte';
 export { default as SettingsButton } from './components/SettingsButton.svelte';
+export { default as FineTuning } from './components/FineTuning.svelte';
+export { default as NeuromorphicText } from './components/NeuromorphicText.svelte';
+export { default as BlankButton } from './components/BlankButton.svelte';

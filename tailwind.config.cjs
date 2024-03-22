@@ -8,8 +8,8 @@ const config = {
 	theme: {
 		extend: {
 			fontFamily: {
-				'sofiasans': ['"Sofia Sans Variable"', 'sans-serif'],
-			}
+				sofiasans: ['"Sofia Sans Variable"', 'sans-serif']
+			},
 		}
 	},
 
