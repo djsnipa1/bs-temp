@@ -33,8 +33,6 @@
 </script>
 
 <div class="border-aqua-500 relative min-h-screen min-w-full border">
-
-
 	<nav class="absolute top-0 flex h-12 w-full items-center justify-between bg-yellow-500">
 		<div
 			style="transition: background-color 1s ease;"
@@ -78,8 +76,6 @@
 			<ControlsNew />
 		</div>
 	{/if}
-	
-	
 
 	<!-- <VideoPosition src="/beatstar-peru.mp4" /> -->
 </div>

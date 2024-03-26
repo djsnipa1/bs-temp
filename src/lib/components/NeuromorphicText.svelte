@@ -1,21 +1,19 @@
 <script>
-
-
 </script>
 
-<div class="neomorph h-6 w-6 rounded-md mx-auto flex items-center">
-<p class="text-xs text-slate-800  mx-auto flex justify-center items-center">
-<slot />
-</p>
+<div class="neomorph mx-auto flex h-6 w-6 items-center rounded-md pt-0">
+	<p class="mx-auto flex items-center justify-center text-xs text-slate-800">
+		<slot />
+	</p>
 </div>
 
-
 <style>
-.neomorph {
-	box-shadow:  inset -1px -1px 3px rgba(255, 255, 255, 0.10),
-        inset 1px 1px 3px rgba(0,0,0,0.40);
-}
-/*:root {
+	.neomorph {
+		box-shadow:
+			inset -1px -1px 3px rgba(255, 255, 255, 0.1),
+			inset 1px 1px 3px rgba(0, 0, 0, 0.4);
+	}
+	/*:root {
 	--primary: #6441a5;
 	--white: #ffffff;
 	--greyLight-1: #e4ebf5; 

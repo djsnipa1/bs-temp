@@ -9,7 +9,7 @@ const config = {
 		extend: {
 			fontFamily: {
 				sofiasans: ['"Sofia Sans Variable"', 'sans-serif']
-			},
+			}
 		}
 	},
 
