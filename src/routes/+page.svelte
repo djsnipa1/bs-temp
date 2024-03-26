@@ -1,7 +1,7 @@
 <script>
 	import { VideoPosition } from '$lib';
 	import { Controls } from '$lib';
-	import { isControlsOpen } from '$lib/stores/ControlsStore.js';
+	import { isControlsOpen } from '$lib/stores/store.js';
 	import { browser } from '$app/environment';
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { fly } from 'svelte/transition';
@@ -40,6 +40,23 @@
 <svelte:window bind:innerWidth bind:innerHeight />
 
 <!-- <h1>{$isControlsOpen}</h1> -->
+
+<div
+	id="links"
+	class="fixed top-10 z-[6000] flex h-1/3 w-1/2 flex-col items-center justify-center rounded-lg border-2 border-yellow-500"
+>
+	<div class="grid grid-cols-1 divide-y divide-slate-600 rounded-lg bg-slate-500 p-2 shadow-lg">
+		<p class="py-2">
+			<a href="/controls2" class="text-slate-200 hover:text-slate-700">Controls2</a>
+		</p>
+		<p class="py-2"><a href="/controls" class="text-slate-200 hover:text-slate-700">Controls</a></p>
+		<p class="py-2">
+			<a href="/controlsnew" class="text-slate-200 hover:text-slate-700">Controls New</a>
+		</p>
+		<p class="py-2"><a href="/css" class="text-slate-200 hover:text-slate-700">CSS</a></p>
+		<p class="py-2"><a href="/svg" class="text-slate-200 hover:text-slate-700">SVG</a></p>
+	</div>
+</div>
 
 <button
 	class="btn"

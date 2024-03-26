@@ -9,37 +9,37 @@ To achieve the effect of displaying a YouTube video at full viewport height on m
 ```css
 /* In your global CSS file, e.g., app.css */
 .video-container {
- @apply h-screen w-full relative;
- }
+	@apply relative h-screen w-full;
+}
 
- .video-container iframe {
-  @apply absolute top-0 left-0 w-full h-full;
-   object-fit: cover;
-   }
-   ```
+.video-container iframe {
+	@apply absolute left-0 top-0 h-full w-full;
+	object-fit: cover;
+}
+```
 
-   4. **HTML Structure**: In your Svelte component, structure your HTML to include the video within a container that uses the custom CSS classes you've defined. Here's an example:
+4.  **HTML Structure**: In your Svelte component, structure your HTML to include the video within a container that uses the custom CSS classes you've defined. Here's an example:
 
 ```html
-   <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-    </div>
+<div class="video-container">
+	<iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+</div>
 ```
 
     5. **Responsive Design**: To ensure this layout only applies to mobile devices, you can use Tailwind's responsive design utilities. For example, you might only want the video to cover the entire viewport on small screens and below. You can adjust the `video-container` class to only apply these styles on smaller screens:
 
 ```css
-    /* Adjust the video-container class for smaller screens */
-    @media (max-width: 640px) {
-     .video-container {
-         @apply h-screen w-full relative;
-          }
+/* Adjust the video-container class for smaller screens */
+@media (max-width: 640px) {
+	.video-container {
+		@apply relative h-screen w-full;
+	}
 
-           .video-container iframe {
-               @apply absolute top-0 left-0 w-full h-full;
-                   object-fit: cover;
-                    }
-                    }
+	.video-container iframe {
+		@apply absolute left-0 top-0 h-full w-full;
+		object-fit: cover;
+	}
+}
 ```
 
 This approach combines Tailwind CSS's utility classes with custom CSS to achieve the desired effect of displaying a YouTube video at full viewport height on mobile devices while maintaining a 16:9 aspect ratio. Remember to replace `VIDEO_ID` with the actual ID of the YouTube video you want to display.

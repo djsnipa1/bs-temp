@@ -41,6 +41,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource-variable/sofia-sans": "^5.0.13",
 		"animejs": "^3.2.2"
 	}
 }

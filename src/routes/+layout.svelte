@@ -1,5 +1,7 @@
 <script>
 	import '../app.pcss';
+	// Supports weights 100-900
+	import '@fontsource-variable/sofia-sans';
 </script>
 
 <svelte:head>

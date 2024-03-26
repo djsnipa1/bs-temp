@@ -5,14 +5,14 @@
 </script>
 
 <!--<div class="shim min-w-full min-h-[25vh] border-pink-400 border-2">-->
-<div class="aspect-[9/16] h-screen w-full">
+<div class="z-[5] aspect-[9/16] h-screen w-full">
 	<video
 		autoplay
 		loop
 		muted
 		playsinline
 		id="myVideo"
-		class="border-2 border-blue-400"
+		class="z-[5] border-2 border-blue-400"
 		on:click|preventDefault={emptyFunction}
 	>
 		<source type="video/mp4" {src} id="player" />

@@ -27,8 +27,8 @@
 
 <div class="justify-items container">
 	<button
-		class="tooltip tooltip-left absolute right-4 z-[40] m-2 rounded-md bg-slate-600 hover:bg-amber-500 p-2 text-slate-300 shadow-sm"
-    data-tip="copied!"
+		class="tooltip tooltip-left absolute right-4 z-[40] m-2 rounded-md bg-slate-600 p-2 text-slate-300 shadow-sm hover:bg-amber-500"
+		data-tip="copied!"
 		use:copy={'https://m.youtube.com/watch?v=m_xoN8KlP3w'}
 	>
 		<svg
@@ -48,5 +48,3 @@
 		<pre><code>https://m.youtube.com/watch?v=m_xoN8KlP3w</code></pre>
 	</div>
 </div>
-
-              

@@ -10,7 +10,7 @@
 		function load() {
 			player = new YT.Player(ytPlayerId, {
 				height: '100%',
-				width: '80%',
+				width: '100%',
 				videoId: initialVideoId,
 				playerVars: { autoplay: 0 }
 			});

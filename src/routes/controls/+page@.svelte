@@ -1,7 +1,7 @@
 <script>
 	import { VideoPosition } from '$lib';
 	import { Controls } from '$lib';
-	import { isControlsOpen } from '$lib/stores/ControlsStore.js';
+	import { isControlsOpen } from '$lib/stores/store.js';
 	import { browser } from '$app/environment';
 	import { onMount, onDestroy } from 'svelte';
 	import { fly } from 'svelte/transition';
