@@ -1,8 +1,9 @@
 <script>
+	export let textColor = 'text-slate-500';
 </script>
 
-<div class="neomorph mx-auto flex h-6 w-6 items-center rounded-md pt-0">
-	<p class="mx-auto flex items-center justify-center text-xs text-slate-800">
+<div class="neomorph mx-auto flex h-8 w-8 items-center rounded-md">
+	<p class="mx-auto flex items-center justify-center text-sm {textColor}">
 		<slot />
 	</p>
 </div>

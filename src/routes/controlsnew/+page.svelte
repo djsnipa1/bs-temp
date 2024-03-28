@@ -7,7 +7,7 @@
 	import { fly, fade } from 'svelte/transition';
 
 	let element;
-	let dev = true;
+	let dev = false;
 
 	/*	if (browser) {
 		function centerElement() {
@@ -78,6 +78,7 @@
 	{/if}
 
 	<!-- <VideoPosition src="/beatstar-peru.mp4" /> -->
+	<div class="w-full h-screen bg-slate-800"></div>
 </div>
 
 <style>
