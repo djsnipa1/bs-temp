@@ -1,5 +1,7 @@
 { pkgs }: {
     deps = [
+      pkgs.unzip
+      pkgs.fd
       pkgs.neovim
       pkgs.pastel
     # pkgs.pastebinit
