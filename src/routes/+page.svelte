@@ -55,6 +55,7 @@
 		</p>
 		<p class="py-2"><a href="/css" class="text-slate-200 hover:text-slate-700">CSS</a></p>
 		<p class="py-2"><a href="/svg" class="text-slate-200 hover:text-slate-700">SVG</a></p>
+		<p class="py-2"><a href="/final" class="text-slate-200 hover:text-slate-700">Final</a></p>
 	</div>
 </div>
 

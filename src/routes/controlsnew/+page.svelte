@@ -78,12 +78,12 @@
 	{/if}
 
 	<!-- <VideoPosition src="/beatstar-peru.mp4" /> -->
-	<div class="w-full h-screen bg-slate-800"></div>
+	<div class="h-screen w-full bg-slate-800"></div>
 </div>
 
 <style>
 	.initialPosition {
-		transform: translateY(-210px);
+		transform: translateY(-230px);
 		/*	transition: all 500ms ease-in; */
 		transition: all 1000ms cubic-bezier(0.6, 0.04, 0.98, 0.335); /* easeInCirc */
 	}
