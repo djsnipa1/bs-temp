@@ -20,5 +20,6 @@
     # pkgs.ffmpeg_5-full
     # pkgs.mediainfo
     # pkgs.exiftool
+    # pkgs.turso-cli
     ];
 }

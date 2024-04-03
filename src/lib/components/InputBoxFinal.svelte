@@ -44,23 +44,20 @@
 	}
 </script>
 
-<div class="container  flex items-center justify-center">
+<div class="container flex items-center justify-center">
 	<!-- <input type="text" class="input input-sm input-bordered w-full max-w-xs" on:input={handleInput} /> -->
-	<label class="form-control w-full max-w-xs">
+	<!-- <label class="form-control w-full max-w-xs"> -->
 		<input
 			type="text"
 			placeholder="https://youtu.be/m_xoN8KlP3w"
 			on:input={handleInput}
 			class="input input-sm input-bordered w-full max-w-xs"
 		/>
-		<div class="label">
-			<span class="label-text">Paste YouTube URL</span>
-			<!-- <span class="label-text-alt">Top Right label</span> -->
-		</div>
+		
 		
 		<!-- <div class="label"> -->
 		<!-- <span class="label-text-alt">Paste YouTube URL</span> -->
 		<!-- <span class="label-text-alt">Bottom Right label</span> -->
 		<!-- </div> -->
-	</label>
+	<!-- </label> -->
 </div>
