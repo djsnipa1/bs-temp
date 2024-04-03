@@ -3,7 +3,7 @@
 	import { cssPosition } from '$lib/stores/store.js';
 
 	export let player;
-	export let initialVideoId = 'M7lc1UVf-VE';
+	export let initialVideoId = '9B1SQX9a_hU';
 
 	const ytPlayerId = 'youtube-player';
 

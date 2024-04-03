@@ -13,3 +13,6 @@ export { default as SettingsButton } from './components/SettingsButton.svelte';
 export { default as FineTuning } from './components/FineTuning.svelte';
 export { default as NeuromorphicText } from './components/NeuromorphicText.svelte';
 export { default as BlankButton } from './components/BlankButton.svelte';
+export { default as UrlButton } from './components/UrlButton.svelte';
+export { default as ContrastTest } from './components/ContrastTest.svelte';
+export { default as InputBoxFinal } from './components/InputBoxFinal.svelte';
