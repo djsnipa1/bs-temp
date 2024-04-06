@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="183.311 218.367 48.4647 48.4647" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<linearGradient gradientTransform="matrix(0.751651 -51.488 51.488 0.751651 206.593 268.488)" gradientUnits="userSpaceOnUse" id="LinearGradient" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0" stop-color="#ff9a12"/>
+<stop offset="1" stop-color="#ffc912"/>
+</linearGradient>
+</defs>
+<g id="Layer-2" vectornator:layerName="Layer 2">
+<path d="M183.311 242.599C183.311 229.216 194.16 218.367 207.543 218.367C220.926 218.367 231.775 229.216 231.775 242.599C231.775 255.983 220.926 266.832 207.543 266.832C194.16 266.832 183.311 255.983 183.311 242.599Z" fill="url(#LinearGradient)" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Oval 1"/>
+<g opacity="1" vectornator:layerName="Group 1">
+<path d="M192.389 237.265C192.389 235.347 193.944 233.793 195.862 233.793C197.779 233.793 199.334 235.347 199.334 237.265C199.334 239.183 197.779 240.737 195.862 240.737C193.944 240.737 192.389 239.183 192.389 237.265Z" fill="#000000" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Oval 4"/>
+<path d="M194.936 235.167C194.936 234.655 195.35 234.241 195.862 234.241C196.373 234.241 196.788 234.655 196.788 235.167C196.788 235.678 196.373 236.093 195.862 236.093C195.35 236.093 194.936 235.678 194.936 235.167Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Oval 5"/>
+</g>
+<g opacity="1" vectornator:layerName="Group 2">
+<path d="M215.752 237.265C215.752 235.347 217.307 233.793 219.224 233.793C221.142 233.793 222.697 235.347 222.697 237.265C222.697 239.183 221.142 240.737 219.224 240.737C217.307 240.737 215.752 239.183 215.752 237.265Z" fill="#000000" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Oval 3"/>
+<path d="M218.298 235.167C218.298 234.655 218.713 234.241 219.224 234.241C219.736 234.241 220.15 234.655 220.15 235.167C220.15 235.678 219.736 236.093 219.224 236.093C218.713 236.093 218.298 235.678 218.298 235.167Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="Oval 2"/>
+</g>
+<path d="M199.83 243.288C199.658 244.723 203.951 247.5 207.464 247.5C210.978 247.5 214.9 244.507 215.371 243.188C215.371 243.188 215.646 242.648 214.519 242.695C214.113 242.712 213.746 243.188 213.746 243.188C212.45 244.945 210.189 246.187 207.464 246.188C204.74 246.188 201.183 243.188 201.183 243.188C201.183 243.188 200.958 242.81 200.267 242.835C199.861 242.85 199.83 243.288 199.83 243.288Z" fill="#000000" fill-rule="nonzero" opacity="1" stroke="#00eaff" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.0746047" vectornator:layerName="Curve 1"/>
+<path d="M199.569 243.207" fill="none" opacity="1" stroke="#00eaff" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.0746047" vectornator:layerName="Curve 2"/>
+</g>
+</svg>

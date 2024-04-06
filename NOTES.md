@@ -6,7 +6,7 @@ Here's a step-by-step guide on how to implement this:
 
 ```html
 <div class="video-container">
-	<video id="myVideo" src="your-video.mp4"></video>
+  <video id="myVideo" src="your-video.mp4"></video>
 </div>
 ```
 
@@ -18,20 +18,20 @@ Here's a step-by-step guide on how to implement this:
 
 ```css
 .video-container {
-	width: 100%; /* Adjust the width as needed */
-	height: 0;
-	padding-bottom: 100%; /* Maintain aspect ratio */
-	position: relative;
-	overflow: hidden; /* Hide the parts of the video outside the container */
+  width: 100%; /* Adjust the width as needed */
+  height: 0;
+  padding-bottom: 100%; /* Maintain aspect ratio */
+  position: relative;
+  overflow: hidden; /* Hide the parts of the video outside the container */
 }
 
 #myVideo {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	object-fit: cover;
-	/* Adjust object-position based on which part of the video you want to show */
-	object-position: 0% 50%; /* For left  1/3 */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  /* Adjust object-position based on which part of the video you want to show */
+  object-position: 0% 50%; /* For left  1/3 */
 }
 ```
 

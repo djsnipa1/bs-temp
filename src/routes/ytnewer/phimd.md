@@ -9,12 +9,12 @@ To achieve the effect of displaying a YouTube video at full viewport height on m
 ```css
 /* In your global CSS file, e.g., app.css */
 .video-container {
-	@apply relative h-screen w-full;
+  @apply relative h-screen w-full;
 }
 
 .video-container iframe {
-	@apply absolute left-0 top-0 h-full w-full;
-	object-fit: cover;
+  @apply absolute left-0 top-0 h-full w-full;
+  object-fit: cover;
 }
 ```
 
@@ -22,7 +22,11 @@ To achieve the effect of displaying a YouTube video at full viewport height on m
 
 ```html
 <div class="video-container">
-	<iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+  <iframe
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    frameborder="0"
+    allowfullscreen
+  ></iframe>
 </div>
 ```
 
@@ -31,14 +35,14 @@ To achieve the effect of displaying a YouTube video at full viewport height on m
 ```css
 /* Adjust the video-container class for smaller screens */
 @media (max-width: 640px) {
-	.video-container {
-		@apply relative h-screen w-full;
-	}
+  .video-container {
+    @apply relative h-screen w-full;
+  }
 
-	.video-container iframe {
-		@apply absolute left-0 top-0 h-full w-full;
-		object-fit: cover;
-	}
+  .video-container iframe {
+    @apply absolute left-0 top-0 h-full w-full;
+    object-fit: cover;
+  }
 }
 ```
 

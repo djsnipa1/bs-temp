@@ -3,17 +3,17 @@ const typography = require('@tailwindcss/typography');
 
 /** @type {import('tailwindcss').Config}*/
 const config = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+  content: ['./src/**/*.{html,js,svelte,ts}'],
 
-	theme: {
-		extend: {
-			fontFamily: {
-				sofiasans: ['"Sofia Sans Variable"', 'sans-serif']
-			}
-		}
-	},
+  theme: {
+    extend: {
+      fontFamily: {
+        sofiasans: ['"Sofia Sans Variable"', 'sans-serif']
+      }
+    }
+  },
 
-	plugins: [typography, daisyui]
+  plugins: [typography, daisyui]
 };
 
 module.exports = config;

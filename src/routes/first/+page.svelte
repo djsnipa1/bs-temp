@@ -1,5 +1,5 @@
 <script>
-	import { VideoPlayer } from '$lib';
+  import { VideoPlayer } from '$lib';
 </script>
 
 <h1>First Page</h1>
