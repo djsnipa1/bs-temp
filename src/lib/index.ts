@@ -16,3 +16,4 @@ export { default as BlankButton } from './components/BlankButton.svelte';
 export { default as UrlButton } from './components/UrlButton.svelte';
 export { default as ContrastTest } from './components/ContrastTest.svelte';
 export { default as InputBoxFinal } from './components/InputBoxFinal.svelte';
+export { default as PasteButton } from './components/PasteButton.svelte';

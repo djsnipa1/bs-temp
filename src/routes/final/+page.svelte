@@ -61,18 +61,20 @@
 
 <div class="border-aqua-500 relative min-h-screen min-w-full border">
   <nav
-    class="shadow-sharp absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-gradient-to-b from-yellow-400 to-amber-600 opacity-50"
+    class="shadow-sharp absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-gradient-to-b from-yellow-400 to-amber-600 opacity-100"
   >
     <!-- <div
 			style="transition: background-color 1s ease"
 			class="{$isControlsOpen ? 'bg-green-500' : 'bg-red-500'} top-8 ml-4 w-12 flex-none px-2">
 			{$isControlsOpen}
 		</div> -->
-
+<div class="absolute text-4xl top-[350px] left-[30px] z-[2000]">{$isUrlOpen}</div>
     <UrlButton
       class="button ml-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
       on:click={() => {
-        isUrlOpen.set(true);
+        //isUrlOpen.set(true);
+        isUrlOpen.update(value => !value);
+        //$isUrlOpen = !$isUrlOpen;
         console.log('click');
         console.log($isUrlOpen);
       }}
@@ -97,26 +99,14 @@
     <ControlsNew />
   </div>
 
-  <!-- InputBoxNew -->
-  <!--  <div
-    class="h-22 container absolute z-[750] flex items-center justify-center rounded-bl-lg rounded-br-lg border-2 border-red-500 pt-1"
-  >
-    <InputBoxFinal />
-  </div>
--->
-  <!--
-{#if menuOpen}
-	<ul >
-		<li>a menu item</li>
-	</ul>
-{/if}
--->
 
   <div class:endPos={$isUrlOpen} class:startPos={!$isUrlOpen} on:outside={() => {
   console.log("succck");
   $isUrlOpen = false
   }} use:clickOutside>
+  
     <InputBoxFinal />
+    
   </div>
 
   <div class="container">
@@ -183,11 +173,15 @@
       0 8px 8px rgba(0, 0, 0, 0.2);
   }
   .startPos {
-    transform: translateY(6px);
-    transition: all 600ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    transform: translateY(-16px);
+    transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
   }
   .endPos {
-    transform: translateY(55px);
-    transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: translateY(48px); 
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   }
+  .block {
+	transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
+}
+  
 </style>
