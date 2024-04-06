@@ -8,3 +8,7 @@ export const videoId = writable('9B1SQX9a_hU');
 export const cssPosition = writable('');
 
 export const isControlsOpen = writable(false);
+
+export const isUrlOpen = writable(false);
+
+export const menuOpen = writable(false);
