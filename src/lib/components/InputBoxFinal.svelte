@@ -42,45 +42,21 @@
     } else {
       console.log('The function returned a truthy value:', ytValue);
       $videoId = ytValue;
-      isUrlOpen.update(value => !value);
+      isUrlOpen.update((value) => !value);
     }
   }
-
-/*
-  function handleMenuOpen() {
-    $isUrlOpen = true;
-    console.log('open');
-    document.body.addEventListener('click', handleMenuClose);
-  }
-  function handleMenuClose() {
-    $isUrlOpen = false;
-    console.log('close');
-    document.body.removeEventListener('click', handleMenuClose);
-  }
-  */
 </script>
 
-<!--{#if $isUrlOpen} -->
-  <div
-    class="container flex items-center justify-center glass h-16"
-  >
-    <!-- <input type="text" class="input input-sm input-bordered w-full max-w-xs" on:input={handleInput} /> -->
-    <!-- <label class="form-control w-full max-w-xs"> -->
-<PasteButton 
-  class="button mx-4 flex-1 rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
+<div class="container glass flex h-16 items-center justify-center">
+  <PasteButton
+    class="button mx-4 flex-1 rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
   />
 
-    <input
-      type="text"
-      placeholder="https://youtu.be/m_xoN8KlP3w"
-      on:input={handleInput}
-      class="input input-sm input-bordered w-full max-w-xs mr-4"
-    />
+  <input
+    type="text"
+    placeholder="https://youtu.be/m_xoN8KlP3w"
+    on:input={handleInput}
+    class="input input-sm input-bordered mr-4 w-full max-w-xs"
+  />
+</div>
 
-    <!-- <div class="label"> -->
-    <!-- <span class="label-text-alt">Paste YouTube URL</span> -->
-    <!-- <span class="label-text-alt">Bottom Right label</span> -->
-    <!-- </div> -->
-    <!-- </label> -->
-  </div>
-<!--{/if} -->
