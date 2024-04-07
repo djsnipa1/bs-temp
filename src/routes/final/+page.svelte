@@ -5,7 +5,8 @@
     InputBoxFinal,
     ControlsNew,
     SettingsButton,
-    UrlButton
+    UrlButton,
+    PlayerControls
   } from '$lib';
   import { videoId } from '$lib/stores/store.js';
   import { copy } from 'svelte-copy';
@@ -38,7 +39,6 @@
 
   $: style = `width: ${value}vw; height: ${value}px;`;
 
-  
   function clickOutside(element: HTMLElememt) {
     function handleClick(event: MouseEvent) {
       const targetEl = event.target as HTMLElement;
@@ -68,12 +68,14 @@
 			class="{$isControlsOpen ? 'bg-green-500' : 'bg-red-500'} top-8 ml-4 w-12 flex-none px-2">
 			{$isControlsOpen}
 		</div> -->
-<div class="absolute text-4xl top-[350px] left-[30px] z-[2000]">{$isUrlOpen}</div>
+    <div class="absolute left-[30px] top-[350px] z-[2000] text-4xl">
+      {$isUrlOpen}
+    </div>
     <UrlButton
       class="button ml-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
       on:click={() => {
         //isUrlOpen.set(true);
-        isUrlOpen.update(value => !value);
+        isUrlOpen.update((value) => !value);
         //$isUrlOpen = !$isUrlOpen;
         console.log('click');
         console.log($isUrlOpen);
@@ -99,16 +101,21 @@
     <ControlsNew />
   </div>
 
-
-  <div class:endPos={$isUrlOpen} class:startPos={!$isUrlOpen} on:outside={() => {
-  console.log("succck");
-  $isUrlOpen = false
-  }} use:clickOutside>
-  
+  <div
+    class:endPos={$isUrlOpen}
+    class:startPos={!$isUrlOpen}
+    on:outside={() => {
+      console.log('succck');
+      $isUrlOpen = false;
+    }}
+    use:clickOutside
+  >
     <InputBoxFinal />
-    
   </div>
 
+
+  <PlayerControls />
+  
   <div class="container">
     <YoutubeNewer bind:player />
   </div>
@@ -177,11 +184,10 @@
     transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
   }
   .endPos {
-    transform: translateY(48px); 
+    transform: translateY(48px);
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .block {
-	transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
-}
-  
+    transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
+  }
 </style>
