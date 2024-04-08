@@ -113,9 +113,8 @@
     <InputBoxFinal />
   </div>
 
-
   <PlayerControls />
-  
+
   <div class="container">
     <YoutubeNewer bind:player />
   </div>
