@@ -59,4 +59,3 @@
     class="input input-sm input-bordered mr-4 w-full max-w-xs"
   />
 </div>
-
