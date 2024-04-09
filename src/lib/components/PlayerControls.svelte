@@ -1,5 +1,7 @@
 <script>
-  import { isUrlOpen, videoId, menuOpen } from '$lib/stores/store.js';
+  import { isUrlOpen, videoId, menuOpen, isVideoPlaying } from '$lib/stores/store.js';
+  
+  
 </script>
 
 <div
@@ -17,12 +19,15 @@
     class="col-span-2 row-start-2 flex h-12 w-12 items-center justify-center rounded-full bg-slate-300"
     >REV</button
   >
-  <button
-    class="col-span-3 col-start-3 row-start-2 flex h-16 w-16 items-center justify-center rounded-full bg-slate-300"
+  {#if !$isVideoPlaying}
+  <button on:click={() => {isVideoPlaying.set(true)}}
+    class="col-span-3 col-start-3 row-start-2 flex h-16 w-16 items-center justify-center rounded-full bg-slate-300 hover:bg-slate-600 hover:text-slate-400 transition-all"
     >PLAY</button
   >
+  {else}
+  
   <button
-    class="col-span-2 col-start-6 row-start-2 flex h-12 w-12 items-center justify-center rounded-full bg-slate-300"
+    class="col-span-2 col-start-6 row-start-2 flex h-12 w-12 items-center justify-center rounded-full bg-slate-300 hover:bg-slate-600 hover:text-slate-400"
     >FWD</button
   >
   <button

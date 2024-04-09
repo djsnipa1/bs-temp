@@ -13,7 +13,15 @@
         height: '100%',
         width: '100%',
         videoId: initialVideoId,
-        playerVars: { autoplay: 0 }
+        playerVars: { 
+          autoplay: 0,
+          fs: 0,
+          enablejsapi: 1,
+          iv_load_policy: 3,
+          playsinline: 1,
+          disablekb: 1,
+          controls: 0 
+          }
       });
     }
 
@@ -30,11 +38,9 @@
 </svelte:head>
 
 <div class="video-background container flex items-center justify-center">
-  <!-- <div class="new-wrapper"> -->
   <div class="video-foreground" style="--translate: {$cssPosition}%;">
     <div class="iframe" id={ytPlayerId} />
   </div>
-  <!-- </div> -->
 </div>
 
 <style>

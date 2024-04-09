@@ -14,21 +14,24 @@
     cssPosition,
     isControlsOpen,
     isUrlOpen,
-    menuOpen
+    menuOpen,
+    isVideoPlaying
   } from '$lib/stores/store.js';
 
   let player;
 
-  // const toggle = () => {
-  // 	console.log('changing video id');
-  // 	// player.loadVideoById('dQw4w9WgXcQ');
+   const toggle = () => {
+   	console.log('changing video id');
+     player.loadVideoById('dQw4w9WgXcQ');
   // 	player.loadVideoById($videoId);
-  // };
+   };
 
   // Reactive statement to load a new video when $videoId changes
   $: if ($videoId && player && typeof player.loadVideoById === 'function') {
     player.loadVideoById($videoId);
   }
+  
+  $: if ($isVideoPlaying) { player.playVideo() }
 
   export let min = -33;
   export let max = 33;
