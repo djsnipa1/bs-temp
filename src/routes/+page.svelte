@@ -5,6 +5,7 @@
   import { browser } from '$app/environment';
   import { onMount, onDestroy, tick } from 'svelte';
   import { fly } from 'svelte/transition';
+ import { goto } from '$app/navigation';
 
   let element, controlsContainer;
   let width;
@@ -12,8 +13,11 @@
   let innerHeight = 0;
 
   onMount(async () => {
-    await tick(); // wait for the next microtask
-    width = controlsContainer.clientWidth; // get the client width
+    
+    
+    goto('/final');
+    //await tick(); // wait for the next microtask
+    //width = controlsContainer.clientWidth; // get the client width
   });
 
   let old = false;

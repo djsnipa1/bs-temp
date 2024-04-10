@@ -1,4 +1,4 @@
-    import { writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 export const youtubeUrl = writable('https://youtu.be/9B1SQX9a_hU');
 
@@ -14,3 +14,5 @@ export const isUrlOpen = writable(false);
 export const menuOpen = writable(false);
 
 export const isVideoPlaying = writable(false);
+
+export const isVideoPaused = writable(false);

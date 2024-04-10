@@ -42,13 +42,10 @@ I create a youtube component (feel free to modify any of the properties in the `
 The key things to note here are:
 
 1.  the script tag in `<svelte:head>` injects the iframe api code.
-    
 2.  VScode (or whatever editor) will underline a bunch of things in red like `Cannot find name 'YT'` or `Property 'onYouTubeIframeAPIReady' does not exist on type 'Window & typeof globalThis'`. You can ignore these as these reference code that gets injected from the iframe api code, and will function properly when actually running in the browser
-    
 3.  The `if (window.YT)...` statement is very important - the first time the embed is mounted, window.YT property will not exist, so `window.onYouTubeIframeAPIReady = load;` what this does is when the loaded iframe api code runs, it will attempt to execute window.onYouTubeIframeAPIReady(). Since this function gets set to load, then the `player = new YT.player(...` as per youtube's example code in their docs linked in the OP.
-    
+
 However, if you navigate away to another page on your site and then return to the page with the embed, since sveltekit sites act like an SPA, all the code loaded from the script tag remains. What ends up happening is that some logic in the loaded iframe api code causes the onYouTubeIframeAPIReady function to not be run again, and thus a new player element is not created. If you refreshed the page and thus removed all the loaded code, the embed would load properly again. To solve this, if `window.YT` exists (which is some property that the loaded iframe api code creates), then we can directly create a new player by calling `load()` and we can be certain that the loaded api code has already been added to our page and the player will function properly.
-    
 
 Then we can import the component within a page and also access the player object by binding to it:
 
@@ -155,6 +152,7 @@ Source: Conversation with Bing, 4/8/2024
 ---
 
 ## Display portion of video
+
 To display only a portion of a video, such as the left, center, or right 1/3 of the video, you can use CSS to achieve this effect. The key properties you'll use are `object-fit` and `object-position`. The `object-fit` property controls how the video's size is adjusted to fit within the frame, and `object-position` allows you to adjust the positioning of the video within the element's frame.
 
 Here's a step-by-step guide on how to implement this:

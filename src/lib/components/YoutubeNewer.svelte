@@ -1,6 +1,10 @@
 <script>
   import { onMount } from 'svelte';
-  import { cssPosition } from '$lib/stores/store.js';
+  import {
+    cssPosition,
+    isVideoPlaying,
+    isVideoPaused
+  } from '$lib/stores/store.js';
 
   export let player;
   export let initialVideoId = '9B1SQX9a_hU';
@@ -13,15 +17,19 @@
         height: '100%',
         width: '100%',
         videoId: initialVideoId,
-        playerVars: { 
+        playerVars: {
           autoplay: 0,
           fs: 0,
           enablejsapi: 1,
           iv_load_policy: 3,
           playsinline: 1,
           disablekb: 1,
-          controls: 0 
-          }
+          controls: 0,
+          rel: 0
+        },
+        events: {
+          onStateChange: onPlayerStateChange
+        }
       });
     }
 
@@ -29,6 +37,18 @@
       load();
     } else {
       window.onYouTubeIframeAPIReady = load;
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.PAUSED) {
+        console.log('The video is paused.');
+        isVideoPaused.set(true);
+        isVideoPlaying.set(false);
+      } else if (event.data == YT.PlayerState.PLAYING) {
+        console.log('The video is playing.');
+        isVideoPlaying.set(true);
+        isVideoPaused.set(false);
+      }
     }
   });
 </script>
