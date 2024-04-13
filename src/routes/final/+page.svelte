@@ -14,20 +14,29 @@
     cssPosition,
     isControlsOpen,
     isUrlOpen,
-    menuOpen
+    menuOpen,
+    isVideoPlaying,
+    isVideoPaused
   } from '$lib/stores/store.js';
 
   let player;
 
-  // const toggle = () => {
-  // 	console.log('changing video id');
-  // 	// player.loadVideoById('dQw4w9WgXcQ');
-  // 	player.loadVideoById($videoId);
-  // };
+  const toggle = () => {
+    console.log('changing video id');
+    player.loadVideoById('dQw4w9WgXcQ');
+    // 	player.loadVideoById($videoId);
+  };
 
   // Reactive statement to load a new video when $videoId changes
   $: if ($videoId && player && typeof player.loadVideoById === 'function') {
     player.loadVideoById($videoId);
+  }
+
+  $: if ($isVideoPlaying) {
+    player.playVideo();
+  }
+  $: if ($isVideoPaused) {
+    player.pauseVideo();
   }
 
   export let min = -33;
@@ -59,10 +68,15 @@
   }
 </script>
 
-<div class="border-aqua-500 relative min-h-screen min-w-full border">
+<div class="relative min-h-screen min-w-full touch-none border">
   <nav
-    class="shadow-sharp absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-gradient-to-b from-yellow-400 to-amber-600 opacity-100"
+    class="absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-[linear-gradient(180deg,#ffe636_0%,#ffd430_5%,#ffc12b_10%,#ffb72c_25%,#ffa51a_40%,#f6a200_60%,#f59c00_75%,#f39500_90%,#f28d00_95%,#f78d00_100%)] opacity-100 shadow-lg"
   >
+    <!-- 
+    background-size: 100% 100%;
+background-position: 0px 0px;
+background-image: linear-gradient(180deg, #ffbe00 0%, #f9af00 5%, #f49600 65%, #f58d00 100%);
+   -->
     <!-- <div
 			style="transition: background-color 1s ease"
 			class="{$isControlsOpen ? 'bg-green-500' : 'bg-red-500'} top-8 ml-4 w-12 flex-none px-2">
@@ -82,7 +96,7 @@
       }}
     />
     <div
-      class="text-md flex-none text-center font-sofiasans font-bold leading-4 text-slate-700"
+      class="text-md flex-none text-center font-sofiasans font-bold leading-4 text-white text-shadow-sm shadow-slate-600"
     >
       Beatstar<br />Practicer
     </div>
@@ -105,7 +119,6 @@
     class:endPos={$isUrlOpen}
     class:startPos={!$isUrlOpen}
     on:outside={() => {
-      console.log('succck');
       $isUrlOpen = false;
     }}
     use:clickOutside
@@ -185,8 +198,5 @@
   .endPos {
     transform: translateY(48px);
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  .block {
-    transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
   }
 </style>

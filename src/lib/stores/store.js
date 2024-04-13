@@ -12,3 +12,7 @@ export const isControlsOpen = writable(false);
 export const isUrlOpen = writable(false);
 
 export const menuOpen = writable(false);
+
+export const isVideoPlaying = writable(false);
+
+export const isVideoPaused = writable(false);
