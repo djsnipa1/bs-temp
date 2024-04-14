@@ -6,11 +6,78 @@
     isVideoPlaying,
     isVideoPaused,
   } from "$lib/stores/store.js";
-  import anime from 'animejs'
+  import { onMount } from "svelte";
+  import anime from 'animejs';
+
+  let circle1, circle2, circle3, mainCircle
+
+  onMount(setup);
+
+  const scaleCircle = (targets, opts) => ({
+    targets,
+    scale: 14,
+   // borderWidth: '5px',
+    ...opts
+  });
+const opacityCircle = (targets, opts) => ({
+    targets,
+    opacity: 0,
+    borderWidth: 0,
+    ...opts
+  });
+  
+  function setup() {
+    anime
+      .timeline({
+        easing: 'easeOutExpo',
+        autoplay: true,
+        loop: true
+      })
+      .add({
+          targets: mainCircle,
+          scale: [0, 1],
+//          width: [0, 100%],
+          duration: 400,
+       //   easing: 'easeInOutSine',
+          transformOrigin: 'center center',
+      })
+      .add(scaleCircle(circle1, { duration:1200 }), 400)
+      .add(opacityCircle(circle1, { duration: 800 }), 600)
+      .add(scaleCircle(circle2, { duration:1200, delay: 400 }), '-=400')
+      .add(opacityCircle(circle2, { duration: 800 }), 1600)
+  /*    .add(
+        {
+          targets: div3,
+          scale: 8,
+          borderWidth: 5,
+          duration: 4000,
+          opacity: 100
+        },
+        0
+      );
+*/
+  }
 </script>
 
+ <!-- Original Div Content 
+<div class="relative mx-auto grid h-[150px] top-[50%] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full border border-black">
+   
+
+  
+    <div class="absolute inset-0 z-10 opacity-50 border bg-green-500" id="hiddenDiv1"></div>
+    <div class="absolute inset-0 z-20 opacity-50 bg-blue-500/50" id="hiddenDiv2"></div>
+
+</div>
+-->
+
+
+
 <div
-  class="glass mx-auto grid h-[150px] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full border border-black">
+  class="relative glass mx-auto grid h-[150px] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full border border-black" bind:this={mainCircle}>
+  <div class="absolute rounded-full border-2 border-white text-white p-4" bind:this={circle1}></div>
+  <div class="absolute rounded-full border-6 border-white text-white p-4 border-blue-500" bind:this={circle2}></div>
+  <div class="absolute rounded-full border border-white text-white p-4" bind:this={circle3}></div>
+  
   <button class="buttonClass group col-span-2 col-start-2">
     <span class="spanClass">FB</span>
     <svg
@@ -103,7 +170,7 @@
   }   
   */
   .buttonClass {
-    @apply relative flex flex h-10 w-10 transform-gpu flex-col items-center justify-center glass-button rounded-full p-2 text-slate-700 border border-white/40 shadow-md transition hover:scale-[120%] hover:text-slate-800 hover:transition-all transition-all hover:duration-300 duration-300;
+    @apply relative flex flex h-10 w-10 transform-gpu flex-col items-center justify-center glass-button rounded-full p-2 text-slate-700 border border-white/40 shadow-md transition hover:scale-[120%] hover:text-slate-800 hover:transition-all transition-all hover:duration-300 duration-300 hidden;
   }
 
   .spanClass {
@@ -111,7 +178,7 @@
   }
 
   .svgClass {
-    @apply absolute z-0 h-6 w-6 text-white/50 transition-all group-hover:text-amber-400 group-focus:text-blue-400 group-active:text-amber-400 group-hover:scale-110 hover:text-[oklch(86%_0.367_92)];
+    @apply absolute z-0 h-6 w-6 text-white/50 transition-all group-hover:text-amber-400 group-focus:text-blue-400 group-active:text-amber-400 group-hover:scale-110 hover:text-[oklch(86%_0.367_92)] hidden;
   }
 
   .shadow-sharp {
