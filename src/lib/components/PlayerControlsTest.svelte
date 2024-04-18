@@ -9,29 +9,59 @@
   import { onMount } from 'svelte';
   import anime from 'animejs';
 
-  let circle1, circle2, circle3, mainCircle, circleTest;
+  let circle1, circle2, circle3, mainCircle, circleTest, circleMask, playButton;
 
-
-/*
-script
-  let visible = true;
-
-  function toggleVisibility() {
-    visible = !visible;
+  const circlesScaling = (targets, opts) => ({
+    targets,
+    opacity: [
+        {value: 1, duration: 1},
+        {value: 1, duration: 500},
+        {value: 0, duration: 700}
+      ],
+      scale: {value: 4, duration: 1200},
+    ...opts
+  });
+  function shrinkIntro() {
+    anime.timeline({
+      easing: 'easeOutExpo',
+      autoplay: true,
+      loop: true,
+    })
+    .add({
+      targets: playButton,
+      scale: [1, 0.5]
+    })
   }
-script
-
-style
-  .your-element {
-    transition: opacity 1s;
-    opacity: {visible ? 1 : 0};
+  function newAnim() {
+    anime.timeline({
+  easing: 'easeOutExpo',
+  autoplay: true,
+  loop: true,
+})
+  .add({
+    targets: mainCircle,
+    scale: [0, 1],
+    duration: 700,
+    transformOrigin: 'center center'
+  })
+/*  .add({
+    targets: circle1,
+    opacity: [
+      {value: 1, duration: 1},
+      {value: 1, duration: 500},
+      {value: 0, duration: 700}
+    ],
+    scale: {value: 4, duration: 1200},
+    borderWidth: '10px'
+  }, '-=500')
+  */
+    .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=500')
+    .add(circlesScaling(circle2), '-=800')
+    .add(circlesScaling(circle3), '-=1000')
   }
-style
 
-<div class="your-element">Hello, world!</div>
-<button on:click={toggleVisibility}>Toggle visibility</button>
-*/
-  onMount(setup);
+
+  onMount(shrinkIntro);
 
     const scaleCircle = (targets, opts) => ({
     targets,
@@ -126,18 +156,22 @@ style
 
   <div class="absolute h-[75px] w-[75px] rounded-full border-8 border-red-500 p-4 text-white opacity-0" bind:this={circleTest}></div>
   <div
-    class="absolute h-[150px] w-[150px] rounded-full border-8 border-white p-4 text-white"
+    class="absolute h-[150px] w-[150px] rounded-full border-4 border-white p-4 text-white opacity-100"
     bind:this={circle1}
   ></div>
   <div
-    class="border-4 h-[150px] w-[150px] absolute rounded-full border-white p-4 text-white"
+    class="border-4 h-[150px] w-[150px] absolute rounded-full border-white p-4 text-white opacity-0"
     bind:this={circle2}
   ></div>
   <div
-    class="border-4 h-[150px] w-[150px] absolute rounded-full border-white p-4 text-white"
+    class="border-4 h-[150px] w-[150px] absolute rounded-full border-white p-4 text-white opacity-0"
     bind:this={circle3}
   ></div>
-
+  <div
+    class="border-4 h-[150px] w-[150px] absolute rounded-full border-white p-4 text-white opacity-0"
+    bind:this={circleMask}
+  ></div>
+  
   <button class="buttonClass group col-span-2 col-start-2">
     <span class="spanClass">FB</span>
     <svg
@@ -189,11 +223,12 @@ style
       on:click={() => {
         isVideoPlaying.set(true);
       }}
+      bind:this={playButton}
     >
       <span class="spanClass">PLAY</span>
       <svg
         class="svgClass !h-12 !w-12"
-        xmilns="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
         <g fill="none" fill-rule="evenodd">

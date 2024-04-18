@@ -18,3 +18,4 @@ export { default as ContrastTest } from './components/ContrastTest.svelte';
 export { default as InputBoxFinal } from './components/InputBoxFinal.svelte';
 export { default as PasteButton } from './components/PasteButton.svelte';
 export { default as PlayerControls } from './components/PlayerControls.svelte';
+export { default as PlayerControlsTest } from './components/PlayerControlsTest.svelte';

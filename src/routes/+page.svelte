@@ -15,7 +15,7 @@
   onMount(async () => {
     
     
-    goto('/final');
+    goto('/test');
     //await tick(); // wait for the next microtask
     //width = controlsContainer.clientWidth; // get the client width
   });
@@ -75,6 +75,9 @@
     </p>
     <p class="py-2">
       <a href="/final" class="text-slate-200 hover:text-slate-700">Final</a>
+    </p>
+    <p class="py-2">
+      <a href="/test" class="text-slate-200 hover:text-slate-700">Test</a>
     </p>
   </div>
 </div>

@@ -1,3 +1,21 @@
+## Animation Timeline
+
+mainCircle 700
+
+circles 1, 2, 3 timeline
+begin: opacity 0 -> 1
+scale 1000
+fadeOut 750
+  start -=500
+
+circle1 scale 1500
+2200
+
+
+
+
+---
+
 ## [How to use youtube embed api in svelte](https://stackoverflow.com/questions/76690112/how-to-use-youtube-embed-api-in-svelte)
 
 After a discussion in the svelte discord server, I have the following solution. Hopefully this can help anyone else going through the pain i just did trying to work this out.
