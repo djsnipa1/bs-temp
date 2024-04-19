@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-abbr -e lvim
-echo "abbr -a v nvim" >>$HOME/.config/fish/config.fish
+echo "abbr -e lvim" >>$HOME/.config/fish/config.fish
+echo "abbr -a -- v nvim" >>$HOME/.config/fish/config.fish
 echo "fixed abbrs"
 
 nix-env --install lf lazygit pistol chafa gh eza
