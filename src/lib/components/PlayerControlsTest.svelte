@@ -9,7 +9,7 @@
   import { onMount } from 'svelte';
   import anime from 'animejs';
 
-  let circle1, circle2, circle3, mainCircle, circleTest, circleMask, playButton;
+  let circle1, circle2, circle3, mainCircle, circleTest, circleMask, playButton, powerButton;
 
   const circlesScaling = (targets, opts) => ({
     targets,
@@ -21,14 +21,33 @@
       scale: {value: 4, duration: 1200},
     ...opts
   });
-  function shrinkIntro() {
+
+  function pressPlayInit() {
     anime.timeline({
       easing: 'easeOutExpo',
       autoplay: true,
+      loop: false
+    })
+    .add({
+      targets: circle1,
+      backgroundColor: 
+        {value: '#000', duration: 1},
+      scale: [
+        {value: [0, 2], duration: 700}
+      ],
+      opacity: {
+        value: [1, 0], duration: 400, delay: 400
+      }
+    })
+  }
+  function shrinkIntro() {
+    anime.timeline({
+      easing: 'easeOutExpo',
+      autoplay: false,
       loop: true,
     })
     .add({
-      targets: playButton,
+      targets: powerButton,
       scale: [1, 0.5]
     })
   }
@@ -216,10 +235,20 @@
       </g>
     </svg>
   </button>
-
-  {#if !$isVideoPlaying}
+  {#if $isVideoPlaying === null}
     <button
-      class="buttonClass group col-span-3 col-start-3 row-start-2 !h-14 !w-14"
+      class="buttonClass group col-span-3 col-start-3 row-start-2 !opacity-100 !h-14 !w-14"
+      on:click={() => {
+        pressPlayInit();
+      }}
+      bind:this={powerButton}
+    >
+      <span class="spanClass">POWER</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="svgClass !opacity-100 !h-12 !w-12" viewBox="0 0 36 36"><path fill="currentColor" d="M18 2a16 16 0 1 0 16 16A16 16 0 0 0 18 2m.06 17.68a1.28 1.28 0 0 1-1.29-1.28V8.65a1.29 1.29 0 0 1 2.58 0v9.75a1.28 1.28 0 0 1-1.29 1.28M18 27.79a9.88 9.88 0 0 1-5.83-17.94a1.4 1.4 0 0 1 1.94.31a1.37 1.37 0 0 1-.31 1.92a7.18 7.18 0 1 0 11.43 5.8a7.07 7.07 0 0 0-3-5.76A1.37 1.37 0 0 1 22 10.2a1.4 1.4 0 0 1 1.94-.29A9.88 9.88 0 0 1 18 27.79" class="clr-i-solid clr-i-solid-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+    </button>
+  {:else if !$isVideoPlaying}
+    <button
+      class="buttonClass group col-span-3 col-start-3 row-start-2 !opacity-100 !h-14 !w-14"
       on:click={() => {
         isVideoPlaying.set(true);
       }}
@@ -227,7 +256,7 @@
     >
       <span class="spanClass">PLAY</span>
       <svg
-        class="svgClass !h-12 !w-12"
+        class="svgClass !opacity-100 !h-12 !w-12"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
@@ -242,9 +271,8 @@
         </g>
       </svg>
     </button>
-  {/if}
 
-  {#if $isVideoPlaying}
+  {:else if $isVideoPlaying}
     <button
       class="buttonClass group col-span-3 col-start-3 row-start-2 !h-14 !w-14"
       on:click={() => {
@@ -321,15 +349,15 @@
   }   
   */
   .buttonClass {
-    @apply glass-button relative flex hidden h-10 w-10 transform-gpu flex-col items-center justify-center rounded-full border border-white/40 p-2 text-slate-700 shadow-md transition transition-all duration-300 hover:scale-[120%] hover:text-slate-800 hover:transition-all hover:duration-300;
+    @apply glass-button relative flex opacity-0 h-10 w-10 transform-gpu flex-col items-center justify-center rounded-full border border-white/40 p-2 text-slate-700 shadow-md transition transition-all duration-300 hover:scale-[120%] hover:text-slate-800 hover:transition-all hover:duration-300;
   }
 
   .spanClass {
-    @apply absolute z-10 hidden w-full transform-gpu text-center font-sofiasans text-base font-normal text-slate-100 transition-all duration-300 group-hover:scale-[80%] group-hover:transition-all group-hover:duration-300;
+    @apply absolute z-10 opacity-0 w-full transform-gpu text-center font-sofiasans text-base font-normal text-slate-100 transition-all duration-300 group-hover:scale-[80%] group-hover:transition-all group-hover:duration-300;
   }
 
   .svgClass {
-    @apply absolute z-0 hidden h-6 w-6 text-white/50 transition-all hover:text-[oklch(86%_0.367_92)] group-hover:scale-110 group-hover:text-amber-400 group-focus:text-blue-400 group-active:text-amber-400;
+    @apply absolute z-0 opacity-0 h-6 w-6 text-white/50 transition-all hover:text-[oklch(86%_0.367_92)] group-hover:scale-110 group-hover:text-amber-400 group-focus:text-blue-400 group-active:text-amber-400;
   }
 
   .shadow-sharp {

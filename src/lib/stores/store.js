@@ -13,6 +13,6 @@ export const isUrlOpen = writable(false);
 
 export const menuOpen = writable(false);
 
-export const isVideoPlaying = writable(false);
+export const isVideoPlaying = writable(null);
 
-export const isVideoPaused = writable(false);
+export const isVideoPaused = writable(null);
