@@ -10,7 +10,7 @@
   import anime from 'animejs';
 
   let circle1, circle2, circle3, mainCircle, circleTest, circleMask, 
-    playButton, powerButton, fbButton, ffButton, revButton;
+    playButton, powerButton, fbButton;
 
   const buttonDuration = 300;
   const buttonScale = [ 0, 1 ];
@@ -35,7 +35,7 @@
         {value: 1, duration: 500},
         {value: 0, duration: 700}
       ],
-      scale: {value: 2, duration: 1200},
+      scale: {value: 4, duration: 1200},
     ...opts
   });
   
@@ -58,14 +58,6 @@
         {value: [1.75, 0], duration: 200, easing: 'easeOutQuint'}
       ]
     }, 1)
-      /*
-    .add({
-      targets: playButton,
-      scale: [0, 1],
-      duration: 400,
-      easing: 'easeOutBack'
-    }, 400)
-    */
     .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=500')
         .add(circlesScaling(circle2), '-=800')
         .add(circlesScaling(circle3), '-=1000')
@@ -79,7 +71,7 @@
       duration: 300
     })
     
-   .add(buttonAnim(ffButton))
+//    .add(buttonAnim(fbButton))
       
   }
   function shrinkIntro() {
@@ -245,7 +237,7 @@
       />
     </svg>
   </button>
-  <button class="buttonClass group col-span-2 col-start-5" bind:this={ffButton}>
+  <button class="buttonClass group col-span-2 col-start-5">
     <span class="spanClass">FF</span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +250,7 @@
       />
     </svg>
   </button>
-  <button class="buttonClass group col-span-2 row-start-2" bind:this={revButton}>
+  <button class="buttonClass group col-span-2 row-start-2">
     <span class="spanClass">REV</span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
