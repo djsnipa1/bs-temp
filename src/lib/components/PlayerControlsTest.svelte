@@ -28,16 +28,23 @@
       autoplay: true,
       loop: false
     })
+      // .add({
+      //   targets: circleTest,
+      //   scale: [0, 1],
+      //   duration: 500,
+      // })
     .add({
       targets: circle1,
-      backgroundColor: 
+      backgroundColor: [
         {value: '#000', duration: 1},
+     //   {value: '#fff', duration: 500}
+        ],
       scale: [
         {value: [0, 2], duration: 700}
       ],
-      opacity: {
-        value: [1, 0], duration: 400, delay: 400
-      }
+      // opacity: {
+      //   value: [0.5, 1], duration: 400, delay: 400
+      // }
     })
   }
   function shrinkIntro() {
@@ -179,7 +186,7 @@
   bind:this={mainCircle}
 >
 
-  <div class="absolute h-[75px] w-[75px] rounded-full border-8 border-red-500 p-4 text-white opacity-0" bind:this={circleTest}></div>
+  <div class="glass absolute h-[150px] w-[150px] rounded-full border-8 border-red-500 p-4 text-white opacity-100" bind:this={circleTest}></div>
   <div
     class="absolute h-[150px] w-[150px] rounded-full border-4 border-white p-4 text-white opacity-100"
     bind:this={circle1}
