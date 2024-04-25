@@ -5,209 +5,14 @@
     menuOpen,
     isVideoPlaying,
     isVideoPaused,
-    playerControlAnimOver
+    isVideoNull
   } from '$lib/stores/store.js';
   import { onMount } from 'svelte';
   import anime from 'animejs';
 
-  let displayPlayBtn = false;
-  
   let circle1, circle2, circle3, mainCircle, circleTest, circleMask, 
     playButton, powerButton, fbButton, ffButton, revButton, fwdButton, backButton, stopButton;
-
-  const buttonDuration = 300;
-  const buttonScale = [ 0, 1 ];
-  const buttonOpacity = {
-      value: [0, 1],
-      duration: 1
-    }
-  
-
-  const buttonAnim = (targets, opts) => ({
-    targets,
-    scale: buttonScale,
-    opacity: buttonOpacity,
-    duration: buttonDuration,
-    ...opts
-  });
-  
-  const circlesScaling = (targets, opts) => ({
-    targets,
-    opacity: [
-        {value: 1, duration: 1},
-        {value: 1, duration: 500},
-        {value: 0, duration: 700}
-      ],
-      scale: {value: 2, duration: 1200},
-    ...opts
-  });
-  
-  function pressPowerInit() {
-    anime.timeline({
-      easing: 'easeOutExpo',
-      autoplay: true,
-      loop: false
-    })
-    .add({
-      targets: circleTest,
-      scale: [
-        {value: [0, 1], duration: 1000}
-      ],
-    }, 2)
-    .add({
-      targets: powerButton,
-      scale: [
-        {value: [1, 1.75], duration: 50, easing: 'easeOutQuad'},
-        {value: [1.75, 0], duration: 300, easing: 'easeOutExpo'}
-      ],
-      complete: () => {
-        displayPlayBtn = true;
-      }
-    }, 1)
-      
-    .add({
-      targets: playButton,
-      scale: [0, 1],
-      duration: 400,
-      easing: 'easeOutBack'
-    }, 400)
-    
-    .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=200')
-        .add(circlesScaling(circle2), '-=600')
-        .add(circlesScaling(circle3), '-=800')
-    .add(buttonAnim(fbButton))
-   .add(buttonAnim(ffButton))
-    .add(buttonAnim(revButton))
-    .add(buttonAnim(fwdButton))
-    .add(buttonAnim(backButton))
-    .add(buttonAnim(stopButton))
-  }
-  function shrinkIntro() {
-    /*
-    anime.timeline({
-      easing: 'easeOutExpo',
-      autoplay: false,
-      loop: true,
-    })
-      .add({
-        targets: mainCircle,
-        scale: [
-          { value: [1, 0], duration: 1},
-          { value: [0, 1], duration: 400}]
-      })
-    .add({
-      targets: powerButton,
-      scale: [1, 0.5]
-    })
-    */
-  }
-  /*
-  function newAnim() {
-    anime.timeline({
-  easing: 'easeOutExpo',
-  autoplay: true,
-  loop: true,
-})
-  .add({
-    targets: mainCircle,
-    scale: [0, 1],
-    duration: 700,
-    transformOrigin: 'center center'
-  })
-
-    .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=500')
-    .add(circlesScaling(circle2), '-=800')
-    .add(circlesScaling(circle3), '-=1000')
-  }
-*/
-
-  onMount(shrinkIntro);
-
-    const scaleCircle = (targets, opts) => ({
-    targets,
-    scale: 4,
-    // borderWidth: '5px',
-    ...opts
-  });
-  const opacityCircle = (targets, opts) => ({
-    targets,
-    opacity: 1,
-    ...opts
-  });
-  const killOpacity = (targets, opts) => ({
-    targets,
-    opacity: 0,
-    duration: 1000,
-    ...opts
-  });
-  const visible = (targets, opts) => ({
-    targets,
-    opacity: [0, 1],
-    duration: 1,
-    ...opts
-  });
-  
-  let isComplete = 0
-  function setup() {
-    anime
-      .timeline({
-        easing: 'easeOutExpo',
-        autoplay: true,
-        loop: true,
-        loopBegin: function (anim) {
-          console.log("loopBegin")
-        },
-        loopComplete: function (anim) {
-          isComplete++
-          console.log(isComplete)
-        }
-      })
-      .add({
-        targets: mainCircle,
-        scale: [0, 1],
-        duration: 700,
-        transformOrigin: 'center center',
-      })
-      .add(visible(circle1), '-=500')
-      .add(scaleCircle(circle1, {duration: 1000}), '-=500')
-      .add(opacityCircle(circle1, {duration: 700}), 1000)
-      .add(killOpacity(circle1), '-=900')
-      .add(visible(circle2), 900)
-      .add(scaleCircle(circle2, { duration: 1200 }), 900 )
-      .add(opacityCircle(circle2, { duration: 700 }), 1000)
-    .add(killOpacity(circle2), '-=900')
-    .add(visible(circle3), 1000)
-    .add(scaleCircle(circle3, { scale: 3, duration: 1200 }), 1000)
-   .add(opacityCircle(circle3, { duration: 700 }), 1200)
-    .add(killOpacity(circle3), '-=400');
-    /*    .add(
-        {
-          targets: div3,
-          scale: 8,
-          borderWidth: 5,
-          duration: 4000,
-          opacity: 100
-        },
-        0
-      );
-*/
-  }
-  // setup.finished.then(() => {
-  //   console.log('setup finished');
-  //   buttonAnimation()
-  // })
 </script>
-
-<!-- Original Div Content 
-<div class="relative mx-auto grid h-[150px] top-[50%] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full border border-black">
-   
-
-  
-    <div class="absolute inset-0 z-10 opacity-50 border bg-green-500" id="hiddenDiv1"></div>
-    <div class="absolute inset-0 z-20 opacity-50 bg-blue-500/50" id="hiddenDiv2"></div>
-
-</div>
--->
 
 <div
   class=" bg-opacity-0 relative mx-auto grid h-[150px] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full"
@@ -276,20 +81,18 @@
       </g>
     </svg>
   </button>
-  <!-- {#if $isVideoPlaying === null} -->
-  {#if !displayPlayBtn}
+  {#if $isVideoPlaying === null}
     <button
       class="buttonClass group col-span-3 col-start-3 row-start-2 !opacity-100 !h-14 !w-14"
       on:click={() => {
-        pressPowerInit();
+        isVideoPaused.set(true);
       }}
       bind:this={powerButton}
     >
       <span class="spanClass">POWER</span>
       <svg xmlns="http://www.w3.org/2000/svg" class="svgClass !opacity-100 !h-10 !w-10" viewBox="0 0 36 36"><path fill="currentColor" d="M18 2a16 16 0 1 0 16 16A16 16 0 0 0 18 2m.06 17.68a1.28 1.28 0 0 1-1.29-1.28V8.65a1.29 1.29 0 0 1 2.58 0v9.75a1.28 1.28 0 0 1-1.29 1.28M18 27.79a9.88 9.88 0 0 1-5.83-17.94a1.4 1.4 0 0 1 1.94.31a1.37 1.37 0 0 1-.31 1.92a7.18 7.18 0 1 0 11.43 5.8a7.07 7.07 0 0 0-3-5.76A1.37 1.37 0 0 1 22 10.2a1.4 1.4 0 0 1 1.94-.29A9.88 9.88 0 0 1 18 27.79" class="clr-i-solid clr-i-solid-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
     </button>
-  <!-- {:else if !$isVideoPlaying} -->
-  {:else if displayPlayBtn}
+  {:else if !$isVideoPlaying}
     <button
       class="buttonClass group col-span-3 col-start-3 row-start-2 !opacity-100 !h-14 !w-14"
       on:click={() => {
@@ -315,7 +118,7 @@
       </svg>
     </button>
 
-  <!-- {:else if $isVideoPlaying} 
+  {:else if $isVideoPlaying}
     <button
       class="buttonClass group col-span-3 col-start-3 row-start-2 !h-14 !w-14"
       on:click={() => {
@@ -338,7 +141,6 @@
       >
       <span class="spanClass">PAUSE</span>
     </button>
-    -->
   {/if}
 
   <button class="buttonClass group col-span-2 col-start-6 row-start-2" bind:this={fwdButton}>
@@ -384,14 +186,7 @@
 </div>
 
 <style>
-  /* .buttonClass {
-    @apply relative flex flex h-12 w-12 transform-gpu flex-col items-center items-center justify-center justify-center rounded-full bg-black hover:scale-[120%] hover:text-slate-600 hover:transition-all transition-all hover:duration-300 duration-300 border-[#265ad8] border-[5px];
-  }   
- .buttonClass {
-    @apply relative flex flex h-12 w-12 transform-gpu flex-col items-center items-center justify-center justify-center rounded-full glass bg-slate-800/50
-     hover:border-[5px] hover:text-slate-600 hover:transition-all transition-all hover:duration-300 duration-300 border-[#265ad8] border-[8px];
-  }   
-  */
+
   .buttonClass {
     @apply glass-button relative flex opacity-0 h-10 w-10 transform-gpu flex-col items-center justify-center rounded-full border border-white/40 p-2 text-slate-700 shadow-sm transition transition-all duration-300 hover:scale-[120%] hover:text-slate-800 hover:transition-all hover:duration-300;
   }

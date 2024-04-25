@@ -6,17 +6,19 @@
     ControlsNew,
     SettingsButton,
     UrlButton,
-    PlayerControlsTest
+    PlayerControlsTest,
+    PlayerControlsCssTransition
   } from '$lib';
-  import { videoId } from '$lib/stores/store.js';
   import { copy } from 'svelte-copy';
   import {
+    videoId,
     cssPosition,
     isControlsOpen,
     isUrlOpen,
     menuOpen,
     isVideoPlaying,
-    isVideoPaused
+    isVideoPaused,
+    playerControlAnimOver
   } from '$lib/stores/store.js';
 
   let player;
@@ -125,9 +127,15 @@ background-image: linear-gradient(180deg, #ffbe00 0%, #f9af00 5%, #f49600 65%, #
   >
     <InputBoxFinal />
   </div>
-
+{#if !$playerControlAnimOver}
   <PlayerControlsTest />
+{/if}
 
+  {#if $playerControlAnimOver}
+    <PlayerControlsCssTransition />
+  {/if}
+
+  
   <div class="container">
     <YoutubeNewer bind:player />
   </div>
