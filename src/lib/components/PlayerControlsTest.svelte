@@ -9,8 +9,10 @@
   import { onMount } from 'svelte';
   import anime from 'animejs';
 
+  let displayPlayBtn = false;
+  
   let circle1, circle2, circle3, mainCircle, circleTest, circleMask, 
-    playButton, powerButton, fbButton, ffButton, revButton;
+  playButton, powerButton, fbButton, ffButton, revButton, fwdButton, backButton, stopButton;
 
   const buttonDuration = 300;
   const buttonScale = [ 0, 1 ];
@@ -39,7 +41,7 @@
     ...opts
   });
   
-  function pressPlayInit() {
+    function pressPowerInit() {
     anime.timeline({
       easing: 'easeOutExpo',
       autoplay: true,
@@ -54,33 +56,32 @@
     .add({
       targets: powerButton,
       scale: [
-        {value: [1, 1.75], duration: 150, easing: 'easeOutQuad'},
-        {value: [1.75, 0], duration: 200, easing: 'easeOutQuint'}
-      ]
+        {value: [1, 1.75], duration: 50, easing: 'easeOutQuad'},
+        {value: [1.75, 0], duration: 300, easing: 'easeOutExpo'}
+      ],
+        complete: () => {
+          displayPlayBtn = true;
+      }
     }, 1)
-      /*
+      
     .add({
       targets: playButton,
       scale: [0, 1],
       duration: 400,
       easing: 'easeOutBack'
     }, 400)
-    */
-    .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=500')
-        .add(circlesScaling(circle2), '-=800')
-        .add(circlesScaling(circle3), '-=1000')
-    .add({
-      targets: fbButton,
-      scale: [0, 1],
-      opacity: {
-        value: [0, 1],
-        duration: 1
-      },
-      duration: 300
-    })
+
+    .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=200')
+        .add(circlesScaling(circle2), '-=600')
+        .add(circlesScaling(circle3), '-=800')
+    .add(buttonAnim(fbButton))
     
    .add(buttonAnim(ffButton))
-      
+
+      .add(buttonAnim(revButton))
+      .add(buttonAnim(fwdButton))
+      .add(buttonAnim(backButton))
+      .add(buttonAnim(stopButton))      
   }
   function shrinkIntro() {
     /*
@@ -210,13 +211,13 @@
 -->
 
 <div
-  class=" bg-opacity-0 relative mx-auto grid h-[150px] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full border border-black"
+  class=" bg-opacity-0 relative mx-auto grid h-[150px] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full"
   bind:this={mainCircle}
 >
 
   <div class="scale-0 glass absolute h-[150px] w-[150px] rounded-full border-8 border-red-500 p-4 text-white opacity-100" bind:this={circleTest}></div>
   <div
-    class="absolute h-[150px] w-[150px] rounded-full border-4 border-white p-4 text-white opacity-100"
+    class="absolute h-[150px] w-[150px] rounded-full border-4 border-white p-4 text-white opacity-0"
     bind:this={circle1}
   ></div>
   <div
@@ -276,22 +277,27 @@
       </g>
     </svg>
   </button>
-  {#if $isVideoPlaying === null}
+    <!-- {#if $isVideoPlaying === null} -->
+    {#if !displayPlayBtn}
     <button
       class="buttonClass group col-span-3 col-start-3 row-start-2 !opacity-100 !h-14 !w-14"
       on:click={() => {
-        pressPlayInit();
+        pressPowerInit();
       }}
       bind:this={powerButton}
     >
       <span class="spanClass">POWER</span>
       <svg xmlns="http://www.w3.org/2000/svg" class="svgClass !opacity-100 !h-10 !w-10" viewBox="0 0 36 36"><path fill="currentColor" d="M18 2a16 16 0 1 0 16 16A16 16 0 0 0 18 2m.06 17.68a1.28 1.28 0 0 1-1.29-1.28V8.65a1.29 1.29 0 0 1 2.58 0v9.75a1.28 1.28 0 0 1-1.29 1.28M18 27.79a9.88 9.88 0 0 1-5.83-17.94a1.4 1.4 0 0 1 1.94.31a1.37 1.37 0 0 1-.31 1.92a7.18 7.18 0 1 0 11.43 5.8a7.07 7.07 0 0 0-3-5.76A1.37 1.37 0 0 1 22 10.2a1.4 1.4 0 0 1 1.94-.29A9.88 9.88 0 0 1 18 27.79" class="clr-i-solid clr-i-solid-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
     </button>
-  {:else if !$isVideoPlaying}
+      <!-- {:else if !$isVideoPlaying} -->
+      {:else if displayPlayBtn}
     <button
       class="buttonClass group col-span-3 col-start-3 row-start-2 !opacity-100 !h-14 !w-14"
       on:click={() => {
-        isVideoPlaying.set(true);
+        isVideoPlaying.set(true)
+  //    if (isVideoPlaying === null) {
+ //       $isVideoPlaying.set(true)
+  //    }
       }}
       bind:this={playButton}
     >
@@ -303,7 +309,7 @@
       >
         <g fill="none" fill-rule="evenodd">
           <path
-            d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+            d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 00-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
           />
           <path
             fill="currentColor"
@@ -313,7 +319,7 @@
       </svg>
     </button>
 
-  {:else if $isVideoPlaying}
+<!-- {:else if $isVideoPlaying} 
     <button
       class="buttonClass group col-span-3 col-start-3 row-start-2 !h-14 !w-14"
       on:click={() => {
@@ -336,9 +342,10 @@
       >
       <span class="spanClass">PAUSE</span>
     </button>
+      -->
   {/if}
 
-  <button class="buttonClass group col-span-2 col-start-6 row-start-2">
+  <button <button class="buttonClass group col-span-2 col-start-6 row-start-2" bind:this={fwdButton}>
     <span class="spanClass">FWD</span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -354,7 +361,7 @@
       ></svg
     >
   </button>
-  <button class="buttonClass group col-span-2 col-start-2 row-start-3">
+  <button class="buttonClass group col-span-2 col-start-2 row-start-3" bind:this={backButton}>
     <span class="spanClass">BACK</span>
     <svg xmlns="http://www.w3.org/2000/svg" class="svgClass" viewBox="0 0 24 24"
       ><path
@@ -365,7 +372,7 @@
       /></svg
     >
   </button>
-  <button class="buttonClass group col-span-2 col-start-5 row-start-3">
+  <button class="buttonClass group col-span-2 col-start-5 row-start-3" bind:this={stopButton}>
     <span class="spanClass">STOP</span>
     <svg xmlns="http://www.w3.org/2000/svg" class="svgClass" viewBox="0 0 24 24"
       ><g fill="none" fill-rule="evenodd"
@@ -390,7 +397,7 @@
   }   
   */
   .buttonClass {
-    @apply glass-button relative flex opacity-0 h-10 w-10 transform-gpu flex-col items-center justify-center rounded-full border border-white/40 p-2 text-slate-700 shadow-md transition transition-all duration-300 hover:scale-[120%] hover:text-slate-800 hover:transition-all hover:duration-300;
+    @apply glass-button relative flex opacity-0 h-10 w-10 transform-gpu flex-col items-center justify-center rounded-full border border-white/40 p-2 text-slate-700 shadow-sm transition transition-all duration-300 hover:scale-[120%] hover:text-slate-800 hover:transition-all hover:duration-300;
   }
 
   .spanClass {
