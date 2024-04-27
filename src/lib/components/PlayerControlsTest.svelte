@@ -10,10 +10,13 @@
   import anime from 'animejs';
 
   let displayPlayBtn = false;
+  let playButtonHover = false;
   
   let circle1, circle2, circle3, mainCircle, circleTest, circleMask, 
-  playButton, powerButton, fbButton, ffButton, revButton, fwdButton, backButton, stopButton;
+  playButton, powerButton, fbButton, ffButton, revButton, fwdButton, backButton, stopButton, playButtonSvg;
 
+  let classes = ['hover:scale-[120%]', 'hover:transition-all', 'hover:duration-300']
+  
   const buttonDuration = 300;
   const buttonScale = [ 0, 1 ];
   const buttonOpacity = {
@@ -45,7 +48,15 @@
     anime.timeline({
       easing: 'easeOutExpo',
       autoplay: true,
-      loop: false
+      loop: false,
+      begin: function() {
+        console.log('begin')
+        
+      },
+      complete: function() {
+        playButtonHover = true;
+        playButton.classList.add(...classes)
+      }
     })
     .add({
       targets: circleTest,
@@ -83,6 +94,29 @@
       .add(buttonAnim(backButton))
       .add(buttonAnim(stopButton))      
   }
+
+/*
+    let enableHover = false;
+
+    // Function to enable hover after animation
+    function enableHoverAfterAnimation() {
+      // Call this function after your animation
+      enableHover = true;
+    }
+  
+
+  <button
+    class:enable-hover={enableHover}
+    on:click={enableHoverAfterAnimation}
+  >
+    Hover Me
+  </button>
+*/
+
+
+  
+
+
   function shrinkIntro() {
     /*
     anime.timeline({
@@ -292,7 +326,7 @@
       <!-- {:else if !$isVideoPlaying} -->
       {:else if displayPlayBtn}
     <button
-      class="buttonClass group col-span-3 col-start-3 row-start-2 !opacity-100 !h-14 !w-14"
+      class="group col-span-3 col-start-3 row-start-2 !opacity-100 !h-14 !w-14 { playButtonHover ? 'playButtonHover' : 'playButtonNoHover' }" 
       on:click={() => {
         isVideoPlaying.set(true)
   //    if (isVideoPlaying === null) {
@@ -302,8 +336,8 @@
       bind:this={playButton}
     >
       <span class="spanClass">PLAY</span>
-      <svg
-        class="svgClass !opacity-100 !h-12 !w-12"
+      <svg bind:this={playButtonSvg}
+        class="{playButtonHover ? 'playButtonSvg' : 'playButtonSvgNoHover'} !opacity-100 !h-10 !w-10"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
@@ -401,13 +435,29 @@
   }
 
   .spanClass {
-    @apply absolute z-10 opacity-0 w-full transform-gpu text-center font-sofiasans text-base font-normal text-slate-100 transition-all duration-300 group-hover:scale-[80%] group-hover:transition-all group-hover:duration-300;
+    @apply absolute z-10 opacity-0 w-full transform-gpu text-center font-sofiasans text-base font-normal text-slate-100 transition-all duration-300 group-hover:scale-[65%] group-hover:transition-all group-hover:duration-300 group-hover:opacity-100;
   }
 
   .svgClass {
-    @apply absolute z-0 opacity-100 h-6 w-6 text-white/50 transition-all hover:text-[oklch(86%_0.367_92)] group-hover:scale-110 group-hover:text-amber-400 group-focus:text-blue-400 group-active:text-amber-400;
+    @apply absolute z-0 opacity-100 h-6 w-6 text-white/50 transition-all hover:text-[oklch(86%_0.367_92)] group-hover:scale-110 group-active:scale-100 group-hover:text-amber-400 group-active:text-amber-400;
   }
 
+  .playButtonHover {
+    @apply glass-button relative flex opacity-0 h-10 w-10 transform-gpu flex-col items-center justify-center rounded-full border border-white/40 p-2 text-slate-700 shadow-sm transition transition-all duration-300 hover:scale-[120%] hover:text-slate-800 hover:transition-all hover:duration-300;
+  }
+
+  .playButtonNoHover {
+    @apply glass-button relative flex opacity-0 h-10 w-10 transform-gpu flex-col items-center justify-center rounded-full border border-white/40 p-2 text-slate-700 shadow-sm;
+  }
+
+  .playButtonSvg {
+    @apply absolute z-0 opacity-100 h-6 w-6 text-white/50 transition-all hover:text-[oklch(86%_0.367_92)] group-hover:scale-110 group-active:scale-100 group-hover:text-amber-400 group-active:text-amber-400;
+  }
+
+  .playButtonSvgNoHover {
+    @apply absolute z-0 opacity-100 h-6 w-6 text-white/50;
+  }
+  
   .shadow-sharp {
     box-shadow:
       0 1px 1px rgba(0, 0, 0, 0.25),
