@@ -3,7 +3,8 @@
   import {
     cssPosition,
     isVideoPlaying,
-    isVideoPaused
+    isVideoPaused,
+    playerStore
   } from '$lib/stores/store.js';
 
   export let player;
@@ -28,7 +29,8 @@
           rel: 0
         },
         events: {
-          onStateChange: onPlayerStateChange
+          onStateChange: onPlayerStateChange,
+          onReady: onPlayerReady
         }
       });
     }
@@ -37,6 +39,10 @@
       load();
     } else {
       window.onYouTubeIframeAPIReady = load;
+    }
+
+    function onPlayerReady(event) {
+      playerStore.set(player);
     }
 
     function onPlayerStateChange(event) {

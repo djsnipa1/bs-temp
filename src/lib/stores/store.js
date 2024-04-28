@@ -16,3 +16,5 @@ export const menuOpen = writable(false);
 export const isVideoPlaying = writable(null);
 
 export const isVideoPaused = writable(null);
+
+export const playerStore = writable(null);

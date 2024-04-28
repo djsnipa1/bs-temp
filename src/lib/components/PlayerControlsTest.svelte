@@ -4,7 +4,8 @@
     videoId,
     menuOpen,
     isVideoPlaying,
-    isVideoPaused
+    isVideoPaused,
+    playerStore
   } from '$lib/stores/store.js';
   import { onMount } from 'svelte';
   import anime from 'animejs';
@@ -16,14 +17,13 @@
   playButton, powerButton, fbButton, ffButton, revButton, fwdButton, backButton, stopButton, playButtonSvg;
 
   let classes = ['hover:scale-[120%]', 'hover:transition-all', 'hover:duration-300']
-  
+
   const buttonDuration = 300;
   const buttonScale = [ 0, 1 ];
   const buttonOpacity = {
       value: [0, 1],
       duration: 1
     }
-  
 
   const buttonAnim = (targets, opts) => ({
     targets,
@@ -95,27 +95,19 @@
       .add(buttonAnim(stopButton))      
   }
 
-/*
-    let enableHover = false;
+  // SkipButton
+  let player;
 
-    // Function to enable hover after animation
-    function enableHoverAfterAnimation() {
-      // Call this function after your animation
-      enableHover = true;
-    }
-  
+  playerStore.subscribe(value => {
+      player = value;
+  });
 
-  <button
-    class:enable-hover={enableHover}
-    on:click={enableHoverAfterAnimation}
-  >
-    Hover Me
-  </button>
-*/
-
-
-  
-
+  function skipForward10Seconds() {
+      if (player) {
+          var currentTime = player.getCurrentTime();
+          player.seekTo(currentTime + 10);
+      }
+  }
 
   function shrinkIntro() {
     /*
@@ -280,7 +272,8 @@
       />
     </svg>
   </button>
-  <button class="buttonClass group col-span-2 col-start-5" bind:this={ffButton}>
+  <button class="buttonClass group col-span-2 col-start-5" bind:this={ffButton} 
+  on:click={skipForward10Seconds}>
     <span class="spanClass">FF</span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
