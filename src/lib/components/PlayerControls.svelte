@@ -11,8 +11,7 @@
 
   let circle1, circle2, circle3, mainCircle, circleTest;
 
-
-/*
+  /*
 script
   let visible = true;
 
@@ -33,7 +32,7 @@ style
 */
   onMount(setup);
 
-    const scaleCircle = (targets, opts) => ({
+  const scaleCircle = (targets, opts) => ({
     targets,
     scale: 4,
     // borderWidth: '5px',
@@ -56,8 +55,8 @@ style
     duration: 1,
     ...opts
   });
-  
-  let isComplete = 0
+
+  let isComplete = 0;
   function setup() {
     anime
       .timeline({
@@ -65,31 +64,31 @@ style
         autoplay: true,
         loop: true,
         loopBegin: function (anim) {
-          console.log("loopBegin")
+          console.log('loopBegin');
         },
         loopComplete: function (anim) {
-          isComplete++
-          console.log(isComplete)
+          isComplete++;
+          console.log(isComplete);
         }
       })
       .add({
         targets: mainCircle,
         scale: [0, 1],
         duration: 700,
-        transformOrigin: 'center center',
+        transformOrigin: 'center center'
       })
       .add(visible(circle1), '-=500')
-      .add(scaleCircle(circle1, {duration: 1000}), '-=500')
-      .add(opacityCircle(circle1, {duration: 700}), 1000)
+      .add(scaleCircle(circle1, { duration: 1000 }), '-=500')
+      .add(opacityCircle(circle1, { duration: 700 }), 1000)
       .add(killOpacity(circle1), '-=900')
       .add(visible(circle2), 900)
-      .add(scaleCircle(circle2, { duration: 1200 }), 900 )
+      .add(scaleCircle(circle2, { duration: 1200 }), 900)
       .add(opacityCircle(circle2, { duration: 700 }), 1000)
-    .add(killOpacity(circle2), '-=900')
-    .add(visible(circle3), 1000)
-    .add(scaleCircle(circle3, { scale: 3, duration: 1200 }), 1000)
-   .add(opacityCircle(circle3, { duration: 700 }), 1200)
-    .add(killOpacity(circle3), '-=400');
+      .add(killOpacity(circle2), '-=900')
+      .add(visible(circle3), 1000)
+      .add(scaleCircle(circle3, { scale: 3, duration: 1200 }), 1000)
+      .add(opacityCircle(circle3, { duration: 700 }), 1200)
+      .add(killOpacity(circle3), '-=400');
     /*    .add(
         {
           targets: div3,
@@ -123,18 +122,20 @@ style
   class="glass relative mx-auto grid h-[150px] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full border border-black"
   bind:this={mainCircle}
 >
-
-  <div class="absolute h-[75px] w-[75px] rounded-full border-8 border-red-500 p-4 text-white opacity-0" bind:this={circleTest}></div>
+  <div
+    class="absolute h-[75px] w-[75px] rounded-full border-8 border-red-500 p-4 text-white opacity-0"
+    bind:this={circleTest}
+  ></div>
   <div
     class="absolute h-[150px] w-[150px] rounded-full border-8 border-white p-4 text-white"
     bind:this={circle1}
   ></div>
   <div
-    class="border-4 h-[150px] w-[150px] absolute rounded-full border-white p-4 text-white"
+    class="absolute h-[150px] w-[150px] rounded-full border-4 border-white p-4 text-white"
     bind:this={circle2}
   ></div>
   <div
-    class="border-4 h-[150px] w-[150px] absolute rounded-full border-white p-4 text-white"
+    class="absolute h-[150px] w-[150px] rounded-full border-4 border-white p-4 text-white"
     bind:this={circle3}
   ></div>
 

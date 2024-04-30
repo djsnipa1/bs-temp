@@ -96,7 +96,7 @@ background-image: linear-gradient(180deg, #ffbe00 0%, #f9af00 5%, #f49600 65%, #
       }}
     />
     <div
-      class="text-md flex-none text-center font-sofiasans font-bold leading-4 text-white text-shadow-sm shadow-slate-600"
+      class="text-md flex-none text-center font-sofiasans font-bold leading-4 text-white shadow-slate-600 text-shadow-sm"
     >
       Beatstar<br />Practicer
     </div>

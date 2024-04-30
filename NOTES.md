@@ -6,13 +6,10 @@ circles 1, 2, 3 timeline
 begin: opacity 0 -> 1
 scale 1000
 fadeOut 750
-  start -=500
+start -=500
 
 circle1 scale 1500
 2200
-
-
-
 
 ---
 
