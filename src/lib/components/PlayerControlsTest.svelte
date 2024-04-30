@@ -5,7 +5,8 @@
     menuOpen,
     isVideoPlaying,
     isVideoPaused,
-    playerStore
+    playerStore,
+    isPlayerReady
   } from '$lib/stores/store.js';
   import { onMount } from 'svelte';
   import anime from 'animejs';
@@ -54,10 +55,10 @@
     targets,
     opacity: [
       { value: 1, duration: 1 },
-      { value: 1, duration: 500 },
+      { value: 1, duration: 250 },
       { value: 0, duration: 700 }
     ],
-    scale: { value: 2, duration: 1200 },
+    scale: { value: 2.5, duration: 1000 },
     ...opts
   });
 
@@ -78,7 +79,7 @@
       .add(
         {
           targets: circleTest,
-          scale: [{ value: [0, 1], duration: 1000 }]
+          scale: [{ value: [0, 1], duration: 700 }]
         },
         2
       )
@@ -103,12 +104,12 @@
           duration: 400,
           easing: 'easeOutBack'
         },
-        400
+        1 //changed from 400
       )
 
-      .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=200')
+      .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=400')
       .add(circlesScaling(circle2), '-=600')
-      .add(circlesScaling(circle3), '-=800')
+      .add(circlesScaling(circle3), '-=700')
       .add(buttonAnim(fbButton))
       .add(buttonAnim(ffButton))
       .add(buttonAnim(revButton))
@@ -270,7 +271,7 @@
 
 </div>
 -->
-
+<div class="{$isPlayerReady ? 'opacity-100*' : 'opacity-0'}">
 <div
   class=" relative mx-auto grid h-[150px] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full bg-opacity-0"
   bind:this={mainCircle}
@@ -485,6 +486,7 @@
       ></svg
     >
   </button>
+</div>
 </div>
 
 <style>
