@@ -4,7 +4,8 @@
     cssPosition,
     isVideoPlaying,
     isVideoPaused,
-    playerStore
+    playerStore,
+    isPlayerReady
   } from '$lib/stores/store.js';
 
   export let player;
@@ -43,6 +44,7 @@
 
     function onPlayerReady(event) {
       playerStore.set(player);
+      isPlayerReady.set(true);
     }
 
     function onPlayerStateChange(event) {
