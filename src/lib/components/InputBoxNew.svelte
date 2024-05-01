@@ -1,5 +1,5 @@
 <script>
-  import { videoId } from '$lib/stores/YoutubeURL.js';
+  import { videoId } from '$lib/stores/store.js';
 
   $: currentBind = '';
   let newId;
