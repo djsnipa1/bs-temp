@@ -38,6 +38,7 @@
 
   const buttonDuration = 300;
   const buttonScale = [0, 1];
+  const buttonOffset = -150;
   const buttonOpacity = {
     value: [0, 1],
     duration: 1
@@ -48,6 +49,7 @@
     scale: buttonScale,
     opacity: buttonOpacity,
     duration: buttonDuration,
+    endDelay: buttonOffset,
     ...opts
   });
 
@@ -72,6 +74,7 @@
           console.log('begin');
         },
         complete: function () {
+          console.log('complete')
           //playButtonHover = true;
           playButton.classList.add(...classes);
         }
@@ -87,7 +90,7 @@
         {
           targets: powerButton,
           scale: [
-            { value: [1, 1.75], duration: 50, easing: 'easeOutQuad' },
+            { value: [1, 1.75], duration: 150, easing: 'easeOutQuad' },
             { value: [1.75, 0], duration: 300, easing: 'easeOutExpo' }
           ],
           complete: () => {
@@ -107,15 +110,15 @@
         1 //changed from 400
       )
 
-      .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=400')
+      .add(circlesScaling(circle1, { borderWidth: '10px' }), '-=600')
       .add(circlesScaling(circle2), '-=600')
-      .add(circlesScaling(circle3), '-=700')
-      .add(buttonAnim(fbButton))
-      .add(buttonAnim(ffButton))
-      .add(buttonAnim(revButton))
-      .add(buttonAnim(fwdButton))
-      .add(buttonAnim(backButton))
-      .add(buttonAnim(stopButton));
+      .add(circlesScaling(circle3), '-=800')
+      .add(buttonAnim(fbButton), '-=600')
+      .add(buttonAnim(ffButton), '-=500')
+      .add(buttonAnim(revButton), '-=400')
+      .add(buttonAnim(fwdButton), '-=300')
+      .add(buttonAnim(backButton), '-=200')
+      .add(buttonAnim(stopButton), '-=100');
   }
 
   // SkipButton
