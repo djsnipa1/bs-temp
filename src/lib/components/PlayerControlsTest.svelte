@@ -153,13 +153,16 @@
 
   function setFwdPlayBackRate() {
     if (player) {
+     console.log(player.getPlaybackRate())
       var pbr = player.getPlaybackRate();
 
-      if (pbr === 1) {
+      if (pbr === 0.5) {
+         player.setPlaybackRate(1);
+      } else if (pbr === 1) {
         player.setPlaybackRate(1.25);
       } else if (pbr === 1.25) {
         player.setPlaybackRate(1.5);
-      } else if (prb === 1.5) {
+      } else if (pbr === 1.5) {
         player.setPlaybackRate(2);
       }
     }
@@ -167,12 +170,34 @@
 
   function setBackPlayBackRate() {
     if (player) {
+     console.log(player.getPlaybackRate())
       //player.setPlaybackRate(1);
       var pbr = player.getPlaybackRate();
-      console.log(`pbr: ${pbr}`);
+      
+      if (pbr === 2) {
+        player.setPlaybackRate(1.5);
+      } else if (pbr === 1.5) {
+        player.setPlaybackRate(1.25);
+      } else if (pbr === 1.25) {
+        player.setPlaybackRate(1);
+      } else if (pbr === 1) {
+       player.setPlaybackRate(0.5)
+      }
     }
   }
 
+  function restartVideo() {
+   if (player) {
+    player.seekTo(0);
+    player.playVideo();
+   }
+  }
+  
+  function stopVideo() {
+   if (player) {
+    player.stopVideo();
+   }
+  }
   function shrinkIntro() {
     /*
     anime.timeline({
@@ -483,6 +508,7 @@
     <button
       class="buttonClass group col-span-2 col-start-2 row-start-3"
       bind:this={backButton}
+      on:click={restartVideo}
     >
       <span class="spanClass">BACK</span>
       <svg
@@ -500,6 +526,7 @@
     <button
       class="buttonClass group col-span-2 col-start-5 row-start-3"
       bind:this={stopButton}
+      on:click={stopVideo}
     >
       <span class="spanClass">STOP</span>
       <svg
