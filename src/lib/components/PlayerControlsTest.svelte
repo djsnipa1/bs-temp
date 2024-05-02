@@ -1,13 +1,11 @@
 <script>
   import {
-    isUrlOpen,
-    videoId,
+    isUrlOpen, videoId,
     menuOpen,
     isVideoPlaying,
     isVideoPaused,
     playerStore,
-    isPlayerReady
-  } from '$lib/stores/store.js';
+    isPlayerReady } from '$lib/stores/store.js';
   import { onMount } from 'svelte';
   import anime from 'animejs';
 
@@ -76,7 +74,7 @@
         complete: function () {
           console.log('complete');
           //playButtonHover = true;
-          playButton.classList.add(...classes);
+          //playButton.classList.add(...classes);
           displayPlayBtn = true;
         }
       })
@@ -143,9 +141,33 @@
     }
   }
 
-  function setPlayBackRate() {
+  /*
+  function setFwdPlayBackRate() {
     if (player) {
       player.setPlaybackRate(1.5);
+    }
+  }
+ */
+
+  function setFwdPlayBackRate() {
+    if (player) {
+      var pbr = player.getPlaybackRate();
+
+      if (pbr === 1) {
+        player.setPlaybackRate(1.25);
+      } else if (pbr === 1.25) {
+        player.setPlaybackRate(1.5);
+      } else if (prb === 1.5) {
+        player.setPlaybackRate(2);
+      }
+    }
+  }
+
+  function setBackPlayBackRate() {
+    if (player) {
+      //player.setPlaybackRate(1);
+      var pbr = player.getPlaybackRate();
+      console.log(`pbr: ${pbr}`);
     }
   }
 
@@ -338,6 +360,7 @@
     <button
       class="buttonClass group col-span-2 row-start-2"
       bind:this={revButton}
+      on:click={setBackPlayBackRate}
     >
       <span class="spanClass">REV</span>
       <svg
@@ -411,7 +434,7 @@
         </button>
       {:else if $isVideoPlaying}
         <button
-          class="buttonClass group col-span-3 col-start-3 row-start-2 !h-14 !w-14"
+          class="buttonClass group col-span-3 col-start-3 row-start-2 !h-14 !w-14 !opacity-100"
           on:click={() => {
             isVideoPaused.set(true);
           }}
@@ -438,7 +461,7 @@
       <button
       class="buttonClass group col-span-2 col-start-6 row-start-2"
       bind:this={fwdButton}
-      on:click={setPlayBackRate}
+      on:click={setFwdPlayBackRate}
     >
       <span class="spanClass">FWD</span>
       <svg
