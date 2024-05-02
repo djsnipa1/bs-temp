@@ -68,7 +68,7 @@
   }
 </script>
 
-<div class="relative min-h-screen min-w-full touch-none border">
+<div class="relative min-h-screen min-w-full touch-none border-0">
   <nav
     class="absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-[linear-gradient(180deg,#ffe636_0%,#ffd430_5%,#ffc12b_10%,#ffb72c_25%,#ffa51a_40%,#f6a200_60%,#f59c00_75%,#f39500_90%,#f28d00_95%,#f78d00_100%)] opacity-100 shadow-lg"
   >
@@ -82,9 +82,7 @@ background-image: linear-gradient(180deg, #ffbe00 0%, #f9af00 5%, #f49600 65%, #
 			class="{$isControlsOpen ? 'bg-green-500' : 'bg-red-500'} top-8 ml-4 w-12 flex-none px-2">
 			{$isControlsOpen}
 		</div> -->
-    <div class="absolute left-[30px] top-[350px] z-[2000] text-4xl">
-      {$isUrlOpen}
-    </div>
+    <div class="absolute left-[30px] top-[350px] z-[2000] text-4xl"></div>
     <UrlButton
       class="button ml-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
       on:click={() => {
@@ -108,14 +106,19 @@ background-image: linear-gradient(180deg, #ffbe00 0%, #f9af00 5%, #f49600 65%, #
   </nav>
 
   <div
-    class="absolute top-0 w-full"
+    class="absolute top-0 z-[10] w-full"
     class:initialPosition={!$isControlsOpen}
     class:endPosition={$isControlsOpen}
   >
     <ControlsNew />
   </div>
 
+  <div class="z-[5] translate-y-16">
+    <PlayerControlsTest />
+  </div>
+
   <div
+    class="z-[15]"
     class:endPos={$isUrlOpen}
     class:startPos={!$isUrlOpen}
     on:outside={() => {
@@ -125,8 +128,6 @@ background-image: linear-gradient(180deg, #ffbe00 0%, #f9af00 5%, #f49600 65%, #
   >
     <InputBoxFinal />
   </div>
-
-  <PlayerControlsTest />
 
   <div class="container">
     <YoutubeNewer bind:player />
@@ -192,11 +193,13 @@ background-image: linear-gradient(180deg, #ffbe00 0%, #f9af00 5%, #f49600 65%, #
       0 8px 8px rgba(0, 0, 0, 0.2);
   }
   .startPos {
-    transform: translateY(-16px);
+    transform: translateY(-166px);
     transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
+    z-index: 15;
   }
   .endPos {
-    transform: translateY(48px);
+    transform: translateY(-106px);
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 15;
   }
 </style>

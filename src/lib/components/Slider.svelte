@@ -17,4 +17,6 @@
     bind:value={$cssPosition}
   />
 </div>
-<div class="mx-auto w-1/2 text-2xl text-white">{$cssPosition}</div>
+<!--
+<div class="mx-auto w-1/2 text-2xl text-white">{$cssPosition}</div> 
+-->
