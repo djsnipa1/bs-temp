@@ -1,11 +1,13 @@
 <script>
   import {
-    isUrlOpen, videoId,
+    isUrlOpen,
+    videoId,
     menuOpen,
     isVideoPlaying,
     isVideoPaused,
     playerStore,
-    isPlayerReady } from '$lib/stores/store.js';
+    isPlayerReady
+  } from '$lib/stores/store.js';
   import { onMount } from 'svelte';
   import anime from 'animejs';
 
@@ -297,7 +299,7 @@
 
 </div>
 -->
-<div class={$isPlayerReady ? 'opacity-100*' : 'opacity-0'}>
+<div class={$isPlayerReady ? 'opacity-100' : 'opacity-0'}>
   <div
     class="relative mx-auto grid h-[150px] w-[150px] grid-cols-7 grid-rows-3 items-center justify-items-center gap-4 rounded-full bg-opacity-0"
     bind:this={mainCircle}

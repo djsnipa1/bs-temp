@@ -7,11 +7,10 @@
   function onClick() {
     dispatch('click');
   }
-
 </script>
 
 <button
-  class="glass-button button rounded-md p-2 text-slate-700 shadow-md transition hover:scale-110 hover:text-slate-800 active:scale-90"
+  class="glass-button button rounded-md p-2 text-slate-900 shadow-md transition hover:scale-110 hover:text-slate-600 active:scale-90"
   {...$$restProps}
   on:click={onClick}
 >
