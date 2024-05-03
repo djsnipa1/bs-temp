@@ -153,11 +153,11 @@
 
   function setFwdPlayBackRate() {
     if (player) {
-     console.log(player.getPlaybackRate())
+      console.log(player.getPlaybackRate());
       var pbr = player.getPlaybackRate();
 
       if (pbr === 0.5) {
-         player.setPlaybackRate(1);
+        player.setPlaybackRate(1);
       } else if (pbr === 1) {
         player.setPlaybackRate(1.25);
       } else if (pbr === 1.25) {
@@ -170,10 +170,10 @@
 
   function setBackPlayBackRate() {
     if (player) {
-     console.log(player.getPlaybackRate())
+      console.log(player.getPlaybackRate());
       //player.setPlaybackRate(1);
       var pbr = player.getPlaybackRate();
-      
+
       if (pbr === 2) {
         player.setPlaybackRate(1.5);
       } else if (pbr === 1.5) {
@@ -181,22 +181,22 @@
       } else if (pbr === 1.25) {
         player.setPlaybackRate(1);
       } else if (pbr === 1) {
-       player.setPlaybackRate(0.5)
+        player.setPlaybackRate(0.5);
       }
     }
   }
 
   function restartVideo() {
-   if (player) {
-    player.seekTo(0);
-    player.playVideo();
-   }
+    if (player) {
+      player.seekTo(0);
+      player.playVideo();
+    }
   }
-  
+
   function stopVideo() {
-   if (player) {
-    player.stopVideo();
-   }
+    if (player) {
+      player.stopVideo();
+    }
   }
   function shrinkIntro() {
     /*
