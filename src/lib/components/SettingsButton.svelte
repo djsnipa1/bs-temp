@@ -5,7 +5,7 @@
 <button
   {...$$restProps}
   on:click={() => {
-    isControlsOpen.update(value => !value);
+    isControlsOpen.update((value) => !value);
     //isControlsOpen.set(true);
   }}
 >
