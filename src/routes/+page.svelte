@@ -114,9 +114,9 @@
     </div>
   </div>
 {/if}
-
+<!--
 <VideoPosition src="/beatstar-peru.mp4" />
-
+-->
 <style>
   .initialPosition {
     transform: translateX(-290px);
