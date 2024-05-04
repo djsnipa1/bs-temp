@@ -53,6 +53,9 @@ devDependencies:
   eslint-plugin-svelte:
     specifier: ^2.38.0
     version: 2.38.0(eslint@8.57.0)(svelte@4.2.15)
+  get-video-id:
+    specifier: ^4.1.5
+    version: 4.1.5
   postcss:
     specifier: ^8.4.38
     version: 8.4.38
@@ -106,6 +109,13 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+    dev: true
+
+  /@babel/runtime@7.24.5:
+    resolution: {integrity: sha512-Nms86NXrsaeU9vbBJKni6gXiEXZ4CVpYVzEjDH9Sb8vmZ3UljyA1GSOJl/6LGPO8EHLuSF9H+IxNXHPX8QHJ4g==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
     dev: true
 
   /@cloudflare/kv-asset-handler@0.3.2:
@@ -1920,6 +1930,13 @@ packages:
       source-map: 0.6.1
     dev: true
 
+  /get-video-id@4.1.5:
+    resolution: {integrity: sha512-a8kerYWxYkNJSJJ0m78AMBKgrNeGa7J2POHnWFXYbrehdjUkW4LkIw4Pz2mGxDgYrmbcuZTcpBHNU/TYY6fg/A==}
+    engines: {node: '>=16'}
+    dependencies:
+      '@babel/runtime': 7.24.5
+    dev: true
+
   /glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -2706,6 +2723,10 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
+    dev: true
+
+  /regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
     dev: true
 
   /regexparam@3.0.0:
