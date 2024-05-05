@@ -1,5 +1,5 @@
 <script>
-import { Intro } from '$lib';
+  import { Intro } from '$lib';
 </script>
 
 <Intro />

@@ -72,22 +72,22 @@
   <nav
     class="absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-[linear-gradient(180deg,#ffe636_0%,#ffd430_5%,#ffc12b_10%,#ffb72c_25%,#ffa51a_40%,#f6a200_60%,#f59c00_75%,#f39500_90%,#f28d00_95%,#f78d00_100%)] opacity-100 shadow-lg"
   >
-
     <div class="absolute left-[30px] top-[350px] z-[2000] text-4xl"></div>
     <UrlButton
       class="button ml-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
-      on:click={() => { isUrlOpen.update((value) => !value) }}
+      on:click={() => {
+        isUrlOpen.update((value) => !value);
+      }}
     />
     <div
       class="text-md flex-none text-center font-sofiasans font-bold leading-4 text-white shadow-slate-600 text-shadow-sm"
     >
       Beatstar<br />Practicer
     </div>
-  
-      <SettingsButton
-        class="button mr-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
-      />
-    
+
+    <SettingsButton
+      class="button mr-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
+    />
   </nav>
 
   <div
