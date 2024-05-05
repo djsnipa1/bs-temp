@@ -20,7 +20,8 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sofiasans: ['"Sofia Sans Variable"', 'sans-serif']
+        sofiasans: ['"Sofia Sans Variable"', 'sans-serif'],
+        kiona: ['"Kiona"', 'sans-serif']
       },
       textShadow: {
         sm: '0 1px 2px var(--tw-shadow-color)',
