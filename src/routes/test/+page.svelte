@@ -72,37 +72,22 @@
   <nav
     class="absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-[linear-gradient(180deg,#ffe636_0%,#ffd430_5%,#ffc12b_10%,#ffb72c_25%,#ffa51a_40%,#f6a200_60%,#f59c00_75%,#f39500_90%,#f28d00_95%,#f78d00_100%)] opacity-100 shadow-lg"
   >
-    <!-- 
-    background-size: 100% 100%;
-background-position: 0px 0px;
-background-image: linear-gradient(180deg, #ffbe00 0%, #f9af00 5%, #f49600 65%, #f58d00 100%);
-   -->
-    <!-- <div
-			style="transition: background-color 1s ease"
-			class="{$isControlsOpen ? 'bg-green-500' : 'bg-red-500'} top-8 ml-4 w-12 flex-none px-2">
-			{$isControlsOpen}
-		</div> -->
+
     <div class="absolute left-[30px] top-[350px] z-[2000] text-4xl"></div>
     <UrlButton
       class="button ml-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
-      on:click={() => {
-        //isUrlOpen.set(true);
-        isUrlOpen.update((value) => !value);
-        //$isUrlOpen = !$isUrlOpen;
-        console.log('click');
-        console.log($isUrlOpen);
-      }}
+      on:click={() => { isUrlOpen.update((value) => !value) }}
     />
     <div
       class="text-md flex-none text-center font-sofiasans font-bold leading-4 text-white shadow-slate-600 text-shadow-sm"
     >
       Beatstar<br />Practicer
     </div>
-    <div class="">
+  
       <SettingsButton
-        class="button mr-4 flex-1 rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
+        class="button mr-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
       />
-    </div>
+    
   </nav>
 
   <div

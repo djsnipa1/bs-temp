@@ -12,6 +12,8 @@
     
     return id;
 }
+
+/*
   // Test the function with some sample URLs
   console.log(getYouTubeID('https://www.youtube.com/watch?v=qeMFqkcPYcg')); // qeMFqkcPYcg
   console.log(getYouTubeID('https://youtu.be/qeMFqkcPYcg')); // qeMFqkcPYcg
@@ -19,19 +21,19 @@
   console.log(getYouTubeID('https://www.youtube.com/v/qeMFqkcPYcg')); // qeMFqkcPYcg
   console.log(getYouTubeID('https://www.youtube.com/watch?v=invalid')); // ""
   console.log(getYouTubeID('https://youtu.be/m_xoN8KlP3w'));
-
+*/
   let inputValue = '';
   let ytValue = '';
   // This function will be called every time the input value changes
   function handleInput(event) {
     inputValue = event.target.value;
-    console.log(inputValue); // Log the current value of the input
+  //  console.log(inputValue); // Log the current value of the input
     ytValue = getYouTubeID(inputValue);
     if (typeof ytValue !== 'string' || ytValue === '') {
-      console.log('The function did not return a truthy value');
+      console.log('Could not get youtube video id');
       // return ''
     } else {
-      console.log('The function returned a truthy value:', ytValue);
+//      console.log('The function returned a truthy value:', ytValue);
       $videoId = ytValue;
       isUrlOpen.update((value) => !value);
     }
@@ -48,6 +50,6 @@
     type="text"
     placeholder="https://youtu.be/m_xoN8KlP3w"
     on:input={handleInput}
-    class="input input-sm input-bordered w-full max-w-xs"
+    class="input input-sm input-bordered w-full max-w-xs md:input-md md:max-w-md lg:max-w-lg xl:max-w-xl"
   />
 </div>

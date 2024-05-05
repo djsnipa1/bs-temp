@@ -5,9 +5,9 @@
   let isVisible = false;
 </script>
 
-<div class="container relative">
+<div class="container relative flex justify-center items-center">
   <div
-    class="glass absolute left-0 top-0 z-[100] z-[1500] h-[230px] w-[375px] rounded-xl bg-slate-600/20 shadow-xl"
+    class="glass  left-0 top-0 z-[100] z-[1500] h-[230px] w-[375px] rounded-xl bg-slate-600/20 shadow-xl"
   >
     <!--	class:visible={$isControlsOpen} class:notVisible={!$isControlsOpen} -->
 
