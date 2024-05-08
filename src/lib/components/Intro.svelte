@@ -4,7 +4,9 @@
 
   let logo, circleMask, circle1, circle2, circle3, 
       circle1_1, circle1_2;
+
   
+
   const circlesScaling = (targets, opts) => ({
     targets,
     opacity: [
@@ -17,12 +19,14 @@
   });
 
   function start() {
-    anime
-      .timeline({
-        easing: "easeOutExpo",
-        autoplay: true,
-        loop: true,
-      })
+    let timelineOne = anime.timeline({ 
+      autoplay: true,
+      easing: "easeOutExpo",
+      loop: true
+  });
+  let timelineTwo = anime.timeline({ autoplay: false });
+  
+    timelineOne
       .add({
         targets: logo,
         opacity: [ {value: 1, duration: 1} ], 
@@ -38,8 +42,8 @@
      /*   opacity: [{value: 1, duration: 1},
             {value: 1, duration: 450},
             {value: 0, duration: 300}], */
-        duration: 2500
-      }, 1500)
+        duration: 1500
+      }, 1250)
       .add({
         targets: logo,
         //opacity: 0,
@@ -50,7 +54,7 @@
         offset: '-=600',
         easing: "linear"
       }, 1000)
-      .add(circlesScaling(circle1, { borderWidth: '10px' }), 1500)
+    /*  .add(circlesScaling(circle1, { borderWidth: '10px' }), 1500)
       .add(circlesScaling(circle2), 1800)
       .add({
         targets: circle3,
@@ -68,6 +72,7 @@
           duration: 1000
         }, 2400)
         */
+        
   }
 
   onMount(start);
