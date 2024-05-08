@@ -2,7 +2,8 @@
   import anime from "animejs";
   import {onMount} from "svelte";
 
-  let logo, circleMask, circle1, circle2, circle3;
+  let logo, circleMask, circle1, circle2, circle3, 
+      circle1_1, circle1_2;
   
   const circlesScaling = (targets, opts) => ({
     targets,
@@ -31,6 +32,14 @@
         targets: circleMask,
         scale: [{value: [18, 0], duration: 1500}]
       })
+      .add({
+        targets: circle1_1,
+        scale: [18, 0],
+     /*   opacity: [{value: 1, duration: 1},
+            {value: 1, duration: 450},
+            {value: 0, duration: 300}], */
+        duration: 2500
+      }, 1500)
       .add({
         targets: logo,
         //opacity: 0,
@@ -66,6 +75,8 @@
 
 <div class="w-full h-screen flex items-center justify-center">
   <div class="absolute rounded-full h-20 w-20 border-[10px] border-blue-400" bind:this={circleMask}></div>
+  <div class="absolute rounded-full h-20 w-20 border-2 border-yellow-400 opacity-100" bind:this={circle1_1}></div>
+  <div class="absolute rounded-full h-20 w-20 border-2 border-yellow-400 opacity-0" bind:this={circle1_2}></div>
   <div class="absolute rounded-full h-20 w-20 border-2 border-pink-400 opacity-0" bind:this={circle1}></div>
   <div class="absolute rounded-full h-20 w-20 border-2 border-pink-400 opacity-0" bind:this={circle2}></div>
   <div class="absolute rounded-full h-20 w-20 border-2 border-pink-400 opacity-0" bind:this={circle3}></div>
