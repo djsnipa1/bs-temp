@@ -1,4 +1,4 @@
-<!-- Test -->
+<!-- Main Route +page.svelte -->
 <script lang="ts">
   import {
     YoutubeNewer,
@@ -18,9 +18,18 @@
     isVideoPlaying,
     isVideoPaused
   } from '$lib/stores/store.js';
+  import { goto } from '$app/navigation';
+  import { onMount } from 'svelte'
 
+  let skipToIntro = true;
   let player;
 
+  onMount(async () => {
+    if (skipToIntro) {
+      goto('/intro');
+    }
+  });
+  
   const toggle = () => {
     console.log('changing video id');
     player.loadVideoById('dQw4w9WgXcQ');
