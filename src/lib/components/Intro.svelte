@@ -5,6 +5,8 @@
   let animationOne = true;
   let animationTwo = true;
 
+  let timelineOne;
+
   let logo,
     loading,
     circleMask,
@@ -43,90 +45,46 @@
     ...opts
   });
 
+  function calculate() {
+    let scale = 1;
+
+    if (circleMask) {
+      const currentDivSize = Math.min(
+        circleMask.offsetWidth,
+        circleMask.offsetHeight
+      ); // Get the smaller dimension
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const extraSpace = 10; // Adjust this value based on how much extra space you want around the div
+
+      // Calculate the scaling factor
+      scale =
+        Math.max(
+          viewportWidth / currentDivSize,
+          viewportHeight / currentDivSize
+        ) +
+        extraSpace / currentDivSize;
+
+      console.log(scale);
+    }
+  }
+
+  function playAnimation() {
+    console.log('clickkin');
+    timelineOne.play();
+  }
   function start() {
-    let timelineOne = anime.timeline({
-      autoplay: true,
+    calculate();
+    timelineOne = anime.timeline({
+      autoplay: false,
       easing: 'easeOutExpo',
       loop: false
     });
     let timelineTwo = anime.timeline({
       autoplay: false,
       easing: 'easeOutExpo',
-      loop: true
+      loop: false
     });
-
-    timelineTwo
-      .add({
-        targets: logo,
-        opacity: [{ value: 1, duration: 1 }],
-        scale: [{ value: [0, 1], duration: 1000 }]
-      })
-      .add(circlesScaling(circle2_1), 250)
-      .add(circlesScaling(circle2_2), 450)
-      .add(
-        {
-          targets: circle2_3,
-          opacity: [
-            { value: 1, duration: 1 },
-            { value: [1, 1], duration: 1100 },
-            { value: [1, 0], duration: 399 }
-          ],
-          scale: { value: 6, duration: 1500 }
-        },
-        750
-      )
-      //   .add(circlesScaling(circle2_4), 4000)
-      .add(circlesOpacity(circle2_4, { scale: [0, 9], duration: 3000 }), 4000)
-      .add(circlesOpacity(circle2_5, { scale: [0, 8], duration: 2500 }), 4125)
-      .add(circlesOpacity(circle2_6, { scale: [0, 8], duration: 3000 }), 4450)
-      .add(circlesOpacity(circle2_7, { scale: [0, 5], duration: 2500 }), 4750)
-      .add(
-        {
-          targets: finalMask,
-          scale: { value: [12, 0], duration: 1200 },
-          opacity: [
-            { value: 1, duration: 1 },
-            { value: 1, duration: 799 },
-            { value: 0, duration: 1000 }
-          ],
-          duration: 2000
-        },
-        4500
-      )
-      .add(
-        {
-          targets: logo,
-          //opacity: 0,
-          //scale: .6,
-          scale: [
-            { value: 1.3, duration: 500, easing: 'easeInQuad' },
-            //              {value: 1.3, duration: 200},
-            { value: 0, duration: 700, easing: 'easeOutQuad' }
-          ],
-          duration: 1800
-          // offset: '-=600',
-          //   easing: "easeInOutExpo"
-        },
-        4000
-      );
-    /*    .add(circlesScaling(circle2_2, { borderWidth: '10px' }), 1500)
-    .add(circlesScaling(circle2_3), 1800)
-    .add({
-      targets: circle2_4,
-      scale: 6,
-      opacity: [
-        {value: 1, duration: 1},
-        {value: [1, 1], duration: 500},
-        {value: [1, 0], duration: 1199}
-        ],
-      duration: 1700
-      }, 2100)
-    /*   .add({
-        targets: circle1_3,
-        opacity: [1, 0],
-        duration: 1000
-      }, 2400)
-      */
 
     timelineOne
       .add({
@@ -136,18 +94,15 @@
       })
       .add({
         targets: circleMask,
-        scale: [{ value: [18, 0], duration: 1500 }]
+        scale: [{ value: [11, 0], duration: 1100 }]
       })
       .add(
         {
           targets: circle1_1,
-          scale: [18, 0],
-          /*   opacity: [{value: 1, duration: 1},
-            {value: 1, duration: 450},
-            {value: 0, duration: 300}], */
-          duration: 1500
+          scale: [11, 0],
+          duration: 1100
         },
-        1250
+        1200
       )
       .add(
         {
@@ -161,10 +116,10 @@
           //duration: 200,
           offset: '-=600',
           easing: 'linear',
-          complete: function() {
-            animationTwo = true; 
-            timelineTwo.play()
-            animationOne = false;
+          complete: function () {
+            setTimeout(() => {
+              timelineTwo.play();
+            }, 1500);
           }
         },
         1000
@@ -187,93 +142,185 @@
           duration: 1000
         }, 2400)
         */
+
+    timelineTwo
+      .add({
+        targets: logo,
+        opacity: [{ value: 1, duration: 1 }],
+        scale: [
+          { value: [0, 1.15], duration: 650 },
+          { value: [1.15, 1], duration: 150 }
+        ]
+      })
+      // .add(circlesScaling(circle2_1), 250)
+      .add(circlesOpacity(circle2_1, { scale: [0, 15], duration: 3000 }), 250)
+      // .add(circlesScaling(circle2_2), 450)
+      .add(circlesOpacity(circle2_2, { scale: [0, 15], duration: 2500 }), 550)
+      .add(circlesOpacity(circle2_3, { scale: [0, 6.5], duration: 2500 }), 950)
+      /*   .add(
+        {
+          targets: circle2_3,
+          opacity: [
+            { value: 1, duration: 1 },
+            { value: [1, 1], duration: 1100 },
+            { value: [1, 0], duration: 399 }
+          ],
+          scale: { value: 6, duration: 1500 }
+        },
+        750
+      )
+      */
+      //   .add(circlesScaling(circle2_4), 4000)
+
+      .add(
+        {
+          targets: finalMask,
+          scale: { value: [12, 0], duration: 1000 },
+          opacity: [
+            { value: 1, duration: 1 },
+            { value: 1, duration: 799 },
+            { value: 0, duration: 1000 }
+          ],
+          duration: 2000
+        },
+        4000
+      )
+      .add(
+        {
+          targets: logo,
+          //opacity: 0,
+          //scale: .6,
+          scale: [
+            { value: 1.3, duration: 500, easing: 'easeOutQuad' },
+            //              {value: 1.3, duration: 200},
+            { value: 0, duration: 500, easing: 'easeOutQuad' }
+          ],
+          duration: 1800
+          // offset: '-=600',
+          //   easing: "easeInOutExpo"
+        },
+        3500
+      )
+      .add(circlesOpacity(circle2_4, { scale: [0, 9], duration: 2500 }), 3500)
+      .add(circlesOpacity(circle2_5, { scale: [0, 8], duration: 2000 }), 3650)
+      .add(circlesOpacity(circle2_6, { scale: [0, 8], duration: 2500 }), 3800)
+      .add(circlesOpacity(circle2_7, { scale: [0, 5], duration: 2000 }), 4050);
+    /*    .add(circlesScaling(circle2_2, { borderWidth: '10px' }), 1500)
+    .add(circlesScaling(circle2_3), 1800)
+    .add({
+      targets: circle2_4,
+      scale: 6,
+      opacity: [
+        {value: 1, duration: 1},
+        {value: [1, 1], duration: 500},
+        {value: [1, 0], duration: 1199}
+        ],
+      duration: 1700
+      }, 2100)
+    /*   .add({
+        targets: circle1_3,
+        opacity: [1, 0],
+        duration: 1000
+      }, 2400)
+      */
   }
 
   onMount(start);
 </script>
 
 <div class="flex h-screen w-full items-center justify-center">
+  <button class="button btn absolute z-20 opacity-50" on:click={playAnimation}
+    >play</button
+  >
   <!-- {#if animationTwo} -->
-    <!-- animationTwo -->
-    <div
-      class="absolute z-10 h-20 w-20 rounded-full border-[10px] border-green-400 opacity-0"
-      bind:this={circleMask}
-    ></div>
-    <div
-      class="absolute z-10 h-20 w-20 rounded-full border-4 border-orange-300 opacity-0"
-      bind:this={circle2_1}
-    ></div>
-    <div
-      class="absolute z-10 h-20 w-20 rounded-full border-2 border-orange-500 opacity-0"
-      bind:this={circle2_2}
-    ></div>
-    <div
-      class="absolute z-10 h-20 w-20 rounded-full border-2 border-orange-700 opacity-0"
-      bind:this={circle2_3}
-    ></div>
-    <div
-      class="absolute z-10 h-20 w-20 rounded-full border-2 border-pink-200 opacity-0"
-      bind:this={circle2_4}
-    ></div>
-    <div
-      class="absolute z-10 h-20 w-20 rounded-full border-[7px] border-pink-400 opacity-0"
-      bind:this={circle2_5}
-    ></div>
-    <div
-      class="absolute z-10 h-20 w-20 rounded-full border-[2px] border-pink-600 opacity-0"
-      bind:this={circle2_6}
-    ></div>
-    <div
-      class="absolute z-10 h-20 w-20 rounded-full border-[2px] border-pink-800 opacity-0"
-      bind:this={circle2_7}
-    ></div>
+  <!-- animationTwo -->
+  <div
+    class="absolute z-10 h-20 w-20 rounded-full border-8 border-white opacity-0"
+    bind:this={circle2_1}
+  ></div>
+  <div
+    class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
+    bind:this={circle2_2}
+  ></div>
+  <div
+    class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
+    bind:this={circle2_3}
+  ></div>
+  <div
+    class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
+    bind:this={circle2_4}
+  ></div>
+  <div
+    class="absolute z-10 h-20 w-20 rounded-full border-[9px] border-white opacity-0"
+    bind:this={circle2_5}
+  ></div>
+  <div
+    class="absolute z-10 h-20 w-20 rounded-full border-[2px] border-white opacity-0"
+    bind:this={circle2_6}
+  ></div>
+  <div
+    class="absolute z-10 h-20 w-20 rounded-full border-[2px] border-white opacity-0"
+    bind:this={circle2_7}
+  ></div>
 
-    <div
-      class="absolute z-0 h-20 w-20 rounded-full bg-black opacity-100"
-      bind:this={finalMask}
-    ></div>
-    <h1
-      class="absolute text-center font-kiona text-2xl text-white opacity-0"
-      bind:this={logo}
-    >
-      Beatstar<br />Practicer
-    </h1>
+  <div
+    class="absolute z-0 h-20 w-20 rounded-full bg-black opacity-100"
+    bind:this={finalMask}
+  ></div>
+  <h1
+    class="absolute text-center font-kiona text-3xl text-white opacity-0"
+    bind:this={logo}
+  >
+    Beatstar<br />Practicer
+  </h1>
   <!-- {/if} -->
 
   <!-- {#if animationOne} -->
   <!-- animationOne -->
-    <div
-      class="absolute h-20 w-20 rounded-full border-[10px] border-blue-400"
-      bind:this={circleMask}
-    ></div>
-    <div
-      class="absolute h-20 w-20 rounded-full border-2 border-yellow-400 opacity-100"
-      bind:this={circle1_1}
-    ></div>
-    <div
-      class="absolute h-20 w-20 rounded-full border-2 border-yellow-400 opacity-0"
-      bind:this={circle1_2}
-    ></div>
-    <div
-      class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
-      bind:this={circle1_3}
-    ></div>
-    <div
-      class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
-      bind:this={circle1_4}
-    ></div>
-    <div
-      class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
-      bind:this={circle1_5}
-    ></div>
-    <h1
-      class="absolute text-center font-kiona text-2xl text-white opacity-0"
-      bind:this={loading}
-    >
-      Loading...
-    </h1>
+  <div
+    class="absolute h-20 w-20 rounded-full border-8 border-white"
+    bind:this={circleMask}
+  ></div>
+  <div
+    class="absolute h-20 w-20 rounded-full border-2 border-white opacity-100"
+    bind:this={circle1_1}
+  ></div>
+  <div
+    class="absolute h-20 w-20 rounded-full border-2 border-yellow-400 opacity-0"
+    bind:this={circle1_2}
+  ></div>
+  <div
+    class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
+    bind:this={circle1_3}
+  ></div>
+  <div
+    class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
+    bind:this={circle1_4}
+  ></div>
+  <div
+    class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
+    bind:this={circle1_5}
+  ></div>
+  <h1
+    class="absolute text-center font-kiona text-3xl text-white opacity-0"
+    bind:this={loading}
+  >
+    Loading...
+  </h1>
   <!-- {/if} -->
 </div>
 
+<!--
+<div style="position:relative; width:100%; height:0px; padding-bottom:216.949%">
+  <iframe
+    allow="fullscreen"
+    allowfullscreen
+    height="100%"
+    src="https://streamable.com/e/iuv1ve?muted=1"
+    width="100%"
+    style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"
+  ></iframe>
+</div>
+-->
 <style>
 </style>
