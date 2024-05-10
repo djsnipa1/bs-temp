@@ -2,4 +2,6 @@
   import { Intro } from '$lib';
 </script>
 
-<Intro />
+<div class="flex h-screen w-full items-center justify-center bg-slate-400">
+  <Intro />
+</div>
