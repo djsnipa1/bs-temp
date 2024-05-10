@@ -19,7 +19,7 @@
     isVideoPaused
   } from '$lib/stores/store.js';
   import { goto } from '$app/navigation';
-  import { onMount } from 'svelte'
+  import { onMount } from 'svelte';
 
   let skipToIntro = true;
   let player;
@@ -29,7 +29,7 @@
       goto('/intro');
     }
   });
-  
+
   const toggle = () => {
     console.log('changing video id');
     player.loadVideoById('dQw4w9WgXcQ');

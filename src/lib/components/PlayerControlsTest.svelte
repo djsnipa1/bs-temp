@@ -15,7 +15,7 @@
   let playButtonHover = false;
 
   let circle1,
-   circle2,
+    circle2,
     circle3,
     mainCircle,
     circleTest,
