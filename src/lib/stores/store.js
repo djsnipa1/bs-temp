@@ -39,3 +39,7 @@ export const isVideoPlaying = writable(null);
 export const isVideoPaused = writable(null);
 
 export const playerStore = writable(null);
+
+export const hideMainElements = writable(true);
+
+export const isAnimationDone = writable(false);

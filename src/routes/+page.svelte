@@ -6,7 +6,8 @@
     ControlsNew,
     SettingsButton,
     UrlButton,
-    PlayerControlsTest
+    PlayerControlsTest,
+    Intro
   } from '$lib';
   import { videoId } from '$lib/stores/store.js';
   import { copy } from 'svelte-copy';
@@ -16,15 +17,19 @@
     isUrlOpen,
     menuOpen,
     isVideoPlaying,
-    isVideoPaused
+    isVideoPaused,
+    hideMainElements,
+    isAnimationDone
   } from '$lib/stores/store.js';
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
 
-  let skipToIntro = true;
+  let skipToIntro = false;
   let player;
 
   onMount(async () => {
+    //   isUrlOpen.set(true);
+    consoleLog();
     if (skipToIntro) {
       goto('/intro');
     }
@@ -75,9 +80,24 @@
       }
     };
   }
+  function consoleLog() {
+    $: console.log(`isUrlOpen: ${$isUrlOpen}`);
+  }
 </script>
 
-<div class="relative min-h-screen min-w-full touch-none border-0">
+<div
+  class="absolute z-[10000] flex h-screen w-full items-center justify-center {$isAnimationDone
+    ? 'displayNone'
+    : ''}"
+>
+  <Intro />
+</div>
+
+<div
+  class="relative min-h-screen min-w-full touch-none border-0 {$hideMainElements
+    ? 'hidden'
+    : ''}"
+>
   <nav
     class="absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-[linear-gradient(180deg,#ffe636_0%,#ffd430_5%,#ffc12b_10%,#ffb72c_25%,#ffa51a_40%,#f6a200_60%,#f59c00_75%,#f39500_90%,#f28d00_95%,#f78d00_100%)] opacity-100 shadow-lg"
   >
@@ -112,11 +132,14 @@
   </div>
 
   <div
-    class="z-[15]"
-    class:endPos={$isUrlOpen}
-    class:startPos={!$isUrlOpen}
+    class="z-[15] {!$isUrlOpen ? 'endPos' : 'startPos'}"
     on:outside={() => {
-      $isUrlOpen = false;
+      //    $isUrlOpen = false;
+      $: console.log(`* $isUrlOpen: ${$isUrlOpen}`);
+      if (!$isUrlOpen) {
+        // $isUrlOpen = false;
+        isUrlOpen.update((value) => !value);
+      }
     }}
     use:clickOutside
   >
@@ -195,5 +218,8 @@
     transform: translateY(-106px);
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 15;
+  }
+  .displayNone {
+    display: none;
   }
 </style>

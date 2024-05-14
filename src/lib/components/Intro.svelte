@@ -1,9 +1,11 @@
 <script>
   import anime from 'animejs';
   import { onMount } from 'svelte';
-
-  let animationOne = true;
-  let animationTwo = true;
+  import {
+    hideMainElements,
+    isAnimationDone,
+    isUrlOpen
+  } from '$lib/stores/store.js';
 
   let timelineOne;
 
@@ -22,7 +24,8 @@
     circle2_5,
     circle2_6,
     circle2_7,
-    finalMask;
+    finalMask,
+    playIntroButton;
 
   const circlesScaling = (targets, opts) => ({
     targets,
@@ -70,7 +73,7 @@
   }
 
   function playAnimation() {
-    console.log('clickkin');
+    playIntroButton.style.display = 'none';
     timelineOne.play();
   }
   function start() {
@@ -120,6 +123,7 @@
             setTimeout(() => {
               timelineTwo.play();
             }, 1500);
+            hideMainElements.set(false);
           }
         },
         1000
@@ -201,10 +205,28 @@
         },
         3500
       )
-      .add(circlesOpacity(circle2_4, { scale: [0, 9], duration: 2500 }), 3500)
+      .add(
+        circlesOpacity(circle2_4, {
+          scale: [0, 9],
+          duration: 2500,
+          complete() {
+            isUrlOpen.update((value) => !value);
+          }
+        }),
+        3500
+      )
       .add(circlesOpacity(circle2_5, { scale: [0, 8], duration: 2000 }), 3650)
       .add(circlesOpacity(circle2_6, { scale: [0, 8], duration: 2500 }), 3800)
-      .add(circlesOpacity(circle2_7, { scale: [0, 5], duration: 2000 }), 4050);
+      .add(
+        circlesOpacity(circle2_7, {
+          scale: [0, 5],
+          duration: 2000,
+          complete() {
+            isAnimationDone.set(true);
+          }
+        }),
+        4050
+      );
     /*    .add(circlesScaling(circle2_2, { borderWidth: '10px' }), 1500)
     .add(circlesScaling(circle2_3), 1800)
     .add({
@@ -215,7 +237,7 @@
         {value: [1, 1], duration: 500},
         {value: [1, 0], duration: 1199}
         ],
-      duration: 1700
+      duration: 1700,
       }, 2100)
     /*   .add({
         targets: circle1_3,
@@ -228,87 +250,91 @@
   onMount(start);
 </script>
 
-<div class="flex h-screen w-full items-center justify-center">
-  <button class="button btn absolute z-20 opacity-50" on:click={playAnimation}
-    >play</button
-  >
-  <!-- {#if animationTwo} -->
-  <!-- animationTwo -->
-  <div
-    class="absolute z-10 h-20 w-20 rounded-full border-8 border-white opacity-0"
-    bind:this={circle2_1}
-  ></div>
-  <div
-    class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
-    bind:this={circle2_2}
-  ></div>
-  <div
-    class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
-    bind:this={circle2_3}
-  ></div>
-  <div
-    class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
-    bind:this={circle2_4}
-  ></div>
-  <div
-    class="absolute z-10 h-20 w-20 rounded-full border-[9px] border-white opacity-0"
-    bind:this={circle2_5}
-  ></div>
-  <div
-    class="absolute z-10 h-20 w-20 rounded-full border-[2px] border-white opacity-0"
-    bind:this={circle2_6}
-  ></div>
-  <div
-    class="absolute z-10 h-20 w-20 rounded-full border-[2px] border-white opacity-0"
-    bind:this={circle2_7}
-  ></div>
+{#if !$isAnimationDone}
+  <div class="flex h-screen w-full items-center justify-center">
+    <button
+      class="button btn absolute z-20 opacity-50"
+      on:click={playAnimation}
+      bind:this={playIntroButton}>play</button
+    >
+    <!-- {#if animationTwo} -->
+    <!-- animationTwo -->
+    <div
+      class="absolute z-10 h-20 w-20 rounded-full border-8 border-white opacity-0"
+      bind:this={circle2_1}
+    ></div>
+    <div
+      class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
+      bind:this={circle2_2}
+    ></div>
+    <div
+      class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
+      bind:this={circle2_3}
+    ></div>
+    <div
+      class="absolute z-10 h-20 w-20 rounded-full border-2 border-white opacity-0"
+      bind:this={circle2_4}
+    ></div>
+    <div
+      class="absolute z-10 h-20 w-20 rounded-full border-[9px] border-white opacity-0"
+      bind:this={circle2_5}
+    ></div>
+    <div
+      class="absolute z-10 h-20 w-20 rounded-full border-[2px] border-white opacity-0"
+      bind:this={circle2_6}
+    ></div>
+    <div
+      class="absolute z-10 h-20 w-20 rounded-full border-[2px] border-white opacity-0"
+      bind:this={circle2_7}
+    ></div>
 
-  <div
-    class="absolute z-0 h-20 w-20 rounded-full bg-black opacity-100"
-    bind:this={finalMask}
-  ></div>
-  <h1
-    class="absolute text-center font-kiona text-3xl text-white opacity-0"
-    bind:this={logo}
-  >
-    Beatstar<br />Practicer
-  </h1>
-  <!-- {/if} -->
+    <div
+      class="absolute z-0 h-20 w-20 rounded-full bg-black opacity-100"
+      bind:this={finalMask}
+    ></div>
+    <h1
+      class="absolute text-center font-kiona text-3xl text-white opacity-0"
+      bind:this={logo}
+    >
+      Beatstar<br />Practicer
+    </h1>
+    <!-- {/if} -->
 
-  <!-- {#if animationOne} -->
-  <!-- animationOne -->
-  <div
-    class="absolute h-20 w-20 rounded-full border-8 border-white"
-    bind:this={circleMask}
-  ></div>
-  <div
-    class="absolute h-20 w-20 rounded-full border-2 border-white opacity-100"
-    bind:this={circle1_1}
-  ></div>
-  <div
-    class="absolute h-20 w-20 rounded-full border-2 border-yellow-400 opacity-0"
-    bind:this={circle1_2}
-  ></div>
-  <div
-    class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
-    bind:this={circle1_3}
-  ></div>
-  <div
-    class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
-    bind:this={circle1_4}
-  ></div>
-  <div
-    class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
-    bind:this={circle1_5}
-  ></div>
-  <h1
-    class="absolute text-center font-kiona text-3xl text-white opacity-0"
-    bind:this={loading}
-  >
-    Loading...
-  </h1>
-  <!-- {/if} -->
-</div>
+    <!-- {#if animationOne} -->
+    <!-- animationOne -->
+    <div
+      class="absolute h-20 w-20 rounded-full border-8 border-white"
+      bind:this={circleMask}
+    ></div>
+    <div
+      class="absolute h-20 w-20 rounded-full border-2 border-white opacity-100"
+      bind:this={circle1_1}
+    ></div>
+    <div
+      class="absolute h-20 w-20 rounded-full border-2 border-yellow-400 opacity-0"
+      bind:this={circle1_2}
+    ></div>
+    <div
+      class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
+      bind:this={circle1_3}
+    ></div>
+    <div
+      class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
+      bind:this={circle1_4}
+    ></div>
+    <div
+      class="absolute h-20 w-20 rounded-full border-2 border-pink-400 opacity-0"
+      bind:this={circle1_5}
+    ></div>
+    <h1
+      class="absolute text-center font-kiona text-3xl text-white opacity-0"
+      bind:this={loading}
+    >
+      Loading...
+    </h1>
+    <!-- {/if} -->
+  </div>
+{/if}
 
 <!--
 <div style="position:relative; width:100%; height:0px; padding-bottom:216.949%">
