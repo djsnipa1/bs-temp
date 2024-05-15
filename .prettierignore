@@ -5,3 +5,4 @@ yarn.lock
 .cache
 src/lib/viewport.js
 static/
+node_modules/
