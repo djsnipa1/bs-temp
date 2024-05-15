@@ -97,11 +97,13 @@
       })
       .add({
         targets: circleMask,
+        opacity: { value: 1, duration: 1 },
         scale: [{ value: [11, 0], duration: 1100 }]
       })
       .add(
         {
           targets: circle1_1,
+          opacity: { value: 1, duration: 1 },
           scale: [11, 0],
           duration: 1100
         },
@@ -110,13 +112,10 @@
       .add(
         {
           targets: loading,
-          //opacity: 0,
-          //scale: .6,
           scale: [
             { value: 1.3, duration: 300, easing: 'linear' },
             { value: 0, duration: 400 }
           ],
-          //duration: 200,
           offset: '-=600',
           easing: 'linear',
           complete: function () {
@@ -128,24 +127,6 @@
         },
         1000
       );
-    /*  .add(circlesScaling(circle1, { borderWidth: '10px' }), 1500)
-      .add(circlesScaling(circle2), 1800)
-      .add({
-        targets: circle1_3,
-        scale: 6,
-        opacity: [
-          {value: 1, duration: 1},
-          {value: [1, 1], duration: 500},
-          {value: [1, 0], duration: 1199}
-          ],
-        duration: 1700
-        }, 2100)
-     /*   .add({
-          targets: circle1_3,
-          opacity: [1, 0],
-          duration: 1000
-        }, 2400)
-        */
 
     timelineTwo
       .add({
@@ -156,26 +137,9 @@
           { value: [1.15, 1], duration: 150 }
         ]
       })
-      // .add(circlesScaling(circle2_1), 250)
       .add(circlesOpacity(circle2_1, { scale: [0, 15], duration: 3000 }), 250)
-      // .add(circlesScaling(circle2_2), 450)
       .add(circlesOpacity(circle2_2, { scale: [0, 15], duration: 2500 }), 550)
       .add(circlesOpacity(circle2_3, { scale: [0, 6.5], duration: 2500 }), 950)
-      /*   .add(
-        {
-          targets: circle2_3,
-          opacity: [
-            { value: 1, duration: 1 },
-            { value: [1, 1], duration: 1100 },
-            { value: [1, 0], duration: 399 }
-          ],
-          scale: { value: 6, duration: 1500 }
-        },
-        750
-      )
-      */
-      //   .add(circlesScaling(circle2_4), 4000)
-
       .add(
         {
           targets: finalMask,
@@ -192,16 +156,11 @@
       .add(
         {
           targets: logo,
-          //opacity: 0,
-          //scale: .6,
           scale: [
             { value: 1.3, duration: 500, easing: 'easeOutQuad' },
-            //              {value: 1.3, duration: 200},
             { value: 0, duration: 500, easing: 'easeOutQuad' }
           ],
           duration: 1800
-          // offset: '-=600',
-          //   easing: "easeInOutExpo"
         },
         3500
       )
@@ -227,24 +186,6 @@
         }),
         4050
       );
-    /*    .add(circlesScaling(circle2_2, { borderWidth: '10px' }), 1500)
-    .add(circlesScaling(circle2_3), 1800)
-    .add({
-      targets: circle2_4,
-      scale: 6,
-      opacity: [
-        {value: 1, duration: 1},
-        {value: [1, 1], duration: 500},
-        {value: [1, 0], duration: 1199}
-        ],
-      duration: 1700,
-      }, 2100)
-    /*   .add({
-        targets: circle1_3,
-        opacity: [1, 0],
-        duration: 1000
-      }, 2400)
-      */
   }
 
   onMount(start);
@@ -257,7 +198,6 @@
       on:click={playAnimation}
       bind:this={playIntroButton}>play</button
     >
-    <!-- {#if animationTwo} -->
     <!-- animationTwo -->
     <div
       class="absolute z-10 h-20 w-20 rounded-full border-8 border-white opacity-0"
@@ -298,16 +238,14 @@
     >
       Beatstar<br />Practicer
     </h1>
-    <!-- {/if} -->
-
-    <!-- {#if animationOne} -->
+    
     <!-- animationOne -->
     <div
-      class="absolute h-20 w-20 rounded-full border-8 border-white"
+      class="absolute h-20 w-20 rounded-full border-8 border-white opacity-0"
       bind:this={circleMask}
     ></div>
     <div
-      class="absolute h-20 w-20 rounded-full border-2 border-white opacity-100"
+      class="absolute h-20 w-20 rounded-full border-2 border-white opacity-0"
       bind:this={circle1_1}
     ></div>
     <div
@@ -332,21 +270,5 @@
     >
       Loading...
     </h1>
-    <!-- {/if} -->
   </div>
 {/if}
-
-<!--
-<div style="position:relative; width:100%; height:0px; padding-bottom:216.949%">
-  <iframe
-    allow="fullscreen"
-    allowfullscreen
-    height="100%"
-    src="https://streamable.com/e/iuv1ve?muted=1"
-    width="100%"
-    style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"
-  ></iframe>
-</div>
--->
-<style>
-</style>
