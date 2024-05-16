@@ -86,7 +86,7 @@
 </script>
 
 <div
-  class="absolute z-[10000] flex h-screen w-full items-center justify-center {$isAnimationDone
+  class="landscape:hidden absolute z-[10000] flex h-screen w-full items-center justify-center {$isAnimationDone
     ? 'displayNone'
     : ''}"
 >
@@ -94,7 +94,7 @@
 </div>
 
 <div
-  class="relative min-h-screen min-w-full touch-none border-0 {$hideMainElements
+  class="landscape:hidden relative min-h-screen min-w-full touch-none border-0 {$hideMainElements
     ? 'hidden'
     : ''}"
 >
@@ -174,15 +174,11 @@
 	-->
 </div>
 
+<div class="portrait:hidden relative min-h-screen min-w-full touch-none border-0 flex items-center justify-center">
+  <p class="text-3xl text-white font-kiona flex items-center justify-center text-center">Beatstar Practicer can only<br />be viewed in portrait mode</p>
+</div>
+
 <style>
-  :root {
-    /*
-	range 
-	--filler-size: 200px;
-	--filler-offset: 2rem;
-	--range-shdw: red;
-*/
-  }
   .initialPosition {
     transform: translateY(-230px);
     /*	transition: all 500ms ease-in; */
