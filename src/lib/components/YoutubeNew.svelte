@@ -28,6 +28,6 @@
   <script src="https://www.youtube.com/iframe_api"></script>
 </svelte:head>
 
-<div class="container flex items-center justify-center">
+<div class="z-[1] container flex items-center justify-center">
   <div id={ytPlayerId} />
 </div>

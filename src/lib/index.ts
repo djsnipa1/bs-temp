@@ -20,3 +20,4 @@ export { default as PasteButton } from './components/PasteButton.svelte';
 export { default as PlayerControls } from './components/PlayerControls.svelte';
 export { default as PlayerControlsTest } from './components/PlayerControlsTest.svelte';
 export { default as Intro } from './components/Intro.svelte';
+export { default as Background } from './components/Background.svelte';

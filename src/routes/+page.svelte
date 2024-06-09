@@ -7,7 +7,8 @@
     SettingsButton,
     UrlButton,
     PlayerControlsTest,
-    Intro
+    Intro,
+    Background
   } from '$lib';
   import { videoId } from '$lib/stores/store.js';
   import { copy } from 'svelte-copy';
@@ -24,14 +25,18 @@
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
 
-  let skipToIntro = false;
+  let skipToIntro = true;
   let player;
-
+  let showBackground = true;
+  
   onMount(async () => {
     //   isUrlOpen.set(true);
-    consoleLog();
     if (skipToIntro) {
-      goto('/intro');
+      // TO SKIP INTRO
+      // isAnimationDone = true 
+      // hideMainElements = false
+      isAnimationDone.set(true);
+      hideMainElements.set(false);
     }
   });
 
@@ -53,9 +58,7 @@
     player.pauseVideo();
   }
 
-  export let min = -33;
-  export let max = 33;
-  export let step = 3;
+
   export let value = 0;
 
   let style = '';
@@ -80,9 +83,7 @@
       }
     };
   }
-  function consoleLog() {
-    $: console.log(`isUrlOpen: ${$isUrlOpen}`);
-  }
+  
 </script>
 
 <div
@@ -132,7 +133,7 @@
   </div>
 
   <div
-    class="z-[15] {!$isUrlOpen ? 'endPos' : 'startPos'}"
+    class="z-[15] relative {!$isUrlOpen ? 'endPos' : 'startPos'}"
     on:outside={() => {
       //    $isUrlOpen = false;
       $: console.log(`* $isUrlOpen: ${$isUrlOpen}`);
@@ -146,9 +147,15 @@
     <InputBoxFinal />
   </div>
 
-  <div class="container">
+  <div class="container relative z-[5]">
     <YoutubeNewer bind:player />
   </div>
+
+  {#if showBackground}
+  <div class="container relative z-[3]">
+    <Background />
+  </div>
+  {/if}
 
   <!--	<div class="justify-items container">
 		<button
