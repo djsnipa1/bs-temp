@@ -7,18 +7,18 @@ export const videoId = writable('9B1SQX9a_hU');
 
 export const cssPosition = writable(0);
 // nudges cssPosition left in FineTuning.svelte
-export function nudgeLeft() {
-  cssPosition.update((value) => {
-    if (value - 3 < -33) {
-      return -33;
-    } else {
-      return value - 3;
-    }
-  });
-}
-export function nudgeRight() {
-  cssPosition.update((value) => {
-    if (value + 3 > 33) {
+  export function nudgeLeft() {
+    cssPosition.update((value) => {
+      if (value - 3 < -33) {
+        return -33;
+      } else {
+        return value - 3;
+      }
+    });
+  }
+  export function nudgeRight() {
+    cssPosition.update((value) => {
+      if (value + 3 > 33) {
       return 33;
     } else {
       return value + 3;
@@ -43,3 +43,5 @@ export const playerStore = writable(null);
 export const hideMainElements = writable(true);
 
 export const isAnimationDone = writable(false);
+
+export const showYoutubeTransition = writable(false);
