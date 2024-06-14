@@ -2,19 +2,60 @@
     import { scale } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
     import { hideMainElements } from '$lib/stores/store.js';
+    import { circleTransition } from '$lib/transitions/circleTransition.js';
 
-  function customTransition(node, { delay = 0, duration = 4000 }) {
-    const o = +getComputedStyle(node).clipPath;
+let range = 100;
+  
 
-    return {
-      delay,
-      duration,
-      css: (t) => `clip-path: circle(${t * o} at center);`
-    };
-  }
+  
 
   let visible = true;
+  let circleVisible = false;
+  
+  function woosh() {
+    return {
+      duration: 1000,
+      easing: quintOut,
+      css: (t, u) => `transform: scale(${t}) translateX(${u * 100}%)`
+    }
+  }
+  
+// here. 
+/*
+  import { cubicOut } from 'svelte/easing';
+
+  function clipPathTransition(node, { duration }) {
+    return {
+      duration,
+      css: t => {
+        const eased = cubicOut(t);
+          return `clip-path: circle(${eased * 100}% at center);`;
+      }
+    };
+  }
+  */
 </script>
+
+
+<div class="container">
+<label>
+  <input type="checkbox" bind:checked={circleVisible} />
+  circleVisible
+</label>
+
+
+
+
+  <input type="range" bind:value={range} min="0" max="100" class="range range-primary w-1/2"/>
+
+<p>{range}</p>
+
+{#if circleVisible}
+<div class="div-gradient-mask clip w-screen h-screen absolute t-0 bg-orange-500" style="--clip-range: circle({range}% at center)" transition:circleTransition>
+  
+</div>
+{/if}
+</div>
 
 <label>
   <input type="checkbox" bind:checked={visible} />
@@ -23,8 +64,8 @@
 
 {#if visible}
   <div
-    class="centered"
-    transition:customTransition={{ duration: 8000 }}
+    class="centered bg-pink-500 h-40 w-20 rounded-full"
+    transition:woosh
     
   >
     <span>transitions!</span>
@@ -47,7 +88,15 @@
 {/if} -->
 
 <style>
-  
+
+.div-gradient-mask {
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+  .clip {
+    clip-path: var(--clip-range);
+  }
    .mask-layer {
       position: fixed;
       top: 0;

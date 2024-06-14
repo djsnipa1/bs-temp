@@ -21,3 +21,4 @@ export { default as PlayerControls } from './components/PlayerControls.svelte';
 export { default as PlayerControlsTest } from './components/PlayerControlsTest.svelte';
 export { default as Intro } from './components/Intro.svelte';
 export { default as Background } from './components/Background.svelte';
+export { default as FullPageWrapper } from './components/FullPageWrapper.svelte';

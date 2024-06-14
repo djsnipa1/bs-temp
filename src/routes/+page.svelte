@@ -8,7 +8,8 @@
     UrlButton,
     PlayerControlsTest,
     Intro,
-    Background
+    Background,
+    FullPageWrapper
   } from '$lib';
   import { videoId } from '$lib/stores/store.js';
   import { copy } from 'svelte-copy';
@@ -152,10 +153,12 @@
   </div>
 
   {#if showBackground}
-  <div class="container relative z-[3]">
-    <Background />
+  <div class="container relative z-[100]">
+    <FullPageWrapper />
   </div>
   {/if}
+  
+  
 
   <!--	<div class="justify-items container">
 		<button

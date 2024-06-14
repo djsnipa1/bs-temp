@@ -3,18 +3,39 @@
   // Supports weights 100-900
   import '@fontsource-variable/sofia-sans';
   import { hideMainElements } from '$lib/stores/store.js';
-  import FullPageWrapper  from '$lib/components/FullPageWrapper.svelte';
 </script>
 
 <svelte:head>
   <script src="https://www.youtube.com/iframe_api"></script>
 </svelte:head>
 
+<!--
+<div class="container relative t-[340px]">
+
+<label>
+  <input type="checkbox" bind:checked={circleVisible} />
+  circleVisible
+</label>
+
+  <input type="range" bind:value={range} min="0" max="100" class="range range-primary w-1/2"/>
+
+<p>{range}</p>
 
 
-<FullPageWrapper>
+{#if circleVisible}
+<div class="clip w-screen h-screen absolute t-0 bg-orange-500" style="--clip-range: circle({range}% at center)" transition:circleTransition>
   <slot />
-</FullPageWrapper>
+</div>
+{/if}
+
+</div>
+
+-->
+
+
+  <slot />
+
+
 
 <style>
   :global(body) {
@@ -24,6 +45,11 @@
     overflow: hidden;
     position: fixed;
     -webkit-overflow-scrolling: touch;
+  }
+  
+  
+  .clip {
+    clip-path: var(--clip-range);
   }
   
   .gradient {
