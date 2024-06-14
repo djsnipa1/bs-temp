@@ -7,7 +7,8 @@
     SettingsButton,
     UrlButton,
     PlayerControlsTest,
-    Intro
+    Intro, 
+    Mask
   } from '$lib';
   import { videoId } from '$lib/stores/store.js';
   import { copy } from 'svelte-copy';
@@ -19,19 +20,27 @@
     isVideoPlaying,
     isVideoPaused,
     hideMainElements,
-    isAnimationDone
+    isAnimationDone,
+    showYoutubeTransition
   } from '$lib/stores/store.js';
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
+	  import { fade } from 'svelte/transition'
 
-  let skipToIntro = false;
+  let skipToIntro = true;
   let player;
-
+  //let showBackground = true;
+  
+  
   onMount(async () => {
     //   isUrlOpen.set(true);
-    consoleLog();
     if (skipToIntro) {
-      goto('/intro');
+      // TO SKIP INTRO
+      // isAnimationDone = true 
+      // hideMainElements = false
+      isAnimationDone.set(true);
+      hideMainElements.set(false);
+      
     }
   });
 
@@ -83,6 +92,9 @@
   function consoleLog() {
     $: console.log(`isUrlOpen: ${$isUrlOpen}`);
   }
+
+
+  
 </script>
 
 <div
@@ -119,6 +131,7 @@
     />
   </nav>
 
+
   <div
     class="absolute top-0 z-[10] w-full"
     class:initialPosition={!$isControlsOpen}
@@ -126,9 +139,10 @@
   >
     <ControlsNew />
   </div>
+ 
 
   <div class="z-[5] translate-y-16">
-    <PlayerControlsTest />
+  <!--  <PlayerControlsTest />-->
   </div>
 
   <div
@@ -146,9 +160,30 @@
     <InputBoxFinal />
   </div>
 
-  <div class="container">
-    <YoutubeNewer bind:player />
+<button class="button btn absolute justify-center items-center"
+on:click={() => {
+      if (!$showYoutubeTransition) {
+        // $isUrlOpen = false;
+        showYoutubeTransition.update((value) => !value);
+        console.log("suck")
+      }
+    }}
+>{$showYoutubeTransition}</button>
+  {#if $showYoutubeTransition}
+  <div class="container top-0 right-0">
+  <Mask>
+    <div
+    class="top-0 z-[10] w-full"
+    class:initialPosition={!$isControlsOpen}
+    class:endPosition={$isControlsOpen}
+  >
+    <ControlsNew />
   </div>
+   <PlayerControlsTest />
+    <YoutubeNewer bind:player />
+    </Mask>
+  </div>
+  {/if}
 
   <!--	<div class="justify-items container">
 		<button
