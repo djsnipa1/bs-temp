@@ -1,4 +1,4 @@
-<!-- Main Route +page.svelte -->
+	<!-- Main Route +page.svelte -->
 <script lang="ts">
   import {
     YoutubeNewer,
@@ -172,14 +172,14 @@ on:click={() => {
   {#if $showYoutubeTransition}
   <div class="container top-0 right-0">
   <Mask>
-    <div
+   <!-- <div
     class="top-0 z-[10] w-full"
     class:initialPosition={!$isControlsOpen}
     class:endPosition={$isControlsOpen}
   >
     <ControlsNew />
-  </div>
-   <PlayerControlsTest />
+  </div> -->
+   <!--<PlayerControlsTest /> -->
     <YoutubeNewer bind:player />
     </Mask>
   </div>
