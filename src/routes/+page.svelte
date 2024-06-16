@@ -1,4 +1,4 @@
-	<!-- Main Route +page.svelte -->
+<!-- Main Route +page.svelte -->
 <script lang="ts">
   import {
     YoutubeNewer,
@@ -7,7 +7,7 @@
     SettingsButton,
     UrlButton,
     PlayerControlsTest,
-    Intro, 
+    Intro,
     Mask
   } from '$lib';
   import { videoId } from '$lib/stores/store.js';
@@ -25,22 +25,20 @@
   } from '$lib/stores/store.js';
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
-	  import { fade } from 'svelte/transition'
+  import { fade } from 'svelte/transition';
 
   let skipToIntro = true;
   let player;
   //let showBackground = true;
-  
-  
+
   onMount(async () => {
     //   isUrlOpen.set(true);
     if (skipToIntro) {
       // TO SKIP INTRO
-      // isAnimationDone = true 
+      // isAnimationDone = true
       // hideMainElements = false
       isAnimationDone.set(true);
       hideMainElements.set(false);
-      
     }
   });
 
@@ -92,13 +90,10 @@
   function consoleLog() {
     $: console.log(`isUrlOpen: ${$isUrlOpen}`);
   }
-
-
-  
 </script>
 
 <div
-  class="landscape:hidden absolute z-[10000] flex h-screen w-full items-center justify-center {$isAnimationDone
+  class="absolute z-[10000] flex h-screen w-full items-center justify-center landscape:hidden {$isAnimationDone
     ? 'displayNone'
     : ''}"
 >
@@ -106,7 +101,7 @@
 </div>
 
 <div
-  class="landscape:hidden relative min-h-screen min-w-full touch-none border-0 {$hideMainElements
+  class="relative min-h-screen min-w-full touch-none border-0 landscape:hidden {$hideMainElements
     ? 'hidden'
     : ''}"
 >
@@ -131,7 +126,6 @@
     />
   </nav>
 
-
   <div
     class="absolute top-0 z-[10] w-full"
     class:initialPosition={!$isControlsOpen}
@@ -139,10 +133,9 @@
   >
     <ControlsNew />
   </div>
- 
 
   <div class="z-[5] translate-y-16">
-  <!--  <PlayerControlsTest />-->
+    <!--  <PlayerControlsTest />-->
   </div>
 
   <div
@@ -160,29 +153,30 @@
     <InputBoxFinal />
   </div>
 
-<button class="button btn absolute justify-center items-center"
-on:click={() => {
+  <button
+    class="button btn absolute items-center justify-center"
+    on:click={() => {
       if (!$showYoutubeTransition) {
         // $isUrlOpen = false;
         showYoutubeTransition.update((value) => !value);
-        console.log("suck")
+        console.log('suck');
       }
-    }}
->{$showYoutubeTransition}</button>
+    }}>{$showYoutubeTransition}</button
+  >
   {#if $showYoutubeTransition}
-  <div class="container top-0 right-0">
-  <Mask>
-   <!-- <div
+    <div class="container right-0 top-0">
+      <Mask>
+        <!-- <div
     class="top-0 z-[10] w-full"
     class:initialPosition={!$isControlsOpen}
     class:endPosition={$isControlsOpen}
   >
     <ControlsNew />
   </div> -->
-   <!--<PlayerControlsTest /> -->
-    <YoutubeNewer bind:player />
-    </Mask>
-  </div>
+        <!--<PlayerControlsTest /> -->
+        <YoutubeNewer bind:player />
+      </Mask>
+    </div>
   {/if}
 
   <!--	<div class="justify-items container">
@@ -209,8 +203,14 @@ on:click={() => {
 	-->
 </div>
 
-<div class="portrait:hidden relative min-h-screen min-w-full touch-none border-0 flex items-center justify-center">
-  <p class="text-3xl text-white font-kiona flex items-center justify-center text-center">Beatstar Practicer can only<br />be viewed in portrait mode</p>
+<div
+  class="relative flex min-h-screen min-w-full touch-none items-center justify-center border-0 portrait:hidden"
+>
+  <p
+    class="flex items-center justify-center text-center font-kiona text-3xl text-white"
+  >
+    Beatstar Practicer can only<br />be viewed in portrait mode
+  </p>
 </div>
 
 <style>
