@@ -1,44 +1,33 @@
 <!-- src/components/Mask.svelte -->
 <script>
-import { circleTransition } from '$lib/transitions/CircleTransition.js';
-import { showYoutubeTransition, videoId } from '$lib/stores/store.js';
-import anime from 'animejs';
-
+  import { showYoutubeTransition, videoId } from '$lib/stores/store.js';
+  import anime from 'animejs';
   import { onMount } from 'svelte';
 
   let thumbnailUrl;
-export let circleVisible = false;
   let range = 100;
   let circle, thumbnail;
-  
+
   onMount(() => {
-  //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
+    //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
     thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
-  
 
-  
-  
-  
-  
-  let anim = () => {
-	anime.timeline({ loop: false })
-	.add({
-  targets: thumbnail,
-  //rotateY: '2160deg',
-  rotateY: 360 * 4, 
-  duration: 4000,
-  translateZ: 0, // Keeps the circle in place while it rotates
-  loop: false, // Makes the animation loop infinitely
-  easing: 'easeInOutQuad' // Ensures the animation has a constant speed
-})
-}
-anim()
-})
+    let anim = () => {
+      anime.timeline({ loop: true }).add({
+        targets: thumbnail,
+        rotateY: {
+          value: '1080deg',
+          duration: 2000
+        },
+        translateZ: 0, // Keeps the circle in place while it rotates
+        loop: true, // Makes the animation loop infinitely
+        easing: 'easeInQuad' // Ensures the animation has a constant speed
+      });
+    };
+    anim();
+  });
 
-
-
-  
- /* 
+  /* 
   onMount(() => {
 		console.log(image.clientHeight)
 	let anim = () => {
@@ -50,7 +39,7 @@ anim()
     width: 225,
     elasticity: 200,
     borderRadius: 25,
-     delay: 1000
+    delay: 1000
   })
   .add({
     targets: "div",
@@ -111,34 +100,37 @@ anim()
 {/if}
 -->
 
-<div class="container w-full h-screen">
-
-
-<img src={thumbnailUrl} bind:this={thumbnail} alt="YouTube Video Thumbnail" class="circle-mask object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/4 object-cover aspect-video" />
-
-</div>
+<div class="container h-screen w-full">
+  <img
+    src={thumbnailUrl}
+    bind:this={thumbnail}
+    alt="YouTube Video Thumbnail"
+    class="circle-mask absolute left-1/2 top-1/2 aspect-video h-1/4 -translate-x-1/2 -translate-y-1/2 object-cover object-cover"
+  />
   <!--<div class="inset-0 bg-transparent clip-path-circle"></div> -->
-  
-<!--
+
+  <!--
 <img src={thumbnailUrl} bind:this={thumbnail} alt="YouTube Video Thumbnail" />
 -->
 
   <!--{#if showYoutubeTransition} -->
-<div class="clip w-screen h-screen top-0 bg-orange-500" style="--clip-range: circle({range * 0.1 + 100}% at center)" transition:circleTransition={{duration: 1200, delay: 4000}} bind:this={circle}>
- <slot />
+  <div
+    class="clip top-0 h-screen w-screen bg-orange-500"
+    style="--clip-range: circle({range * 0.1 + 100}% at center)"
+    transition:circleTransition={{ duration: 1200, delay: 2000 }}
+    bind:this={circle}
+  >
+    <slot />
+  </div>
+  <!-- {/if} -->
 </div>
-<!-- {/if} 
-</div> --> 
 
 <style>
-	  .clip {
+  .clip {
     clip-path: var(--clip-range);
   }
-  
- 
+
   .circle-mask {
     clip-path: circle(30%);
   }
-
-
 </style>
