@@ -1,50 +1,51 @@
 <!-- src/components/CircleImage.svelte -->
 <script>
-import { circleTransition } from '$lib/transitions/CircleTransition.js';
-import { showYoutubeTransition, videoId, youtubeThumbUrl } from '$lib/stores/store.js';
-import anime from 'animejs';
-import { onMount } from 'svelte';
-
+  import { circleTransition } from '$lib/transitions/CircleTransition.js';
+  import {
+    showYoutubeTransition,
+    videoId
+  } from '$lib/stores/store.js';
+  import anime from 'animejs';
+  import { onMount } from 'svelte';
+   import { page } from '$app/stores';
 
   let thumbnailUrl;
-export let circleVisible = false;
+  export let circleVisible = false;
   let range = 100;
   let circle, thumbnail;
+
+  export let data;
   
   onMount(() => {
-  //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
+    //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
     thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
-  
-  
-  
-  
-  let anim = () => {
-	anime.timeline({ loop: false })
-	.add({
-  targets: thumbnail,
-  //rotateY: '2160deg',
-  rotateY: 360 * 5, 
-  duration: 3000,
-  translateZ: 0, // Keeps the circle in place while it rotates
-  loop: false, // Makes the animation loop infinitely
-  easing: 'easeInOutQuad' // Ensures the animation has a constant speed
-})
-.add({
-  duration: 1000,
-  loop: true,
-  direction: 'alternate',
-  update: function(anim){
-    thumbnail.style.filter = 'blur(' + 20 * anim.progress / 100 + 'px)'
-  }
-})
-}
-anim()
-})
 
+    let anim = () => {
+      anime
+        .timeline({ loop: false })
+        .add({
+          targets: thumbnail,
+          //rotateY: '2160deg',
+          rotateY: 360 * 5,
+          duration: 3000,
+          translateZ: 0, // Keeps the circle in place while it rotates
+          loop: false, // Makes the animation loop infinitely
+          easing: 'easeInOutQuad' // Ensures the animation has a constant speed
+        })
+        .add({
+          duration: 1000,
+          loop: true,
+          direction: 'alternate',
+          update: function (anim) {
+            thumbnail.style.filter =
+              'blur(' + (20 * anim.progress) / 100 + 'px)';
+          }
+        });
+    };
+    anim();
+  });
 
-
-  
- /* 
+  /* 
   onMount(() => {
 		console.log(image.clientHeight)
 	let anim = () => {
@@ -116,32 +117,31 @@ anim()
   </div>
 {/if}
 -->
-
+{$page.data.color}
 <div class="container">
-
-
-<img src={thumbnailUrl} bind:this={thumbnail} alt="YouTube Video Thumbnail" class="circle-mask object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/4 object-cover aspect-video" />
-
+  <img
+    src={thumbnailUrl}
+    bind:this={thumbnail}
+    alt="YouTube Video Thumbnail"
+    class="circle-mask absolute left-1/2 top-1/2 aspect-video h-1/4 -translate-x-1/2 -translate-y-1/2 object-cover object-cover"
+  />
 </div>
-  <!--<div class="inset-0 bg-transparent clip-path-circle"></div> -->
-  
+
+<!--<div class="inset-0 bg-transparent clip-path-circle"></div> -->
+
 <!--
 <img src={thumbnailUrl} bind:this={thumbnail} alt="YouTube Video Thumbnail" />
 -->
 
-
-
-
 <style>
-	  .clip {
+  .clip {
     clip-path: var(--clip-range);
   }
-  
- 
+
   .circle-mask {
-   clip-path: circle(30%);
+    clip-path: circle(30%);
   }
-/*
+  /*
 .blur-shape {
  mask-image: radial-gradient(black 50%, rgba(0, 0, 0, 0.5) 50%));
 }
@@ -149,7 +149,7 @@ anim()
   mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.5) 50%);
 }
 */
-.mask3 {
- mask-image: radial-gradient(circle, black, transparent)
-}
+  .mask3 {
+    mask-image: radial-gradient(circle, black, transparent);
+  }
 </style>
