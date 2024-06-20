@@ -27,7 +27,12 @@
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
-
+  import { page } from '$app/stores';
+  
+  export let data;
+  
+  $: color = data.color;
+  
   let skipToIntro = true;
   let player;
   //let showBackground = true;
@@ -153,7 +158,8 @@
   >
     <InputBoxFinal />
   </div>
-
+  
+{$page.data.color}
 <CircleImage />
 
   <button
