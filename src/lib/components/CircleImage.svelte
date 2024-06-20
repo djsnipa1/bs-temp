@@ -3,8 +3,8 @@
 import { circleTransition } from '$lib/transitions/CircleTransition.js';
 import { showYoutubeTransition, videoId } from '$lib/stores/store.js';
 import anime from 'animejs';
+import { onMount } from 'svelte';
 
-  import { onMount } from 'svelte';
 
   let thumbnailUrl;
 export let circleVisible = false;
@@ -15,9 +15,6 @@ export let circleVisible = false;
   //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
     thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
   
-
-  
-  
   
   
   let anim = () => {
@@ -25,11 +22,19 @@ export let circleVisible = false;
 	.add({
   targets: thumbnail,
   //rotateY: '2160deg',
-  rotateY: 360 * 4, 
-  duration: 4000,
+  rotateY: 360 * 5, 
+  duration: 3000,
   translateZ: 0, // Keeps the circle in place while it rotates
   loop: false, // Makes the animation loop infinitely
   easing: 'easeInOutQuad' // Ensures the animation has a constant speed
+})
+.add({
+  duration: 1000,
+  loop: true,
+  direction: 'alternate',
+  update: function(anim){
+    thumbnail.style.filter = 'blur(' + 20 * anim.progress / 100 + 'px)'
+  }
 })
 }
 anim()
@@ -111,7 +116,7 @@ anim()
 {/if}
 -->
 
-<div class="container w-full h-screen">
+<div class="container">
 
 
 <img src={thumbnailUrl} bind:this={thumbnail} alt="YouTube Video Thumbnail" class="circle-mask object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/4 object-cover aspect-video" />
@@ -123,12 +128,8 @@ anim()
 <img src={thumbnailUrl} bind:this={thumbnail} alt="YouTube Video Thumbnail" />
 -->
 
-  <!--{#if showYoutubeTransition} -->
-<div class="clip w-screen h-screen top-0 bg-orange-500" style="--clip-range: circle({range * 0.1 + 100}% at center)" transition:circleTransition={{duration: 1200, delay: 4000}} bind:this={circle}>
- <slot />
-</div>
-<!-- {/if} 
-</div> --> 
+
+
 
 <style>
 	  .clip {
@@ -137,8 +138,17 @@ anim()
   
  
   .circle-mask {
-    clip-path: circle(30%);
+   clip-path: circle(30%);
   }
-
-
+/*
+.blur-shape {
+ mask-image: radial-gradient(black 50%, rgba(0, 0, 0, 0.5) 50%));
+}
+.mask2 {
+  mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.5) 50%);
+}
+*/
+.mask3 {
+ mask-image: radial-gradient(circle, black, transparent)
+}
 </style>
