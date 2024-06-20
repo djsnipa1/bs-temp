@@ -8,7 +8,8 @@
     UrlButton,
     PlayerControlsTest,
     Intro,
-    Mask
+    Mask,
+    CircleImage
   } from '$lib';
   import { videoId } from '$lib/stores/store.js';
   import { copy } from 'svelte-copy';
@@ -152,6 +153,8 @@
   >
     <InputBoxFinal />
   </div>
+
+<CircleImage />
 
   <button
     class="button btn absolute items-center justify-center"

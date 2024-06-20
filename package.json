@@ -46,6 +46,7 @@
     "vite": "^5.2.11"
   },
   "dependencies": {
-    "posthog-js": "^1.131.4"
+    "posthog-js": "^1.131.4",
+    "sharp": "^0.33.4"
   }
 }
