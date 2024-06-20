@@ -1,7 +1,7 @@
 <!-- src/components/CircleImage.svelte -->
 <script>
 import { circleTransition } from '$lib/transitions/CircleTransition.js';
-import { showYoutubeTransition, videoId } from '$lib/stores/store.js';
+import { showYoutubeTransition, videoId, youtubeThumbUrl } from '$lib/stores/store.js';
 import anime from 'animejs';
 import { onMount } from 'svelte';
 
@@ -14,6 +14,7 @@ export let circleVisible = false;
   onMount(() => {
   //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
     thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
+  
   
   
   
