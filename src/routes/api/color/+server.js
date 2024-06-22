@@ -4,6 +4,7 @@ import Vibrant from 'node-vibrant';
 
 export const GET = async ({ url, fetch }) => {
   const imageUrl = url.searchParams.get('image');
+  
   if (imageUrl) {
     const image = await fetch(imageUrl).then((res) => res.arrayBuffer());
     const stats = await sharp(Buffer.from(image)).stats();
@@ -34,6 +35,7 @@ export const GET = async ({ url, fetch }) => {
     //const [r, g, b] = rgb; // Further destructuring to get individual R, G, B values
     // Constructing the final string
     const rgbaString = `rgba(${vr}, ${vg}, ${vb})`;
+    //console.log(palette)
 
     return json({
       color: `rgba(${r},${g},${b})`,
