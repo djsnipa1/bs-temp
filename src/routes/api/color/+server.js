@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import sharp from 'sharp';
+//import sharp from 'sharp';
 import Vibrant from 'node-vibrant';
 
 export const GET = async ({ url, fetch }) => {
@@ -7,8 +7,8 @@ export const GET = async ({ url, fetch }) => {
   
   if (imageUrl) {
     const image = await fetch(imageUrl).then((res) => res.arrayBuffer());
-    const stats = await sharp(Buffer.from(image)).stats();
-    const [r, g, b] = stats.channels.map((c) => c.mean);
+//  const stats = await sharp(Buffer.from(image)).stats();
+//  const [r, g, b] = stats.channels.map((c) => c.mean);
 
     // Extracting RGB values from the "Vibrant" option
     // found out how to make this work here:
@@ -38,7 +38,7 @@ export const GET = async ({ url, fetch }) => {
     //console.log(palette)
 
     return json({
-      color: `rgba(${r},${g},${b})`,
+  //  color: `rgba(${r},${g},${b})`,
       vibrantColors: vibrantColors,
       vibrantRGBA: rgbaString,
       palette: vibrantPalette
