@@ -1,7 +1,7 @@
 <!-- src/components/CircleImage.svelte -->
 <script>
   import { circleTransition } from '$lib/transitions/CircleTransition.js';
-  import { showYoutubeTransition, videoId } from '$lib/stores/store.js';
+  import { showYoutubeTransition, videoId, newYtUrl } from '$lib/stores/store.js';
   import anime from 'animejs';
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
@@ -14,26 +14,27 @@
   export let data;
   let color = $page.data.color;
   
-  let vibrantColors;
+  let vibrantColors, vibrantRGBA;
   $: vibrantColors = $page.data?.vibrantColors || {};
+  $: vibrantRGBA = $page.data?.vibrantRGBA || ''
 
   onMount(() => {
     //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
-   //thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
-   thumbnailUrl = `https://img.youtube.com/vi/hNRWpWEd_q4/hqdefault.jpg`;
+   thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
+ //  thumbnailUrl = `https://img.youtube.com/vi/hNRWpWEd_q4/hqdefault.jpg`;
 
 
     let anim = () => {
       anime
-        .timeline({ loop: false })
+        .timeline({ loop: true })
         .add({
           targets: thumbnail,
           //rotateY: '2160deg',
-          rotateY: 360 * 5,
+          rotateY: 360 * 10,
           duration: 3000,
           translateZ: 0, // Keeps the circle in place while it rotates
-          loop: false, // Makes the animation loop infinitely
-          easing: 'easeInOutQuad' // Ensures the animation has a constant speed
+          loop: true, // Makes the animation loop infinitely
+          easing: 'easeInQuad' // Ensures the animation has a constant speed
         })
         .add({
           duration: 1000,
@@ -126,19 +127,24 @@
 -->
 <div class="container" style="--custom-color: {color}">
   <button class="custom-bg btn">TEST</button>
-
+ {$newYtUrl}
   <input type="text" class="placeholder:text-gray-500" value={color} />
 
   <div
     class="custom-grad absolute left-1/2 top-1/2 h-20 w-20 text-sm"
     style={cssVarStyles}
   >
+ 
     {$page.data.vibrantColors.vibrant}
   </div>
 
 <div>
  <div style="background-color: {color}; padding: 10px; margin-bottom: 10px;">
       {color}
+    </div>
+    
+    <div style="background-color: {vibrantRGBA}; padding: 10px; margin-bottom: 10px;">
+      {vibrantRGBA}
     </div>
   <!-- Iterate over the entries of the colors object -->
   {#each Object.entries(vibrantColors) as [colorName, hexCode]}
@@ -148,7 +154,7 @@
   {/each}
 </div>
   <img
-    src={thumbnailUrl}
+    src={$newYtUrl}
     bind:this={thumbnail}
     alt="YouTube Video Thumbnail"
     class="circle-mask absolute left-1/2 top-1/2 aspect-video h-1/4 -translate-x-1/2 -translate-y-1/2 object-cover object-cover"
