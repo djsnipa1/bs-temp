@@ -1,13 +1,10 @@
 <!-- src/components/CircleImage.svelte -->
 <script>
   import { circleTransition } from '$lib/transitions/CircleTransition.js';
-  import {
-    showYoutubeTransition,
-    videoId
-  } from '$lib/stores/store.js';
+  import { showYoutubeTransition, videoId } from '$lib/stores/store.js';
   import anime from 'animejs';
   import { onMount } from 'svelte';
-   import { page } from '$app/stores';
+  import { page } from '$app/stores';
 
   let thumbnailUrl;
   export let circleVisible = false;
@@ -15,7 +12,8 @@
   let circle, thumbnail;
 
   export let data;
-  
+  let color = $page.data.color;
+
   onMount(() => {
     //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
     thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
@@ -107,6 +105,10 @@
   anim();
 	});
 	*/
+
+  //	$: cssVarStyles = `--note-color:${noteColor};--note-bg-color:${noteBgColor}`;
+
+  let cssVarStyles = `--custom-gradient: background: radial-gradient(circle, ${color} 0%, rgba(6,213,252,0.9694189602446484) 100%);`;
 </script>
 
 <!--
@@ -117,8 +119,18 @@
   </div>
 {/if}
 -->
-{$page.data.color}
-<div class="container">
+<div class="container" style="--custom-color: {color}">
+  <button class="custom-bg btn">TEST</button>
+
+  <input type="text" class="placeholder:text-gray-500" value={color} />
+
+  <div
+    class="custom-grad absolute left-1/2 top-1/2 h-20 w-20 text-sm"
+    style={cssVarStyles}
+  >
+    {$page.data.color}
+  </div>
+
   <img
     src={thumbnailUrl}
     bind:this={thumbnail}
@@ -134,6 +146,12 @@
 -->
 
 <style>
+  .custom-grad {
+    background-image: var(--custom-gradient);
+  }
+  .custom-bg {
+    background: var(--custom-color);
+  }
   .clip {
     clip-path: var(--clip-range);
   }
