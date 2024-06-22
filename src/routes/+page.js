@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { videoId } from '$lib/stores/store.js';
 
-let color = null;
+let color, vibrantColors = null;
 
 let thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
@@ -12,10 +12,16 @@ export const load = async ({ fetch, params }) => {
     }).toString()}`
   );
   if (colorRes.ok) {
-    color = (await colorRes.json()).color;
+    const colorJson = (await colorRes.json());
+   // color = (await colorRes.json()).color;
+ //   vibrantColors = (await colorRes.json()).vibrantColors;
+    color = colorJson.color;
+    vibrantColors = colorJson.vibrantColors;
+    console.log(vibrantColors)
   }
 
   return {
-    color
+    color,
+    vibrantColors
   };
 };

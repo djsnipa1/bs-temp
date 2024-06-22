@@ -13,10 +13,15 @@
 
   export let data;
   let color = $page.data.color;
+  
+  let vibrantColors;
+  $: vibrantColors = $page.data?.vibrantColors || {};
 
   onMount(() => {
     //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
-    thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
+   //thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
+   thumbnailUrl = `https://img.youtube.com/vi/hNRWpWEd_q4/hqdefault.jpg`;
+
 
     let anim = () => {
       anime
@@ -128,9 +133,20 @@
     class="custom-grad absolute left-1/2 top-1/2 h-20 w-20 text-sm"
     style={cssVarStyles}
   >
-    {$page.data.color}
+    {$page.data.vibrantColors.vibrant}
   </div>
 
+<div>
+ <div style="background-color: {color}; padding: 10px; margin-bottom: 10px;">
+      {color}
+    </div>
+  <!-- Iterate over the entries of the colors object -->
+  {#each Object.entries(vibrantColors) as [colorName, hexCode]}
+    <div style="background-color: {hexCode}; padding: 10px; margin-bottom: 10px;">
+      {colorName}: {hexCode}
+    </div>
+  {/each}
+</div>
   <img
     src={thumbnailUrl}
     bind:this={thumbnail}
