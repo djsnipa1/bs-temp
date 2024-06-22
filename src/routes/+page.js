@@ -14,13 +14,13 @@ export const load = async ({ fetch, params }) => {
   if (colorRes.ok) {
     const colorJson = (await colorRes.json());
  // color = (await colorRes.json()).color;
-    color = colorJson.color;
+    //color = colorJson.color;
     vibrantColors = colorJson.vibrantColors;
     vibrantRGBA = colorJson.vibrantRGBA;
   }
 
   return {
-    color,
+  //color,
     vibrantColors,
     vibrantRGBA
   };

@@ -159,7 +159,7 @@
     <InputBoxFinal />
   </div>
 
-  {$page.data.color}
+  
   <CircleImage />
 
   <button

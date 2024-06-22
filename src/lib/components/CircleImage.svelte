@@ -38,11 +38,12 @@
         })
         .add({
           duration: 1000,
+          offset: '-=3500', 
           loop: true,
-          direction: 'alternate',
+          //direction: 'alternate',
           update: function (anim) {
             thumbnail.style.filter =
-              'blur(' + (20 * anim.progress) / 100 + 'px)';
+              'blur(' + (10 * anim.progress) / 100 + 'px)';
           }
         });
     };
@@ -125,11 +126,9 @@
   </div>
 {/if}
 -->
-<div class="container" style="--custom-color: {color}">
-  <button class="custom-bg btn">TEST</button>
- {$newYtUrl}
-  <input type="text" class="placeholder:text-gray-500" value={color} />
 
+ {$newYtUrl}
+ 
   <div
     class="custom-grad absolute left-1/2 top-1/2 h-20 w-20 text-sm"
     style={cssVarStyles}
@@ -138,10 +137,8 @@
     {$page.data.vibrantColors.vibrant}
   </div>
 
-<div>
- <div style="background-color: {color}; padding: 10px; margin-bottom: 10px;">
-      {color}
-    </div>
+
+
     
     <div style="background-color: {vibrantRGBA}; padding: 10px; margin-bottom: 10px;">
       {vibrantRGBA}
@@ -152,14 +149,15 @@
       {colorName}: {hexCode}
     </div>
   {/each}
-</div>
+  
+
   <img
     src={$newYtUrl}
     bind:this={thumbnail}
     alt="YouTube Video Thumbnail"
     class="circle-mask absolute left-1/2 top-1/2 aspect-video h-1/4 -translate-x-1/2 -translate-y-1/2 object-cover object-cover"
   />
-</div>
+
 
 <!--<div class="inset-0 bg-transparent clip-path-circle"></div> -->
 
