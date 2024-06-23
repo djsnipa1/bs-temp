@@ -10,7 +10,7 @@
     "dev": "vite dev --host",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
-    "preview": "vite preview",
+    "preview": "vite preview --host",
     "test": "playwright test"
   },
   "devDependencies": {

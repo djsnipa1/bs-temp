@@ -134,7 +134,7 @@
     style={cssVarStyles}
   >
  
-    {$page.data.vibrantColors.vibrant}
+    
   </div>
 
 
