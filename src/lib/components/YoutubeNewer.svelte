@@ -14,8 +14,8 @@
 
   const ytPlayerId = 'youtube-player';
 
-    $: if ($videoId !== '9B1SQX9a_hU') {
-    initialVideoId = $videoId
+  $: if ($videoId !== '9B1SQX9a_hU') {
+    initialVideoId = $videoId;
   }
 
   onMount(() => {

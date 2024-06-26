@@ -11,7 +11,6 @@ export const newYtUrl = derived(
   ($videoId) => `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg` // Constructing the URL based on videoId
 );
 
-
 export const cssPosition = writable(0);
 // nudges cssPosition left in FineTuning.svelte
 export function nudgeLeft() {

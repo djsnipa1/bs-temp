@@ -1,7 +1,11 @@
 <!-- src/components/CircleImage.svelte -->
 <script>
   import { circleTransition } from '$lib/transitions/CircleTransition.js';
-  import { showYoutubeTransition, videoId, newYtUrl } from '$lib/stores/store.js';
+  import {
+    showYoutubeTransition,
+    videoId,
+    newYtUrl
+  } from '$lib/stores/store.js';
   import anime from 'animejs';
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
@@ -13,16 +17,15 @@
 
   export let data;
   let color = $page.data.color;
-  
+
   let vibrantColors, vibrantRGBA;
   $: vibrantColors = $page.data?.vibrantColors || {};
-  $: vibrantRGBA = $page.data?.vibrantRGBA || ''
+  $: vibrantRGBA = $page.data?.vibrantRGBA || '';
 
   onMount(() => {
     //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
-   thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
- //  thumbnailUrl = `https://img.youtube.com/vi/hNRWpWEd_q4/hqdefault.jpg`;
-
+    thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
+    //  thumbnailUrl = `https://img.youtube.com/vi/hNRWpWEd_q4/hqdefault.jpg`;
 
     let anim = () => {
       anime
@@ -38,7 +41,7 @@
         })
         .add({
           duration: 1000,
-          offset: '-=3500', 
+          offset: '-=3500',
           loop: true,
           //direction: 'alternate',
           update: function (anim) {
@@ -127,37 +130,31 @@
 {/if}
 -->
 
- {$newYtUrl}
- 
-  <div
-    class="custom-grad absolute left-1/2 top-1/2 h-20 w-20 text-sm"
-    style={cssVarStyles}
-  >
- 
-    
+{$newYtUrl}
+
+<div
+  class="custom-grad absolute left-1/2 top-1/2 h-20 w-20 text-sm"
+  style={cssVarStyles}
+></div>
+
+<div
+  style="background-color: {vibrantRGBA}; padding: 10px; margin-bottom: 10px;"
+>
+  {vibrantRGBA}
+</div>
+<!-- Iterate over the entries of the colors object -->
+{#each Object.entries(vibrantColors) as [colorName, hexCode]}
+  <div style="background-color: {hexCode}; padding: 10px; margin-bottom: 10px;">
+    {colorName}: {hexCode}
   </div>
+{/each}
 
-
-
-    
-    <div style="background-color: {vibrantRGBA}; padding: 10px; margin-bottom: 10px;">
-      {vibrantRGBA}
-    </div>
-  <!-- Iterate over the entries of the colors object -->
-  {#each Object.entries(vibrantColors) as [colorName, hexCode]}
-    <div style="background-color: {hexCode}; padding: 10px; margin-bottom: 10px;">
-      {colorName}: {hexCode}
-    </div>
-  {/each}
-  
-
-  <img
-    src={$newYtUrl}
-    bind:this={thumbnail}
-    alt="YouTube Video Thumbnail"
-    class="circle-mask absolute left-1/2 top-1/2 aspect-video h-1/4 -translate-x-1/2 -translate-y-1/2 object-cover object-cover"
-  />
-
+<img
+  src={$newYtUrl}
+  bind:this={thumbnail}
+  alt="YouTube Video Thumbnail"
+  class="circle-mask absolute left-1/2 top-1/2 aspect-video h-1/4 -translate-x-1/2 -translate-y-1/2 object-cover object-cover"
+/>
 
 <!--<div class="inset-0 bg-transparent clip-path-circle"></div> -->
 

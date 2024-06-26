@@ -1,7 +1,9 @@
 import { get } from 'svelte/store';
-import { videoId, newYtUrl} from '$lib/stores/store.js';
+import { videoId, newYtUrl } from '$lib/stores/store.js';
 
-let color, vibrantColors, vibrantRGBA = null;
+let color,
+  vibrantColors,
+  vibrantRGBA = null;
 
 const thumbnailUrl = get(newYtUrl);
 
@@ -12,15 +14,15 @@ export const load = async ({ fetch, params }) => {
     }).toString()}`
   );
   if (colorRes.ok) {
-    const colorJson = (await colorRes.json());
- // color = (await colorRes.json()).color;
+    const colorJson = await colorRes.json();
+    // color = (await colorRes.json()).color;
     //color = colorJson.color;
     vibrantColors = colorJson.vibrantColors;
     vibrantRGBA = colorJson.vibrantRGBA;
   }
 
   return {
-  //color,
+    //color,
     vibrantColors,
     vibrantRGBA
   };
