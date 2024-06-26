@@ -39,7 +39,7 @@
   }
 </script>
 
-<div class="container glass flex h-16 items-center justify-center">
+<div class="glass flex h-16 items-center justify-center">
   <!--  <PasteButton
     class="button mx-4 flex-1 rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
   />

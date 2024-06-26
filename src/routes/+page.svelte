@@ -45,6 +45,7 @@
       // hideMainElements = false
       isAnimationDone.set(true);
       hideMainElements.set(false);
+      isUrlOpen.set(true)
     }
   });
 
@@ -93,9 +94,9 @@
       }
     };
   }
-  function consoleLog() {
+  
     $: console.log(`isUrlOpen: ${$isUrlOpen}`);
-  }
+ 
 </script>
 
 <div
@@ -107,14 +108,33 @@
 </div>
 
 <div
-  class="relative min-h-screen min-w-full touch-none border-0 landscape:hidden {$hideMainElements
+  class="min-h-screen min-w-full touch-none border-0
+  bg-yellow-500
+  landscape:hidden {$hideMainElements
     ? 'hidden'
     : ''}"
 >
+
+<div class="relative top-20 h-20 w-20 bg-pink-500 border-blue-500"></div>
+
+  <div
+    class="{!$isUrlOpen ? 'endPos' : 'startPos'} border-2 border-green-700 top-20"
+    on:outside={() => {
+      if (!$isUrlOpen) {
+       // $isUrlOpen = false;
+        isUrlOpen.update((value) => !value);
+      }
+    }}
+    use:clickOutside
+  >
+    <InputBoxFinal />
+  </div>
+
+
   <nav
     class="absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-[linear-gradient(180deg,#ffe636_0%,#ffd430_5%,#ffc12b_10%,#ffb72c_25%,#ffa51a_40%,#f6a200_60%,#f59c00_75%,#f39500_90%,#f28d00_95%,#f78d00_100%)] opacity-100 shadow-lg"
   >
-    <div class="absolute left-[30px] top-[350px] z-[2000] text-4xl"></div>
+   <!-- <div class="absolute left-[30px] top-[350px] z-[2000] text-4xl"></div> -->
     <UrlButton
       class="button ml-4 flex-none rounded-md bg-slate-300 p-1 text-slate-700 shadow-md hover:bg-slate-400 hover:text-slate-800"
       on:click={() => {
@@ -132,6 +152,8 @@
     />
   </nav>
 
+
+
   <div
     class="absolute top-0 z-[10] w-full"
     class:initialPosition={!$isControlsOpen}
@@ -144,36 +166,20 @@
     <!--  <PlayerControlsTest />-->
   </div>
 
-  <div
-    class="z-[15] {!$isUrlOpen ? 'endPos' : 'startPos'}"
-    on:outside={() => {
-      //    $isUrlOpen = false;
-      $: console.log(`* $isUrlOpen: ${$isUrlOpen}`);
-      if (!$isUrlOpen) {
-        // $isUrlOpen = false;
-        isUrlOpen.update((value) => !value);
-      }
-    }}
-    use:clickOutside
-  >
-    <InputBoxFinal />
-  </div>
 
   
-  <CircleImage />
 
-  <button
+ <button
     class="button btn absolute items-center justify-center"
     on:click={() => {
       if (!$showYoutubeTransition) {
         // $isUrlOpen = false;
         showYoutubeTransition.update((value) => !value);
-        console.log('suck');
       }
     }}>{$showYoutubeTransition}</button
   >
   {#if $showYoutubeTransition}
-    <div class="container right-0 top-0">
+    <div class="z-[20] absolute border-2 border-blue-500 w-screen  right-0 top-0">
       <Mask>
         <!-- <div
     class="top-0 z-[10] w-full"
@@ -188,30 +194,10 @@
     </div>
   {/if}
 
-  <!--	<div class="justify-items container">
-		<button
-			class="tooltip tooltip-left absolute right-4 z-[40] m-2 rounded-md bg-slate-600 p-2 text-slate-300 shadow-sm hover:bg-amber-500"
-			data-tip="copied!"
-			use:copy="{'https://m.youtube.com/watch?v=9B1SQX9a_hU'}">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="1em"
-				height="1em"
-				viewBox="0 0 24 24"
-				{...$$props}>
-				<path
-					fill="currentColor"
-					d="M5.503 4.627L5.5 6.75v10.504a3.25 3.25 0 0 0 3.25 3.25h8.616a2.251 2.251 0 0 1-2.122 1.5H8.75A4.75 4.75 0 0 1 4 17.254V6.75c0-.98.627-1.815 1.503-2.123M17.75 2A2.25 2.25 0 0 1 20 4.25v13a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-13A2.25 2.25 0 0 1 8.75 2zm0 1.5h-9a.75.75 0 0 0-.75.75v13c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75v-13a.75.75 0 0 0-.75-.75" />
-			</svg>
-		</button>
-
-		<div class="mockup-code m-4 bg-slate-900 text-xs">
-			<pre><code>https://m.youtube.com/watch?v=9B1SQX9a_hU</code></pre>
-		</div>
-	</div>
-	-->
+  
 </div>
 
+<!--
 <div
   class="relative flex min-h-screen min-w-full touch-none items-center justify-center border-0 portrait:hidden"
 >
@@ -221,7 +207,7 @@
     Beatstar Practicer can only<br />be viewed in portrait mode
   </p>
 </div>
-
+-->
 <style>
   .initialPosition {
     transform: translateY(-230px);
@@ -252,14 +238,15 @@
   .startPos {
     transform: translateY(-166px);
     transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
-    z-index: 15;
+    z-index: 1000;
   }
   .endPos {
-    transform: translateY(-106px);
+    transform: translateY(106px);
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 15;
+    z-index: 1000;
   }
   .displayNone {
     display: none;
   }
 </style>
+t
