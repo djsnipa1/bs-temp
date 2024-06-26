@@ -34,7 +34,8 @@
     } else {
       //      console.log('The function returned a truthy value:', ytValue);
       $videoId = ytValue;
-      isUrlOpen.update((value) => !value);
+      //isUrlOpen.update((value) => !value);
+      isUrlOpen.set(true)
     }
   }
 </script>

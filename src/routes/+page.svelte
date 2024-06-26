@@ -22,7 +22,8 @@
     isVideoPaused,
     hideMainElements,
     isAnimationDone,
-    showYoutubeTransition
+    showYoutubeTransition,
+    isPlayerReady
   } from '$lib/stores/store.js';
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
@@ -33,7 +34,7 @@
 
   $: color = data.color;
 
-  let skipToIntro = true;
+  let skipToIntro = false;
   let player;
   //let showBackground = true;
 
@@ -45,7 +46,7 @@
       // hideMainElements = false
       isAnimationDone.set(true);
       hideMainElements.set(false);
-      isUrlOpen.set(true)
+   //   isUrlOpen.set(true)
     }
   });
 
@@ -99,6 +100,8 @@
  
 </script>
 
+<div class="z-[-10] absolute min-w-full min-h-screen bg-slate-800"></div>
+
 <div
   class="absolute z-[10000] flex h-screen w-full items-center justify-center landscape:hidden {$isAnimationDone
     ? 'displayNone'
@@ -109,16 +112,15 @@
 
 <div
   class="min-h-screen min-w-full touch-none border-0
-  bg-yellow-500
   landscape:hidden {$hideMainElements
     ? 'hidden'
     : ''}"
 >
 
-<div class="relative top-20 h-20 w-20 bg-pink-500 border-blue-500"></div>
+<div class="relative top-20 w-20 h-20 bg-pink-500 border-blue-500"></div>
 
   <div
-    class="{!$isUrlOpen ? 'endPos' : 'startPos'} border-2 border-green-700 top-20"
+    class="{!$isUrlOpen ? 'endPos' : 'startPos'} min-w-full absolute z-[2]"
     on:outside={() => {
       if (!$isUrlOpen) {
        // $isUrlOpen = false;
@@ -130,6 +132,31 @@
     <InputBoxFinal />
   </div>
 
+ <button
+    class="button btn absolute items-center justify-center"
+    on:click={() => {
+      //if (!$showYoutubeTransition) {
+        // $isUrlOpen = false;
+        showYoutubeTransition.update((value) => !value);
+      //}
+    }}>showYoutubeTransition: {$showYoutubeTransition}</button
+  >
+  
+  {#if $showYoutubeTransition}
+    <div class="z-[-5] absolute border-2 border-blue-500 w-screen  right-0 top-0">
+      <Mask>
+         <div
+    class="top-0 w-full"
+    class:initialPosition={!$isControlsOpen}
+    class:endPosition={$isControlsOpen}
+  >
+    <ControlsNew />
+  </div> 
+        <!--<PlayerControlsTest />-->
+        <YoutubeNewer bind:player />
+      </Mask>
+    </div>
+  {/if}
 
   <nav
     class="absolute top-0 z-[500] flex h-12 w-full items-center justify-between rounded-sm bg-[linear-gradient(180deg,#ffe636_0%,#ffd430_5%,#ffc12b_10%,#ffb72c_25%,#ffa51a_40%,#f6a200_60%,#f59c00_75%,#f39500_90%,#f28d00_95%,#f78d00_100%)] opacity-100 shadow-lg"
@@ -152,8 +179,7 @@
     />
   </nav>
 
-
-
+<!--
   <div
     class="absolute top-0 z-[10] w-full"
     class:initialPosition={!$isControlsOpen}
@@ -162,38 +188,10 @@
     <ControlsNew />
   </div>
 
-  <div class="z-[5] translate-y-16">
-    <!--  <PlayerControlsTest />-->
+  <div class="z-[50] translate-y-16">
+    <PlayerControlsTest />
   </div>
-
-
-  
-
- <button
-    class="button btn absolute items-center justify-center"
-    on:click={() => {
-      if (!$showYoutubeTransition) {
-        // $isUrlOpen = false;
-        showYoutubeTransition.update((value) => !value);
-      }
-    }}>{$showYoutubeTransition}</button
-  >
-  {#if $showYoutubeTransition}
-    <div class="z-[20] absolute border-2 border-blue-500 w-screen  right-0 top-0">
-      <Mask>
-        <!-- <div
-    class="top-0 z-[10] w-full"
-    class:initialPosition={!$isControlsOpen}
-    class:endPosition={$isControlsOpen}
-  >
-    <ControlsNew />
-  </div> -->
-        <!--<PlayerControlsTest /> -->
-        <YoutubeNewer bind:player />
-      </Mask>
-    </div>
-  {/if}
-
+-->
   
 </div>
 
@@ -238,12 +236,10 @@
   .startPos {
     transform: translateY(-166px);
     transition: transform 0.6s cubic-bezier(0.5, 0, 0.75, 0);
-    z-index: 1000;
   }
   .endPos {
-    transform: translateY(106px);
+    transform: translateY(-34px);
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 1000;
   }
   .displayNone {
     display: none;
