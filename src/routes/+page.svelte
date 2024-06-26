@@ -100,7 +100,9 @@
  
 </script>
 
+<!-- background color -->
 <div class="z-[-10] absolute min-w-full min-h-screen bg-slate-800"></div>
+<!-- end background color -->
 
 <div
   class="absolute z-[10000] flex h-screen w-full items-center justify-center landscape:hidden {$isAnimationDone
@@ -143,7 +145,7 @@
   >
   
   {#if $showYoutubeTransition}
-    <div class="z-[-5] absolute border-2 border-blue-500 w-screen  right-0 top-0">
+    <div class="z-[-5] absolute w-screen right-0 top-0">
       <Mask>
          <div
     class="top-0 w-full"
@@ -171,7 +173,7 @@
     <div
       class="text-md flex-none text-center font-sofiasans font-bold leading-4 text-white shadow-slate-600 text-shadow-sm"
     >
-      Beatstar<br />Practicer
+      Beatstar<br />Practicer<br />{$videoId}
     </div>
 
     <SettingsButton

@@ -1,10 +1,11 @@
 <script>
   import { PasteButton } from '$lib';
-  import { isUrlOpen, videoId, menuOpen } from '$lib/stores/store.js';
+  import { isUrlOpen, videoId, menuOpen, showYoutubeTransition } from '$lib/stores/store.js';
   import getVideoId from 'get-video-id';
 
   $: currentBind = '';
-  let newId;
+  let inputBox;
+  
 
   function getYouTubeID(url) {
     const { id } = getVideoId(url); //=> 'dQw4w9WgXcQ'
@@ -34,8 +35,10 @@
     } else {
       //      console.log('The function returned a truthy value:', ytValue);
       $videoId = ytValue;
-      //isUrlOpen.update((value) => !value);
-      isUrlOpen.set(true)
+      isUrlOpen.update((value) => !value);
+      //isUrlOpen.set(true)
+      showYoutubeTransition.set(true)
+      inputBox.value = '';
     }
   }
 </script>
@@ -50,6 +53,7 @@
     type="text"
     placeholder="https://youtu.be/m_xoN8KlP3w"
     on:input={handleInput}
+    bind:this={inputBox}
     class="input input-sm input-bordered w-full max-w-xs md:input-md md:max-w-md lg:max-w-lg xl:max-w-xl"
   />
 </div>
