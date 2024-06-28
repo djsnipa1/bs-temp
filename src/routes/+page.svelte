@@ -100,7 +100,7 @@
 </script>
 
 <!-- background color -->
-<div class="absolute z-[-10] min-h-screen min-w-full bg-slate-800"></div>
+<div class="gradient-animation absolute z-[-10] min-h-screen min-w-full"></div>
 <!-- end background color -->
 
 <div
@@ -191,9 +191,7 @@
   <div class="z-[50] translate-y-16">
     <PlayerControlsTest />
   </div>
-  
 </div>
-
 
 <!--
 <div
@@ -243,5 +241,83 @@
   }
   .displayNone {
     display: none;
+  }
+  .gradient {
+    background-image: linear-gradient(
+      109.6deg,
+      rgba(62, 161, 219, 1) 11.2%,
+      rgba(93, 52, 236, 1) 100.2%
+    );
+  }
+
+  .gradient-animation {
+    background: radial-gradient(
+        100% 100% at var(--g5-1-x-position) var(--g5-1-y-position),
+        rgba(62, 161, 219, 1) -52%,
+        transparent
+      ),
+      radial-gradient(
+        100% 100% at var(--g5-2-x-position) var(--g5-2-y-position),
+        rgba(93, 52, 236, 1) 0%,
+        transparent
+      ),
+      radial-gradient(
+        100% 100% at var(--g5-3-x-position) var(--g5-3-y-position),
+        rgba(62, 161, 219, 1) 0%,
+        transparent
+      ),
+      #ffffff;
+    animation-name: g-5;
+    animation-iteration-count: infinite;
+    animation-duration: 16s;
+    transition-timing-function: ease-in;
+  }
+  @property --g5-1-x-position {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 1.0937500000000024%;
+  }
+  @property --g5-1-y-position {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+  }
+  @property --g5-2-x-position {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 15.312500000000002%;
+  }
+  @property --g5-2-y-position {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 85.46875%;
+  }
+  @property --g5-3-x-position {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 97.1875%;
+  }
+  @property --g5-3-y-position {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 48.515625%;
+  }
+  :root {
+    --g5-1-x-position: 1.0937500000000024%;
+    --g5-1-y-position: 0%;
+    --g5-2-x-position: 15.312500000000002%;
+    --g5-2-y-position: 85.46875%;
+    --g5-3-x-position: 97.1875%;
+    --g5-3-y-position: 48.515625%;
+  }
+  @keyframes g-5 {
+    50% {
+      --g5-1-x-position: 99.0234375%;
+      --g5-1-y-position: 99.0234375%;
+      --g5-2-x-position: 84.1796875%;
+      --g5-2-y-position: 13.671875%;
+      --g5-3-x-position: 2.8906249999999996%;
+      --g5-3-y-position: 46.1328125%;
+    }
   }
 </style>

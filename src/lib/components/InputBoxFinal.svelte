@@ -45,9 +45,9 @@
       inputBox.value = '';
     }
   }
-  
+
   function fill() {
-    inputBox.value = 'https://youtu.be/m_xoN8KlP3w'
+    inputBox.value = 'https://youtu.be/m_xoN8KlP3w';
   }
 </script>
 
