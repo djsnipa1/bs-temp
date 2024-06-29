@@ -9,7 +9,8 @@
     PlayerControlsTest,
     Intro,
     Mask,
-    CircleImage
+    CircleImage,
+    HelpScreen
   } from '$lib';
   import { videoId } from '$lib/stores/store.js';
   import { copy } from 'svelte-copy';
@@ -34,7 +35,7 @@
 
   $: color = data.color;
 
-  let skipToIntro = false;
+  let skipToIntro = true;
   let player;
   //let showBackground = true;
 
@@ -110,9 +111,9 @@
 >
   <Intro />
 </div>
-
+<!-- class="min-h-screen min-w-full touch-none border-0 -->
 <div
-  class="min-h-screen min-w-full touch-none border-0
+  class="min-h-screen min-w-full border-0
   landscape:hidden {$hideMainElements ? 'hidden' : ''}"
 >
   <div class="relative top-20 h-20 w-20 border-blue-500 bg-pink-500"></div>
@@ -192,7 +193,9 @@
     <PlayerControlsTest />
   </div>
 </div>
-
+<div class="absolute right-0 top-0 z-[-5] w-screen">
+<HelpScreen />
+</div>
 <!--
 <div
   class="relative flex min-h-screen min-w-full touch-none items-center justify-center border-0 portrait:hidden"
@@ -269,8 +272,8 @@
       #ffffff;
     animation-name: g-5;
     animation-iteration-count: infinite;
-    animation-duration: 16s;
-    transition-timing-function: ease-in;
+    animation-duration: 6s;
+    transition-timing-function: ease-in-out;
   }
   @property --g5-1-x-position {
     syntax: '<percentage>';
