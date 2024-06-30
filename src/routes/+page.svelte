@@ -111,9 +111,9 @@
 >
   <Intro />
 </div>
-<!-- class="min-h-screen min-w-full touch-none border-0 -->
+
 <div
-  class="min-h-screen min-w-full border-0
+  class="min-h-screen min-w-full touch-none border-0
   landscape:hidden {$hideMainElements ? 'hidden' : ''}"
 >
   <div class="relative top-20 h-20 w-20 border-blue-500 bg-pink-500"></div>
@@ -193,7 +193,8 @@
     <PlayerControlsTest />
   </div>
 </div>
-<div class="absolute right-0 top-0 z-[-5] w-screen">
+
+<div class="absolute right-0 top-0 z-[15] w-screen">
 <HelpScreen />
 </div>
 <!--
@@ -272,7 +273,7 @@
       #ffffff;
     animation-name: g-5;
     animation-iteration-count: infinite;
-    animation-duration: 6s;
+    animation-duration: 16s;
     transition-timing-function: ease-in-out;
   }
   @property --g5-1-x-position {
