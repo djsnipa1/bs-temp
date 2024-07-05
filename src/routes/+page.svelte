@@ -195,8 +195,9 @@
 </div>
 
 <div class="absolute right-0 top-0 z-[15] w-screen">
-<HelpScreen />
+  <HelpScreen />
 </div>
+
 <!--
 <div
   class="relative flex min-h-screen min-w-full touch-none items-center justify-center border-0 portrait:hidden"

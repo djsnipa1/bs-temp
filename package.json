@@ -1,4 +1,4 @@
- {
+{
   "name": "beatstar-practicer",
   "version": "0.0.1",
   "private": true,
@@ -26,6 +26,7 @@
     "@typescript-eslint/parser": "^7.8.0",
     "animejs": "^3.2.2",
     "autoprefixer": "^10.4.19",
+    "bezier-easing": "^2.1.0",
     "daisyui": "^4.10.5",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
