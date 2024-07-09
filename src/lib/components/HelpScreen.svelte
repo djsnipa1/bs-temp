@@ -4,65 +4,59 @@
   import {blur} from "svelte/transition";
   import {cubicIn} from "svelte/easing";
   import { customFadeBlur } from '$lib/transitions/CustomFadeBlur.js';
+  import { isUrlOpen } from '$lib/stores/store.js';
   
-
   let show = false;
 
-  import {cubicOut} from "svelte/easing";
-
+  function handleClick() {
+    show = !show;
+   // setup();	
+   isUrlOpen.set(false)
+   startDelay();
+  }
   
-
-  /*
-function customScale(node, options) {
- const style = getComputedStyle(node);
-	const target_opacity = +style.opacity;
-	const f = style.filter === 'none' ? '' : style.filter;
-	const od = target_opacity * (1 - opacity);
-	// const [value, unit] = split_css_unit(amount);
-		return {
-			duration: options.duration,
-			easing: cubicIn,
-			//css: t => `transform:scaleX(${t}); transform-origin: top left;`
-			//css: t => `transform:scale(${100 + 30 * t}%);`
-			// css: (t, u) => `opacity: ${target_opacity * u}; filter: blur(${u * value}px); transform:scale(${100 + 30 * t}%);`
-			
-			// css: (_t, u) => `opacity: ${target_opacity - od * u}; filter: ${f} blur(${u * value}${unit}); transform:scale(${100 + 30 * _t}%);`
-			
-		}
-	}	
-	*/
-
-  let maskPath, glassBg, helpTitle, arrow, helptext1, helptext2, helptext3;
+  let maskPath, glassBg, helpTitle, arrow, helpText1, helpText2, helpText3;
   let wipeHover,
     glassFade = false;
+   
+   
+  function delayedFunction() {
+    console.log('This runs after 1 second');
+  }
+
+  function startDelay() {
+    setTimeout(setup, 100);
+  }
+
+function testthis() {
+       animation2.play()
+       wipeHover = true
+     }
+
 
   function setup() {
     wipeHover = false;
 
-    anime
-      .timeline({
+  
+    let animation = anime.timeline({
         easing: "easeOutQuad",
         autoplay: true,
         loop: false,
       })
-      .add({
-        targets: glassBg,
-        //  opacity: [0, 1],
-        // translateY: [30, 0],
-        //        scale: [0, 1],
-        begin: function (anim) {
-          glassFade = false;
-          glassFade = true;
-        },
-        duration: 1000,
+  
+  let animation2 = anime.timeline({
+        easing: "easeOutQuad",
+        autoplay: false,
+        loop: false,
       })
-      .add({
+      
+      animation.add({
         targets: ".help-title",
         opacity: [0, 1],
         translateY: [30, 0],
         duration: 1000,
         easing: "easeInQuart",
-        offset: "-=700",
+    //    offset: "-=700",
         begin: () => {
           console.log("help start");
         },
@@ -70,38 +64,77 @@ function customScale(node, options) {
           console.log("help end");
         },
       })
-      .add({
+      animation.add({
         targets: ".help",
         opacity: [0, 1],
         translateX: [50, 0],
         duration: 700,
         delay: anime.stagger(350),
         easing: "easeInQuart",
+        complete: function(anim) { 
+        //  console.log("animation2") 
+          animation2.play() 
+        }
       })
-      .add({
+     
+    /* animation.finished.then(function() {
+  console.log('finished')
+  animation2.play()
+});
+     */
+     
+     
+   /*  
+      animation2.add({
         targets: arrow,
         duration: 1500,
-        begin: function (anim) {
-          wipeHover = true;
-        },
+        begin: () => {wipeHover = true}
       });
-    /*      .add(drawLine(div1, { duration: 2000, opacity: 100 }), 250)
-      .add(drawLine(div2, { duration: 2000, opacity: 100 }), 750)
-      .add(
-        {
-          targets: div3,
-          scale: 8,
-          borderWidth: 5,
-          duration: 4000,
-          opacity: 100
-        },
-        0
-      );
+      animation2.add({
+        targets: arrow,
+        duration: 2000,
+        translateY: [0, -30]
+      })
       */
-  }
+ 
+      animation2.add({
+  targets: '.rectangle-reveal',
+  clipPath: [
+    { value: 'inset(100% 0% 0% 0%)' },
+    { value: 'inset(0% 0% 0% 0%)' }
+  ],
+  duration: 2000
+});
+
+const helpBorder = '#eab308';
+animation2.add({
+       targets: helpText1,
+       outlineColor: [
+           { value: ['transparent', helpBorder], duration: 300 },
+           //{ value: [helpBorder, 'transparent'], duration: 1000 },
+           { value: '#fff', duration: 1000, delay: 1000 }
+         ],
+      // duration: 3000,
+       easing: 'linear',
+      // delay: 
+     }) 
+     /*
+     animation2.add({
+      targets: helpText1,
+      outlineColor: {
+       value: [helpBorder, 'transparent'],
+       duration: 1000
+      },
+      delay: 1500
+     })
+*/
+      animation.play()
+    }
+  
 
   if (browser) {
-    setup();
+    //setup();
+    startDelay();
     /*
     setTimeout(() => {
       setup()
@@ -126,8 +159,8 @@ function customScale(node, options) {
       maskPath.setAttribute("fill", "none");
     },
     complete: function(anim) {
-      wipeHover = true;
-    }
+      wipeHover = true;zz
+    }dßz
   });
   */
   }
@@ -135,28 +168,18 @@ function customScale(node, options) {
 
 <!-- <div class="min-w-full min-h-screen flex flex-col items-center justify-center"> -->
 
-<button class="btn absolute z-[5000] top-[300px]" on:click="{() => {show = !show}}"> toggle show
+<button class="btn absolute z-[5000] top-[300px]" on:click="{handleClick}"> toggle show
 </button>
+
 
 {#if show}
 <div
-  transition:customFadeBlur
-  data-title="picture portfolio"
-  data-scroll-speed="1"
->
-  <img
-    src="https://pbs.twimg.com/profile_images/1121395911849062400/7exmJEg4_400x400.png"
-    alt="photography portfolio landing"
-  />
-</div>
-{/if}
-
-<div
   class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
 >
+
   <div
-    class="opacity-0 glass border-2 border-red-500 relative rounded-md max-w-full mx-4 px-4 top-0 shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5 {glassFade ? 'puff-in-center' : ''}"
-    bind:this="{glassBg}"
+    class="glass border-2 border-red-500 relative rounded-md max-w-full mx-4 px-4 top-0 shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5"
+    transition:customFadeBlur
   >
     <h1
       class="text-center text-slate-700 text-2xl font-kiona help-title"
@@ -170,53 +193,48 @@ function customScale(node, options) {
       <ol
         class="list-decimal list-outside marker:text-slate-700 border-yellow-500 border"
       >
-        <li class="border-blue-500 border">
-          <p class="m-0 p-0 help" bind:this="{helptext1}">
+       <li class="border-blue-500 outline-4 outline outline-yellow-500/0 outside border-0 border-box" id="helpText1" bind:this="{helpText1}">
+          <p class="m-0 p-0 help">
             Find a YouTube video of your favorite streamer getting a Diamond
             Perfect on the song you would like to practice.
           </p>
         </li>
-        <li>
-          <p class="m-0 p-0 help" bind:this="{helptext2}">
+        <li bind:this="{helpText2}">
+          <p class="m-0 p-0 help">
             Copy the URL of the video and paste it in the box above. (If you
             just want to see how this works you can click this copy button and
             it will automatically copy a URL for you to check out).
           </p>
         </li>
-        <li>
-          <p class="m-0 p-0 help" bind:this="{helptext3}">
+        <li bind:this="{helpText3}">
+          <p class="m-0 p-0 help">
             When the video player controls appear, click play!
           </p>
         </li>
       </ol>
     </div>
-    <div class="fixed top-0 right-8 -translate-y-14">
+    <div class="absolute rectangle-reveal top-0 right-8 -translate-y-[4.5rem]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="48.44"
         height="265.426"
         viewBox="699.152 987.033 48.44 265.426"
-        style="transform: scale(0.9)"
-        class="gradient {!wipeHover ? 'gradientHover' : ''}"
-        bind:this="{arrow}"
-      >
+        style="transform: scale(0.8)"
+        id="arrow"
+        class="fill-slate-200 stroke-slate-700 stroke-2"
+        
+     >
         <path
-          bind:this="{maskPath}"
-          id="mask-path"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-miterlimit="10"
-          stroke-width="1"
+          stroke-miterlimit="10" 
           d="m717.524 995.254 18.95 6.785-14.737 10.665c64.754 91.093-12.532 238.678-12.532 238.678.123 1.398-4.694-.045-5.82.635 4.602-8.92 75.882-150.354 13.715-235.576l-12.282 10.417-2.067-20.021-3.6-19.804zm-14.37 257.206a.439.439 0 0 1 .231-.443l-.23.443z"
-          font-family="none"
-          font-size="none"
-          font-weight="none"
-          text-anchor="none"
         />
       </svg>
     </div>
   </div>
 </div>
+{/if}
 
 <style>
   @property --wipe-position {
@@ -232,6 +250,7 @@ function customScale(node, options) {
     mask-image: linear-gradient(black 25%, transparent 50%);
   }
 
+/*
   .wipe {
     -webkit-mask-image: linear-gradient(
       to bottom right,
@@ -242,12 +261,14 @@ function customScale(node, options) {
 
     transition: --wipe-position 600ms cubic-bezier(0, 0.55, 0.45, 1);
   }
+  */
 
   .wipeHover {
     --wipe-position: calc(-1 * var(--gradient-length));
   }
 
   .gradient {
+    opacity: 50%;
     /*   mask-image: linear-gradient(to bottom, black 55%, rgba(0, 0, 0, 0.01) 90%);  */
     mask-image: linear-gradient(
       to top,
@@ -258,68 +279,89 @@ function customScale(node, options) {
     transition: --wipe-position 1600ms cubic-bezier(0, 0.55, 0.45, 1);
   }
 
-  .gradientHover {
+  .gradient:hover, .gradientHover {
     --wipe-position: calc(-1 * var(--gradient-length));
   }
 
-  .fade-in-bck {
-    animation: fade-in-bck 1.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-  }
-
-  /* ----------------------------------------------
-   * Generated by Animista on 2024-7-3 22:30:56
-   * Licensed under FreeBSD License.
-   * See http://animista.net/license for more info. 
-   * w: http://animista.net, t: @cssanimista
-   * ---------------------------------------------- */
-
-  /**
-   * ----------------------------------------
-   * animation fade-in-bck
-   * ----------------------------------------
-   */
-  @keyframes fade-in-bck {
-    0% {
-      transform: translateZ(80px), scale(120%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateZ(0);
-      opacity: 1;
-    }
-  }
 
   .puff-in-center {
     animation: puff-in-center 1s cubic-bezier(0.5, 0, 0.75, 0) both;
   }
 
-  /* ----------------------------------------------
-   * Generated by Animista on 2024-7-3 22:45:35
-   * Licensed under FreeBSD License.
-   * See http://animista.net/license for more info. 
-   * w: http://animista.net, t: @cssanimista
-   * ---------------------------------------------- */
-
-  /**
-   * ----------------------------------------
-   * animation puff-in-center
-   * ----------------------------------------
-   */
-  @keyframes puff-in-center {
-    0% {
-      transform: scale(1.3);
-      filter: blur(8px);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      filter: blur(0px);
-      opacity: 1;
-    }
-  }
-
+  
   .help,
   .help-title {
     opacity: 0;
   }
+  
+  .arrowMask {
+  background-image: url('https://placehold.co/600x400.png');
+  background-size: cover;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  mask-image: linear-gradient(black 25%, transparent 50%);
+  mask-repeat: no-repeat;
+  animation: botToTop 5s forwards;
+}
+
+@keyframes botToTop {
+  0% {
+    mask-position: 0vh 0%;
+  }
+  100% {
+    mask-position: 100vh 0vh;
+  }
+}
+
+
+/* New @keyframes for the infinite animation */
+@keyframes wipeAnimation {
+  0% {
+    --wipe-position: 0;
+  }
+  50% {
+    --wipe-position: calc(-1 * var(--gradient-length));
+  }
+  100% {
+    --wipe-position: 0;
+  }
+}
+
+/* Modified .wipe class to include the infinite animation */
+.wipe {
+  -webkit-mask-image: linear-gradient(
+    to bottom right,
+    black var(--wipe-position),
+    transparent calc(var(--wipe-position) + var(--gradient-length)),
+    transparent
+  );
+  /* Add the animation property here 
+  animation: wipeAnimation 1200ms ease-in-out infinite;
+  */
+}
+
+.rectangle-reveal {
+  clip-path: inset(100% 0% 0% 0%); /* Initially clips the entire element */
+/*  animation: reveal-up 1s ease-in-out forwards; */
+}
+
+/*
+@keyframes reveal-up {
+  from {
+    clip-path: inset(100% 0% 0% 0%);
+  }
+  to {
+    clip-path: inset(0% 0% 0% 0%); 
+  }
+}
+*/
+
+#helpText1 {
+  box-shadow: 0 0 10px 5px rgba(255,255,0,0.6);
+  @apply rounded-lg;
+  
+}
+
+
 </style>
