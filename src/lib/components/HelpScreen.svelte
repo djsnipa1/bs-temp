@@ -8,6 +8,7 @@
   
   let show = false;
 
+
   function handleClick() {
     show = !show;
    // setup();	
@@ -104,7 +105,19 @@ function testthis() {
     { value: 'inset(0% 0% 0% 0%)' }
   ],
   duration: 2000
-});
+})
+animation2.add({
+ targets: '#ballPath',
+ opacity: 
+  {
+    value: [.5, 1],
+    duration: 400
+    },
+ scale: {
+  value: [1, 3],
+  duration: 500
+ }
+})
 
 const helpBorder = '#eab308';
 animation2.add({
@@ -118,6 +131,7 @@ animation2.add({
        easing: 'linear',
       // delay: 
      }) 
+     
      /*
      animation2.add({
       targets: helpText1,
@@ -129,12 +143,17 @@ animation2.add({
      })
 */
       animation.play()
+      
     }
   
 
   if (browser) {
     //setup();
     startDelay();
+    setTimeout(() => {
+     console.log(anime.get('#arrow', 'height', 'px'))
+     console.log(`clientHeight: ${arrow.clientHeight}`)
+    }, 8000)
     /*
     setTimeout(() => {
       setup()
@@ -171,18 +190,17 @@ animation2.add({
 <button class="btn absolute z-[5000] top-[300px]" on:click="{handleClick}"> toggle show
 </button>
 
-
 {#if show}
 <div
-  class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+  class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden flex"
 >
 
   <div
-    class="glass border-2 border-red-500 relative rounded-md max-w-full mx-4 px-4 top-0 shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5"
+    class="glass border-2 border-red-500 relative rounded-md max-w-full mx-4 px-4 top-0 shadow-xl shadow-slate-700/40 ring-1 ring-gray-900/5 h-[300px]"
     transition:customFadeBlur
   >
     <h1
-      class="text-center text-slate-700 text-2xl font-kiona help-title"
+      class="text-center text-slate-700 text-2xl font-kiona help-title font-bold"
       bind:this="{helpTitle}"
     >
       Help
@@ -201,9 +219,7 @@ animation2.add({
         </li>
         <li bind:this="{helpText2}">
           <p class="m-0 p-0 help">
-            Copy the URL of the video and paste it in the box above. (If you
-            just want to see how this works you can click this copy button and
-            it will automatically copy a URL for you to check out).
+            Copy the URL of the video and paste it in the box above. 
           </p>
         </li>
         <li bind:this="{helpText3}">
@@ -214,6 +230,19 @@ animation2.add({
       </ol>
     </div>
     <div class="absolute rectangle-reveal top-0 right-8 -translate-y-[4.5rem]">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" width="51.932" height="275.426" viewBox="534.788 1085.287 51.932 275.426"
+        style="transform: scale(0.8); overflow: visible;"
+        id="arrow"
+        bind:this={arrow}
+        class="fill-slate-200 stroke-slate-700 stroke-2"
+    >
+  <g fill="none" stroke-linecap="none" stroke-linejoin="none" stroke-miterlimit="10" stroke-width="none" font-family="none" font-size="none" font-weight="none" text-anchor="none">
+    <path fill="#0ff" id="arrowPath" d="m556.652 1093.508 18.95 6.784-14.737 10.665c64.754 91.093-12.532 238.679-12.532 238.679.123 1.398-4.694-.046-5.82.634 4.602-8.92 75.882-150.354 13.716-235.576l-12.283 10.417-2.066-20.021-3.6-19.803zm-14.369 257.205a.439.439 0 0 1 .23-.443c-.15.293-.23.443-.23.443z"/>
+    <path fill="#ff0" id="ballPath" d="M534.788 1350.713c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z"/>
+  </g>
+</svg>
+<!--
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="48.44"
@@ -221,6 +250,7 @@ animation2.add({
         viewBox="699.152 987.033 48.44 265.426"
         style="transform: scale(0.8)"
         id="arrow"
+        bind:this={arrow}
         class="fill-slate-200 stroke-slate-700 stroke-2"
         
      >
@@ -231,6 +261,7 @@ animation2.add({
           d="m717.524 995.254 18.95 6.785-14.737 10.665c64.754 91.093-12.532 238.678-12.532 238.678.123 1.398-4.694-.045-5.82.635 4.602-8.92 75.882-150.354 13.715-235.576l-12.282 10.417-2.067-20.021-3.6-19.804zm-14.37 257.206a.439.439 0 0 1 .231-.443l-.23.443z"
         />
       </svg>
+      -->
     </div>
   </div>
 </div>
@@ -363,5 +394,17 @@ animation2.add({
   
 }
 
+li {
+ @apply border-pink-500 border my-4;
+}
 
+#ballPath {
+ transform-box: stroke-box;
+ transform-origin: center;
+ overflow: visible;
+}
+
+svg {
+ overflow: visible;
+}
 </style>
