@@ -11,7 +11,7 @@
       pkgs.lf
       pkgs.lazygit
       pkgs.eza
-    # pkgs.httplz
+      pkgs.httplz
       pkgs.gh
       pkgs.nodePackages.svelte-language-server
       pkgs.nodePackages.vscode-html-languageserver-bin

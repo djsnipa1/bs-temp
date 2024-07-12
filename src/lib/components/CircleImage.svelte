@@ -1,16 +1,16 @@
 <!-- src/components/CircleImage.svelte -->
 <script>
-  import { circleTransition } from '$lib/transitions/CircleTransition.js';
+  import { ImageFetch } from '$lib';
   import { showYoutubeTransition, videoId, newYtUrl } from '$lib/stores/store.js';
   import anime from 'animejs';
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
-
+  
   let thumbnailUrl;
   export let circleVisible = false;
   let range = 100;
   let circle, thumbnail;
-
+  
   export let data;
   let color = $page.data.color;
   
@@ -22,7 +22,6 @@
     //videoId = 'YOUR_VIDEO_ID'; // Replace with your video ID
    thumbnailUrl = `https://img.youtube.com/vi/${$videoId}/hqdefault.jpg`;
  //  thumbnailUrl = `https://img.youtube.com/vi/hNRWpWEd_q4/hqdefault.jpg`;
-
 
     let anim = () => {
       anime
@@ -126,6 +125,12 @@
   </div>
 {/if}
 -->
+
+<ImageFetch />
+
+
+
+
 
  {$newYtUrl}
  
