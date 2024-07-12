@@ -22,3 +22,4 @@ export { default as PlayerControlsTest } from './components/PlayerControlsTest.s
 export { default as Intro } from './components/Intro.svelte';
 export { default as Mask } from './components/Mask.svelte';
 export { default as CircleImage } from './components/CircleImage.svelte';
+export { default as ImageFetch } from './components/ImageFetch.svelte';
