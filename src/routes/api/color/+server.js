@@ -4,11 +4,11 @@ import Vibrant from 'node-vibrant';
 
 export const GET = async ({ url, fetch }) => {
   const imageUrl = url.searchParams.get('image');
-  
+
   if (imageUrl) {
     const image = await fetch(imageUrl).then((res) => res.arrayBuffer());
-//  const stats = await sharp(Buffer.from(image)).stats();
-//  const [r, g, b] = stats.channels.map((c) => c.mean);
+    //  const stats = await sharp(Buffer.from(image)).stats();
+    //  const [r, g, b] = stats.channels.map((c) => c.mean);
 
     // Extracting RGB values from the "Vibrant" option
     // found out how to make this work here:
@@ -18,7 +18,7 @@ export const GET = async ({ url, fetch }) => {
     const palette = await Vibrant.from(imageUrl).getPalette();
     // const vibrant = palette.Vibrant?.hex;
     // const lightVibrant = palette.LightVibrant?.hex;
-    
+
     const vibrantColors = {
       vibrant: palette.Vibrant?.hex,
       lightVibrant: palette.LightVibrant?.hex,
@@ -26,8 +26,8 @@ export const GET = async ({ url, fetch }) => {
       muted: palette.Muted?.hex,
       lightMuted: palette.LightMuted?.hex,
       darkMuted: palette.DarkMuted?.hex
-    }
-    
+    };
+
     const vibrantPalette = palette.Vibrant;
     const {
       rgb: [vr, vg, vb]
@@ -38,7 +38,7 @@ export const GET = async ({ url, fetch }) => {
     //console.log(palette)
 
     return json({
-  //  color: `rgba(${r},${g},${b})`,
+      //  color: `rgba(${r},${g},${b})`,
       vibrantColors: vibrantColors,
       vibrantRGBA: rgbaString,
       palette: vibrantPalette

@@ -159,7 +159,6 @@
     <InputBoxFinal />
   </div>
 
-  
   <CircleImage />
 
   <button
